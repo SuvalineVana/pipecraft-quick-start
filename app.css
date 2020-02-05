@@ -1,0 +1,49 @@
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+li {
+    margin-left: 30px;
+}
+
+.navbar {
+    padding:0 1rem;
+}
+
+body {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.progress { 
+    margin-left: auto; 
+    margin-right:auto;
+    margin-top: 10px; 
+}
+
+.container {
+    margin-top: 30px;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0px;
+}
+
+
+.hideView {
+    display: none;
+}
+
+#workflowConstructProgress {
+    margin-bottom: 30px;
+}
+
+#test {
+    margin:auto;
+    display:block;
+    margin-top:25px;
+  }
+
+#dnaImage {
+    content: url('assets\PngItem_333137.png');
+}

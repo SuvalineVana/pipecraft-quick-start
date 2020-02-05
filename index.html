@@ -1,19 +1,171 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css" />
+    <link rel="stylesheet" href="app.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+    <link href="assets\fontawesome-free-5.12.0-web\css\all.css" rel="stylesheet"> <!--load all styles -->
+    <script defer src="assets\fontawesome-free-5.12.0-web\js\all.js"></script> <!--load all styles -->
+    <script>let $ = require('jquery');</script>
+    <script>require('popper.js');</script>
+    <script>require('bootstrap');</script>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>Hello World!</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    <!-- Nav 1 -->
+    <nav class="navbar nav-tabs navbar-expand-md navbar-light bg-light" id="mainNav">
+        <a class="navbar-brand" href="">
+            <img src="assets\animated_DNA.gif" width="150" height="50" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" id="startingView" href="#">HOME</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" id="workflowConstructContent" href="#">CONSTRUCT A WORKFLOW</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" id="standAloneTools" href="#">ALL TOOLS</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" id="Docs" href="#">DOCS</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    <!-- You can also require other files to run in this process -->
+
+     <!--Nav 2  -->
+    <nav class="navbar nav-tabs navbar-expand-md navbar-light bg-light hideView" id="altNav">
+        <a class="navbar-brand" href="">
+            <img src="assets\animated_DNA.gif" width="150" height="50" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" id="fileSelect" href="#">FILE SELECT</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" id="fileSelect" href="#">CUT ADAPTERS/PRIMERS</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" id="fileSelect" href="#">QUALITY FILTER</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" id="fileSelect" href="#">CHIMERA FILTER</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" id="fileSelect" href="#">GENE EXTRACTION</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" id="fileSelect" href="#">CLUSTER</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" id="fileSelect" href="#">TAXONOMY</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      
+      
+
+    <!-- Workflow construction view -->
+      <div class="container workflowConstructContent hideView" style="width: 85%;">
+        <img src="assets\kisspng-the-double-helix-a-personal-account-of-the-discov-5b6895dbdefec9.1717537915335807639134.png" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
+          <div class="progress" id="workflowConstructProgress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="cutBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="qualityBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="chimeraBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="geneBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="clusterBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="taxonomyBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="row mt-6 justify-content-between" style="margin: auto">
+            <div class="card text-center" style="width: 16%;">
+                <div class="card-header"><i class="fas fa-cut fa-3x"></i>
+                </div>
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title mt-auto">Cut adapaters or primers</h5>
+                  <p class="card-text"></p>
+                  <input type="checkbox" id="cut" class="form-control form-control-md mt-auto" checked>
+                </div>
+              </div>
+            <div class="card text-center" style="width: 16%;">
+                <div class="card-header"><i class="fas fa-filter fa-3x"></i>
+                </div>
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title mt-auto">Quality filtering</h5>
+                  <p class="card-text"></p>
+                  <input type="checkbox" id="quality" class="form-control form-control-md mt-auto" checked>
+                </div>
+              </div>
+            <div class="card text-center" style="width: 16%;">
+                <div class="card-header"><i class="fas fa-dragon fa-3x"></i>
+                </div>
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title mt-auto">Chimera filtering</h5>
+                  <p class="card-text"></p>
+                  <input type="checkbox" id="chimera" class="form-control form-control-md mt-auto" checked>
+                </div>
+              </div>
+            <div class="card text-center" style="width: 16%;">
+                <div class="card-header"><i class="fas fa-dna fa-3x"></i>
+                </div>
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title mt-auto">Gene extraction</h5>
+                  <p class="card-text"></p>
+                  <input type="checkbox" id="gene" class="form-control form-control-md mt-auto" checked>
+                </div>
+              </div>
+            <div class="card text-center" style="width: 16%;">
+                <div class="card-header"><i class="fas fa-layer-group fa-3x"></i>
+                </div>
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title mt-auto">Clustering</h5>
+                  <p class="card-text"></p>
+                  <input type="checkbox" id="cluster" class="form-control form-control-md mt-auto" checked>
+                </div>
+              </div>
+            <div class="card text-center" style="width: 16%;">
+                <div class="card-header"><i class="fas fa-database fa-3x"></i>
+                </div>
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title mt-auto">Taxonomy assignment</h5>
+                  <p class="card-text"></p>
+                  <input type="checkbox" id="taxonomy" class="form-control form-control-md mt-auto" checked>
+                </div>
+              </div>
+              <button type="button" class="btn btn-dark align-self-center" id="test">Select tools and parameters  <i class="fas fa-tools"></i></button>
+            </div>
+      </div>
+      <div class="container startingView">
+          <img src="assets\5c80f90872f5d9028c17ed44.png" alt="">
+      </div>
+      <div class="container standAloneTools hideView">
+          <h1>Standalone tools</h1>
+      </div>
+      <div class="container Docs hideView">
+          <h1>Documentation</h1>
+          <canvas id="the-canvas"></canvas>
+      </div>
+      <div class="container fileSelect hideView">
+        <h1>File Select</h1>
+        <div id="selectFiles"><i class="fas fa-folder-plus fa-7x"></i>Select DNA sequence files</div>
+        <div id="selectPrimerFile"><i class="fas fa-folder-plus fa-7x"></i>Select primer files(Optional?)</div>
+    </div>
     <script src="./renderer.js"></script>
   </body>
 </html>

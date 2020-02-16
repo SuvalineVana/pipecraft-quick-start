@@ -48,36 +48,56 @@ git push -u origin master
 ## Dockerhub
 
 Pull image
+```bash
 docker pull metsoja/pipecraft:latest
+```
 
 To push a new tag to this repository
+```bash
 docker push metsoja/pipecraft:tagname
+```
 
 ## Docker
 
 Pull image
+```bash
 docker pull metsoja/pipecraft:latest
+```
 
 To push a new tag to this repository
+```bash
 docker push metsoja/pipecraft:tagname
+```
 
 For container modifications via bash
+```bash
 docker run --interactive --tty pipecraft:alfa bash
+```
 
 For analysis testing
+```bash
 docker run --interactive --tty  -v C:\Users\m_4_r\Desktop\Docker\electron-quick-start:/destination  pipecraft:alfa bash
+```
 
 For build
+```bash
 docker build -t pipecraft:alfa -f .\Dockerfile .  
+```
 
 Remove all containers
+```bash
 docker rm `docker ps -a -q`
+```
 
 Remove all “Exited” containers:
+```bash
 docker rm $(docker ps -a | grep 'Exited' | awk '{print $1}')
+```
 
 Remove all images matching a name:
+```bash
 docker rmi $(docker images | grep MYNAME_ | awk '{print $3}')
+```
 
 
 ## License

@@ -1,18 +1,6 @@
-# electron-quick-start
 
-**Clone and run for a quick way to see Electron in action.**
 
-This is a minimal Electron application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.
 
-**Use this app along with the [Electron API Demos](https://electronjs.org/#get-started) app for API code examples to help you get started.**
-
-A basic Electron application needs just these files:
-
-- `package.json` - Points to the app's main file and lists its details and dependencies.
-- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
-- `index.html` - A web page to render. This is the app's **renderer process**.
-
-You can learn more about each of these components within the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start).
 
 ## To Use
 
@@ -20,25 +8,77 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 
 ```bash
 # Clone this repository
-git clone https://github.com/electron/electron-quick-start
+git clone https://github.com/electron/pipecraft-quick-start
 # Go into the repository
-cd electron-quick-start
+cd pipecraft-quick-start
 # Install dependencies
 npm install
 # Run the app
 npm start
 ```
 
-Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
+## To Build
+Install electron-packager. This module requires Node.js 8.0 or higher to run.On Windows, both .NET Framework 4.5 or higher and Powershell 3 or higher are required. For use in npm scripts (recommended) npm install electron-packager --save-dev
+Check electron module version in the devDependencies section of package.json, and set it the exact version of 1.4.15.
 
-## Resources for Learning Electron
+```bash
+npm install electron-packager -g
+electron-packager .
+```
 
-- [electronjs.org/docs](https://electronjs.org/docs) - all of Electron's documentation
-- [electronjs.org/community#boilerplates](https://electronjs.org/community#boilerplates) - sample starter apps created by the community
-- [electron/electron-quick-start](https://github.com/electron/electron-quick-start) - a very basic starter Electron app
-- [electron/simple-samples](https://github.com/electron/simple-samples) - small applications with ideas for taking them further
-- [electron/electron-api-demos](https://github.com/electron/electron-api-demos) - an Electron app that teaches you how to use Electron
-- [hokein/electron-sample-apps](https://github.com/hokein/electron-sample-apps) - small demo apps for the various Electron APIs
+## Git
+
+When pulling from a remote upstream, git fetch --all did the trick for me:
+
+```bash
+git remote add upstream https://github.com/SuvalineVana/pipecraft-quick-start
+git checkout master
+git fetch --all
+git merge upstream/master
+```
+
+When updating the master branch
+
+```bash
+git add .
+git commit -m "commit message"
+git remote add origin https://github.com/SuvalineVana/pipecraft-quick-start.git
+git push -u origin master
+```
+## Dockerhub
+
+Pull image
+docker pull metsoja/pipecraft:latest
+
+To push a new tag to this repository
+docker push metsoja/pipecraft:tagname
+
+## Docker
+
+Pull image
+docker pull metsoja/pipecraft:latest
+
+To push a new tag to this repository
+docker push metsoja/pipecraft:tagname
+
+For container modifications via bash
+docker run --interactive --tty pipecraft:alfa bash
+
+For analysis testing
+docker run --interactive --tty  -v C:\Users\m_4_r\Desktop\Docker\electron-quick-start:/destination  pipecraft:alfa bash
+
+For build
+docker build -t pipecraft:alfa -f .\Dockerfile .  
+
+Remove all containers
+docker rm `docker ps -a -q`
+
+Remove all “Exited” containers:
+docker rm $(docker ps -a | grep 'Exited' | awk '{print $1}')
+
+Remove all images matching a name:
+docker rmi $(docker images | grep MYNAME_ | awk '{print $3}')
+
 
 ## License
 

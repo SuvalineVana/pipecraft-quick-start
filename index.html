@@ -58,7 +58,7 @@
                 <a class="nav-link" id="fileSelect" href="#">FILE SELECT</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" id="fileSelect" href="#">CUT ADAPTERS/PRIMERS</a>
+                <a class="nav-link" id="cutadapt_trimmomatic" href="#">CUT ADAPTERS/PRIMERS</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" id="fileSelect" href="#">QUALITY FILTER</a>
@@ -151,6 +151,8 @@
               <button type="button" class="btn btn-dark align-self-center" id="test">Select tools and parameters  <i class="fas fa-tools"></i></button>
             </div>
       </div>
+
+      
       <div class="container startingView">
           <img src="assets\5c80f90872f5d9028c17ed44.png" alt="">
       </div>
@@ -165,6 +167,16 @@
         <h1>File Select</h1>
         <div id="selectFiles"><i class="fas fa-folder-plus fa-7x"></i>Select DNA sequence files</div>
         <div id="selectPrimerFile"><i class="fas fa-folder-plus fa-7x"></i>Select primer files(Optional?)</div>
+    </div>
+      <div class="container cutadapt_trimmomatic hideView">
+        <h1>File Select</h1>
+        <div id="selectFiles"><i class="fas fa-folder-plus fa-7x"></i>cutadapt -a ADAPTER_FWD -A ADAPTER_REV -o out.1.fastq -p out.2.fastq reads.1.fastq reads.2.fastq
+
+          Single-end/R1 option	Corresponding option for R2
+          --adapter, -a	-A
+          --front, -g	-G
+          --anywhere, -b	-B
+          --cut, -u	-U</div>
     </div>
     <script src="./renderer.js"></script>
   </body>

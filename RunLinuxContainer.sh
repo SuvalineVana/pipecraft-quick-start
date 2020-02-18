@@ -1,3 +1,3 @@
 #!/bin/sh
 # This is a comment!
-docker run  -v C:\Users\m_4_r\Desktop\Docker\electron-quick-start:/destination  -w /destination pipecraft:alfa
+docker run --interactive --tty  -v C:\Users\m_4_r\Desktop\pipecraft-quick-start\assets\container_workflows:/workflows  pipecraft:alfa bash

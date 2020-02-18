@@ -8,6 +8,7 @@ const { dialog } = require('electron').remote
 var child_process = require('child_process');
 var newView = '.startingView'
 
+
 $( ".nav-link" ).click(function() {
     Oldview = newView
     newView = '.' + $(this).attr('id')  

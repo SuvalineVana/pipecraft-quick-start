@@ -1,0 +1,22 @@
+## You can execute other commands in the daemonized -d container with exec, such as:
+
+docker exec -ti CONTAINER_ID bash
+
+The above will start a bash session in the same container, 
+which is great for taking a look around if you need to and perform one-off maintenance tasks.
+
+docker volume prune
+
+docker run -t -i -v '/on/my/host:/on/the/container'-v /on/my/host/2:/on/the/container/2 \ ubuntu /bin/bash
+
+Stop and remove all containers
+You can review the containers on your system with docker ps. Adding the -a flag will show all containers. When you’re sure you want to delete them, you can add the -q flag to supply the IDs to the docker stop and docker rm commands:
+
+List:
+
+docker ps -a
+Remove:
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker volume prune

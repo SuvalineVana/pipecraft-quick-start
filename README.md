@@ -66,16 +66,6 @@ docker push metsoja/pipecraft:tagname
 
 ## Docker
 
-Pull image
-```bash
-docker pull metsoja/pipecraft:latest
-```
-
-To push a new tag to this repository
-```bash
-docker push metsoja/pipecraft:tagname
-```
-
 For container modifications via bash
 ```bash
 docker run --interactive --tty pipecraft:alfa bash

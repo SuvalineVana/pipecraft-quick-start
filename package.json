@@ -17,12 +17,12 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "docker-compose": "^0.23.3",
     "electron": "^8.0.0",
     "electron-packager": "^14.2.0",
     "materialize-css": "^1.0.0-rc.2"
   },
   "dependencies": {
-    "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.1"
   }

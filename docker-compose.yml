@@ -1,0 +1,190 @@
+version: '3'
+
+services:
+
+#Cut adapters/primers
+  #CUTADAPT
+ cutadapt:
+  image: cutadapt:latest
+  env_file:
+   - env_files\cutadapt.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/cutadapt.sh]
+#Cut adapters/primers
+  #CUTADAPT
+ trimmomatic:
+  image: trimmomatic:0.39
+  env_file:
+   - env_files\trimmomatic.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/trimmomatic.sh]
+
+
+#Create circular consensus sequences (PacBio)
+  #PBCSS
+ pbccs-create-circular-consensus-sequence:
+  image: pacbio:pipecraft
+  env_file: 
+   - env_files\pbccs-create-consensus-seq.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/pbccs-create-circular-consensus-sequence.sh]
+  #BAX2BAMS
+ bax2bams-create-circular-consensus-sequence:
+  image: pacbio:pipecraft
+  env_file: 
+   - env_files\bax2bams-create-consensus-seq.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/bax2bams-create-circular-consensus-sequence.sh]
+
+#Assemble paired-end sequences
+  #PANDAseq
+ pandaseq-assemble-paired-end-sequences:
+  image: pandaseq:2.11
+  env_file: 
+   - env_files\pandaseq-assemble-paired-end-sequences.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/pandaseq-assemble-paired-end-sequences.sh]
+  #FLASH
+ flash-assemble-paired-end-sequences:
+  image: flash:2
+  env_file: 
+   - env_files\flash-assemble-paired-end-sequences.env
+  volumes:
+    - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+    - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/flash-assemble-paired-end-sequences.sh]
+  #VSEARCH
+ vsearch-assemble-paired-end-sequences:
+  image: mothur:latest
+  env_file: 
+   - env_files\vsearch-assemble-paired-end-sequences.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/vsearch-assemble-paired-end-sequences.sh]
+    
+#Quality filter
+  #VSEARCH
+ vsearh-quality-filter:
+  image: mothur:latest
+  env_file:
+   - env_files\vsearch-quality-filter-variables.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/vsearch-quality-filter.sh]
+  #MOTHUR
+ mothur-quality-filter:
+  image: mothur:latest
+  env_file:
+   - env_files\mothur-quality-filter-variables.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/mothur-quality-filter.sh]
+  #OBITOOLS
+ obitools-quality-filter:
+  image: obitools:final
+  env_file:
+   - env_files\obitools-quality-filter-variables.env
+  volumes:
+   - ./script_folder:/obitools3/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/obitools-quality-filter.sh]
+  #DADA2
+ dada2-quality-filter:
+    image: dada2:test
+    env_file:
+     - env_files\dada2-quality-filter-variables.env
+    volumes:
+     - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+     - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+    command: ["Rscript", "execute/dada2-quality-filter.R"]
+
+#Demultiplex
+  #MOTHUR
+ mothur-demultiplex:
+  image: mothur:1.43
+  env_file:
+   - env_files\mothur-demultiplex-variables.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/mothur-demultiplex.sh]
+  #OBITOOLS
+ obitools-demultiplex:
+  image: obitools:latest
+  env_file:
+   - env_files\obitools-demultiplex-variables.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/obitools-demultiplex.sh]
+
+#Cluster
+  #CD-HIT
+ cd-hit-cluster:
+  image: cdhit:4.8.1
+  env_file:
+   - env_files\cd-hit-cluster-variables.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/cd-hit-cluster.sh]
+  #VSEARCH
+ vsearch-cluster:
+  image: vsearch:latest
+  env_file:
+   - env_files\vsearch-cluster-variables.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/vsearch-cluster.sh]
+  #SWARM
+ swarm-cluster:
+  image: :latest
+  env_file:
+   - env_files\swarm-cluster-variables.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/swarm-cluster.sh]
+  #MOTHUR
+ mothur-cluster:
+  image: mothur:1.43
+  env_file:
+   - env_files\mothur-cluster-variables.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/mothur-cluster.sh]
+#Taxonomy
+  #MOTHUR
+ mothur-taxonomy:
+  image: mothur:1.43
+  env_file:
+   - env_files\mothur-taxonomy-variables.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/mothur-taxonomy.sh]
+  #BLAST
+ blast-taxonomy:
+  image: blast:latest
+  env_file:
+   - env_files\blast-taxonomy-variables.env
+  volumes:
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+  command: [./execute/blast-taxonomy.sh]
+

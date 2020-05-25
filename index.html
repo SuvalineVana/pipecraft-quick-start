@@ -1,186 +1,492 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css" />
+    <!-- Materialize + Icons + JqueryUI -->
     <link rel="stylesheet" href="app.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" >
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" href="assets\fontawesome-free-5.12.0-web\css\all.css" > <!--load all styles -->
-    <script defer src="assets\fontawesome-free-5.12.0-web\js\all.js"></script> <!--load all styles -->
-    <script>let $ = require('jquery');</script>
-    <script>require('popper.js');</script>
-    <script>require('bootstrap');</script>
+    <link type='text/css' rel="stylesheet" href="node_modules\materialize-css\dist\css\materialize.css" media="screen,projection">
+    <link rel="stylesheet" href="assets\jquery-ui.css">
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <title>Hello World!</title>
+
+    <title>Pipecraft 2.0</title>
   </head>
   <body>
-    <!-- Nav 1 -->
-    <nav class="navbar nav-tabs navbar-expand-md navbar-light bg-light" id="mainNav">
-        <a class="navbar-brand" href="">
-            <img src="assets\animated_DNA.gif" width="150" height="50" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" id="startingView" href="#">HOME</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" id="workflowConstructContent" href="#">CONSTRUCT A WORKFLOW</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" id="standAloneTools" href="#">ALL TOOLS</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" id="Docs" href="#">DOCS</a>
-            </li>
+      <!-- Sidenav -->
+        <ul id="slide-out" class="sidenav sidenav-fixed">
+          <li><div class="user-view">
+            <div class="background"><img src="assets\5c80f90872f5d9028c17ed44.png"></div>
+            </div></li>
+            <a class='btn  grey darken-1 waves-effect waves-green' id="runButton" href='#' style="width: 100%;margin-bottom: 2px;">RUN WORKFLOW</a>
+            <a class='btn  grey darken-1 waves-effect waves-green' id="FileSelectButton" href='#' style="width: 100%;margin-bottom: 2px;">SELECT INPUT FILES</a>
+            <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger btn  grey darken-1' href='#' data-target='dropdown1'>Add Workflow Step</a>
+        <!-- Dropdown Structure -->
+          <ul id='dropdown1' class='dropdown-content'>
+            <li class="dropdown-selection cut" ><a href="#!">Cut adapters/primers<i class="material-icons">add_circle_outline</i></a></li>
+            <li class="dropdown-selection quality" ><a href="#!">Qualit Filter<i class="material-icons">add_circle_outline</i></a></li>
+            <li class="dropdown-selection chimera" ><a href="#!">Remove Chimeras<i class="material-icons">add_circle_outlined</i></a></li>
+            <li class="dropdown-selection cluster"><a href="#!">Cluster<i class="material-icons">add_circle_outline</i></a></li>
+            <li class="dropdown-selection tax" ><a href="#!">Assing Taxonomy<i class="material-icons">add_circle_outline</i></a></li>
+            <li class="dropdown-selection ccs" ><a href="#!">Create circular consensus sequences<i class="material-icons">add_circle_outline</i></a></li>
+            <li class="dropdown-selection assemble-paired" ><a href="#!">Assemble paired-end sequences<i class="material-icons">add_circle_outline</i></a></li>
+            <li class="dropdown-selection demultiplex" ><a href="#!">Demultiplex<i class="material-icons">add_circle_outline</i></a></li>
           </ul>
-        </div>
-      </nav>
+           <ul id="SelectedSteps"></ul>
+        </ul>
+     
+      <!-- Cut adapaters/primers -->
+      <div class="wrapper cut hideView blank">
+        <ul class="collapsible vertical-center">
+          <li>
+            <div class="collapsible-header">cutadapt
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="ADAPTER_FWD" type="text" style="text-transform:uppercase;">
+                <label for="ADAPTER_FWD">Forward adapter</label>
+              </div>
+              <div class="input-field">
+                <input id="ADAPTER_REV" type="text" style="text-transform:uppercase;">
+                <label for="ADAPTER_REV">Reverse adapter</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">Trimmomatic
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body">
 
-
-     <!--Nav 2  -->
-    <nav class="navbar nav-tabs navbar-expand-md navbar-light bg-light hideView" id="altNav">
-        <a class="navbar-brand" href="">
-            <img src="assets\animated_DNA.gif" width="150" height="50" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" id="fileSelect" href="#">FILE SELECT</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" id="cutadapt_trimmomatic" href="#">CUT ADAPTERS/PRIMERS</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" id="fileSelect" href="#">QUALITY FILTER</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" id="fileSelect" href="#">CHIMERA FILTER</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" id="fileSelect" href="#">GENE EXTRACTION</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" id="fileSelect" href="#">CLUSTER</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" id="fileSelect" href="#">TAXONOMY</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      
-      
-
-    <!-- Workflow construction view -->
-      <div class="container workflowConstructContent hideView" style="width: 85%;">
-        <img src="assets\kisspng-the-double-helix-a-personal-account-of-the-discov-5b6895dbdefec9.1717537915335807639134.png" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
-          <div class="progress" id="workflowConstructProgress">
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="cutBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="qualityBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="chimeraBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="geneBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="clusterBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="taxonomyBar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <div class="row mt-6 justify-content-between" style="margin: auto">
-            <div class="card text-center" style="width: 16%;">
-                <div class="card-header"><i class="fas fa-cut fa-3x"></i>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header"></i>Mothur
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body">
+              <div class="flexcontainer" style="width:260x; height:260px;">
+                <div style="text-align: center;">
+                  <a class="btn-floating btn-large waves-effect waves-light grey lighten-1"><i class="material-icons">insert_drive_file</i></a>
+                  <span style="display: block;text-align: center; margin-top: 17px; margin-bottom: 50%">Add an oligos file</span>
                 </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title mt-auto">Cut adapaters or primers</h5>
-                  <p class="card-text"></p>
-                  <input type="checkbox" id="cut" class="form-control form-control-md mt-auto" checked>
-                </div>
+                
+                <ul id="mothurOligosFileExample" title="Oligos file structure" style="box-shadow: 1px 1px; margin-left: 110px; margin-bottom: 10%;">
+                  <li>forward&nbsp;&nbsp;&nbsp;&nbsp;CATGCTGCCTCCCGTAGGAGT</li>
+                  <li>reverse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CCAGAGTTTGATCCTGGCTCAG</li>
+                  <li>barcode&nbsp;&nbsp;&nbsp;&nbsp;AACCAACC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sample1</li>
+                  <li>barcode&nbsp;&nbsp;&nbsp;&nbsp;AACCAAGG&nbsp;&nbsp;&nbsp;&nbsp;Sample2</li>
+                  <li>barcode&nbsp;&nbsp;&nbsp;&nbsp;AACCATCG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sample3</li>
+                </ul>
               </div>
-            <div class="card text-center" style="width: 16%;">
-                <div class="card-header"><i class="fas fa-filter fa-3x"></i>
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title mt-auto">Quality filtering</h5>
-                  <p class="card-text"></p>
-                  <input type="checkbox" id="quality" class="form-control form-control-md mt-auto" checked>
-                </div>
-              </div>
-            <div class="card text-center" style="width: 16%;">
-                <div class="card-header"><i class="fas fa-dragon fa-3x"></i>
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title mt-auto">Chimera filtering</h5>
-                  <p class="card-text"></p>
-                  <input type="checkbox" id="chimera" class="form-control form-control-md mt-auto" checked>
-                </div>
-              </div>
-            <div class="card text-center" style="width: 16%;">
-                <div class="card-header"><i class="fas fa-dna fa-3x"></i>
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title mt-auto">Gene extraction</h5>
-                  <p class="card-text"></p>
-                  <input type="checkbox" id="gene" class="form-control form-control-md mt-auto" checked>
-                </div>
-              </div>
-            <div class="card text-center" style="width: 16%;">
-                <div class="card-header"><i class="fas fa-layer-group fa-3x"></i>
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title mt-auto">Clustering</h5>
-                  <p class="card-text"></p>
-                  <input type="checkbox" id="cluster" class="form-control form-control-md mt-auto" checked>
-                </div>
-              </div>
-            <div class="card text-center" style="width: 16%;">
-                <div class="card-header"><i class="fas fa-database fa-3x"></i>
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title mt-auto">Taxonomy assignment</h5>
-                  <p class="card-text"></p>
-                  <input type="checkbox" id="taxonomy" class="form-control form-control-md mt-auto" checked>
-                </div>
-              </div>
-              <button type="button" class="btn btn-dark align-self-center" id="test">Select tools and parameters  <i class="fas fa-tools"></i></button>
             </div>
       </div>
 
+      <!-- Quality filter -->
+      <div class="wrapper quality hideView blank">
+        <ul class="collapsible vertical-center">
+          <li>
+            <div class="collapsible-header">VSEARCH
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">MOTHUR
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">DADA2
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">OBITOOLS
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+      </div>
       
-      <div class="container startingView">
-          <img src="assets\5c80f90872f5d9028c17ed44.png" alt="">
+      <!-- Demultiplex -->
+      <div class="wrapper demultiplex hideView blank">
+        <ul class="collapsible vertical-center">
+          <li>
+            <div class="collapsible-header">MOTHUR
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">OBITOOLS
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
       </div>
-      <div class="container standAloneTools hideView">
-          <h1>Standalone tools</h1>
-      </div>
-      <div class="container Docs hideView">
-          <h1>Documentation</h1>
-          <canvas id="the-canvas"></canvas>
-      </div>
-      <div class="container fileSelect hideView">
-        <h1>File Select</h1>
-        <div id="selectFiles"><i class="fas fa-folder-plus fa-7x"></i>Select DNA sequence files</div>
-        <div id="selectPrimerFile"><i class="fas fa-folder-plus fa-7x"></i>Select primer files(Optional?)</div>
-    </div>
-      <div class="container cutadapt_trimmomatic hideView">
-        <h1>File Select</h1>
-        <div id="selectFiles"><i class="fas fa-folder-plus fa-7x"></i>cutadapt -a ADAPTER_FWD -A ADAPTER_REV -o out.1.fastq -p out.2.fastq reads.1.fastq reads.2.fastq
 
-          Single-end/R1 option	Corresponding option for R2
-          --adapter, -a	-A
-          --front, -g	-G
-          --anywhere, -b	-B
-          --cut, -u	-U
-        </div>
-    </div>
+      <!-- Remove Chimeras -->
+      <div class="wrapper chimera hideView blank">
+        <ul class="collapsible vertical-center">
+          <li>
+            <div class="collapsible-header">4
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="ADAPTER_FWD" type="text" style="text-transform:uppercase;">
+                <label for="ADAPTER_FWD">Forward adapter</label>
+              </div>
+              <div class="input-field">
+                <input id="ADAPTER_REV" type="text" style="text-transform:uppercase;">
+                <label for="ADAPTER_REV">Reverse adapter</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">5
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body">
+
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header"></i>6
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body">
+              <div class="flexcontainer" style="width:260x; height:260px;">
+                <div style="text-align: center;">
+                  <a class="btn-floating btn-large waves-effect waves-light grey lighten-1"><i class="material-icons">insert_drive_file</i></a>
+                  <span style="display: block;text-align: center; margin-top: 17px; margin-bottom: 50%">Add an oligos file</span>
+                </div>
+                
+                <ul id="mothurOligosFileExample" class="tooltipped" title="Oligos file structure" style="box-shadow: 1px 1px; margin-left: 110px; margin-bottom: 10%;">
+                  <li>forward&nbsp;&nbsp;&nbsp;&nbsp;CATGCTGCCTCCCGTAGGAGT</li>
+                  <li>reverse&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CCAGAGTTTGATCCTGGCTCAG</li>
+                  <li>barcode&nbsp;&nbsp;&nbsp;&nbsp;AACCAACC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sample1</li>
+                  <li>barcode&nbsp;&nbsp;&nbsp;&nbsp;AACCAAGG&nbsp;&nbsp;&nbsp;&nbsp;Sample2</li>
+                  <li>barcode&nbsp;&nbsp;&nbsp;&nbsp;AACCATCG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sample3</li>
+                </ul>
+              </div>
+            </div>
+      </div>
+      
+      <!-- Cluster -->
+      <div class="wrapper cluster hideView blank">
+        <ul class="collapsible vertical-center">
+          <li>
+            <div class="collapsible-header">MOTHUR
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">VSEARCH
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">CD-HIT
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">SWARM
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+      </div>
+
+      <!-- Assing Taxonomy -->
+      <div class="wrapper tax hideView blank">
+        <ul class="collapsible vertical-center">
+          <li>
+            <div class="collapsible-header">MOTHUR
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">BLAST
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+      </div>
+      
+      <!-- Create circular consensus sequences (PacBio) -->
+      <div class="wrapper ccs hideView blank">
+        <ul class="collapsible vertical-center">
+          <li>
+            <div class="collapsible-header">PBCSS
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">BAX2BAMS
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body">
+                under construction
+            </div>
+          </li>
+      </div>
+
+      <!-- Assemble paired-end sequences -->
+      <div class="wrapper assemble-paired hideView blank">
+        <ul class="collapsible vertical-center">
+          <li>
+            <div class="collapsible-header">PANDAseq
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">FLASH
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">VSEARCH
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label>
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+              <div class="input-field">
+                <input id="example" type="text" style="text-transform:uppercase;">
+                <label for="example">place holder</label>
+              </div>
+            </span></div>
+          </li>
+
+      </div>
+
+    <!-- Scripts -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./renderer.js"></script>
+    <script type="text/javascript" src="node_modules\materialize-css\dist\js\materialize.min.js"></script>
+    <script src="assets\jquery-ui.js"></script>
   </body>
 </html>

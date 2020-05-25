@@ -1,0 +1,10 @@
+FROM alpine:3.10
+RUN apk add git \
+    && apk add build-base \
+    && apk add zlib-dev \
+    && git clone https://github.com/dstreett/FLASH2 \
+    && cd FLASH2 \
+    && make \
+    && apk del git \
+    && apk del build-base
+ENV PATH="/FLASH2:$PATH" \

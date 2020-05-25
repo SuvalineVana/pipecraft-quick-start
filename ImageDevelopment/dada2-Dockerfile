@@ -1,0 +1,6 @@
+FROM alpine:edge
+
+RUN apk add build-base && apk add R && apk add R-dev && apk add linux-headers && apk add libjpeg-turbo-dev
+ADD ImageDevelopment/dada2_install.R /
+RUN Rscript dada2_install.R
+RUN apk del R-dev && apk del build-base

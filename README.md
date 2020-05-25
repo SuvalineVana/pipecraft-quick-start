@@ -69,6 +69,7 @@ docker push metsoja/pipecraft:tagname
 For container modifications via bash
 ```bash
 docker run --interactive --tty pipecraft:alfa bash
+docker commit containerID name:version
 ```
 
 For analysis testing
@@ -78,7 +79,7 @@ docker run --interactive --tty  -v C:\Users\m_4_r\Desktop\Docker\electron-quick-
 
 For build
 ```bash
-docker build -t pipecraft:alfa -f .\Dockerfile .  
+docker build --tag pipecraft:alfa --file .\Dockerfile .  
 ```
 
 Remove all containers

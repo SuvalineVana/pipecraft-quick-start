@@ -1,49 +1,82 @@
-.navbar-brand {
-    padding-top: 0;
-    padding-bottom: 0;
+.dropdown-trigger {
+    width: 100%;
 }
 
-li {
-    margin-left: 30px;
-}
-
-.navbar {
-    padding:0 1rem;
+.sidenav li>a>i.material-icons {
+    float: right;
 }
 
 body {
-    font-family: 'Open Sans Condensed', sans-serif;
-}
-
-.progress { 
-    margin-left: auto; 
-    margin-right:auto;
-    margin-top: 10px; 
-}
-
-.container {
-    margin-top: 30px;
-}
-
-.form-control:focus {
-    box-shadow: 0 0 0 0px;
-}
-
-
-.hideView {
-    display: none;
-}
-
-#workflowConstructProgress {
-    margin-bottom: 30px;
-}
-
-#test {
-    margin:auto;
-    display:block;
-    margin-top:25px;
+    overflow: hidden; /* Hide scrollbars */
   }
 
-#dnaImage {
-    content: url('assets\PngItem_333137.png');
+.user-view {
+    height: 150px;
+}
+
+img {
+    max-width:100%;
+    max-height:100%;
+    display:block;
+    margin:auto;
+}
+
+.sidenav {
+    background: #8e9eab;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+body {
+    background: linear-gradient(to bottom, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+}
+
+.wrapper {
+    display: flex;
+    width: 966px;
+    height: 663px;
+    margin-left: 300px;
+    justify-content: center;
+}
+
+.collapsible {
+    height: max-content;
+    width: 100%;
+    margin-top: 300px;
+}
+
+#ADAPTER_FWD {
+    margin-bottom: 14px;
+}
+
+p.adapter-checkbox {
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#dropdown1 {
+    background: linear-gradient(to bottom, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+}
+
+.flexcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    align-content: flex-end;
+ }
+
+ #mothurOligosFileExample {
+     border: 1px grey solid;
+     border-radius: 25px;
+     border-spacing: 20px;
+     padding: 10px;
+ }
+
+ .hideView {
+    display: none;
 }

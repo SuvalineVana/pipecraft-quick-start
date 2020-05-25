@@ -12,11 +12,52 @@ docker run -t -i -v '/on/my/host:/on/the/container'-v /on/my/host/2:/on/the/cont
 Stop and remove all containers
 You can review the containers on your system with docker ps. Adding the -a flag will show all containers. When you’re sure you want to delete them, you can add the -q flag to supply the IDs to the docker stop and docker rm commands:
 
-List:
+List of containers
 
 docker ps -a
-Remove:
+
+Remove all containers
 
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 docker volume prune
+
+Remove dangling images:
+docker rmi -f $(docker images -f "dangling=true" -q)
+
+
+Run with multiple mounted volumes
+docker run --interactive --tty  -v C:\Users\m_4_r\Desktop\pipecraft-quick-start\MarttiVasarMiSeq:/Input  pipecraft:alfa bash
+
+Save Container state as image
+docker commit df591fca4459 name:version
+
+apk add python3-dev
+apk add build-base
+python3 -m pip install cutadapt
+
+
+
+/etc/apk/repositories
+http://dl-cdn.alpinelinux.org/alpine/v3.8/main/x86_64/
+
+
+
+
+
+
+Mothur In Ubuntu
+ 
+apt update
+apt-get install wget
+apt-get install libreadline7
+apt-get install unzip
+wget https://github.com/mothur/mothur/releases/download/v.1.43.0/Mothur.Ubuntu_18.zip
+unzip Mothur.Ubuntu_18.zip
+rm Mothur.Ubuntu_18.zip
+rm /var/lib/apt/lists/*
+apt-get remove wget
+apt-get remove unzip
+export PATH=/mothur/:$PATH
+
+docker build --squash --tag mothur:1.43 --file .\ImageDevelopment\Dockerfile .

@@ -1,0 +1,5 @@
+FROM alpine:3.11
+RUN apk add --no-cache openjdk8-jre-base \
+    && apk add wget unzip \
+    && wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.39.zip \
+    && unzip Trimmomatic-0.39.zip

@@ -1,0 +1,10 @@
+FROM alpine:3.10
+RUN apk add git \
+    && apk add autoconf \
+    && apk add automake \
+    && apk add build-base \
+    && git clone https://github.com/torognes/vsearch.git \
+    && cd vsearch && ./autogen.sh && ./configure && make && make install \
+    && apk del autoconf \
+    && apk del automake \
+    && apk del build-base

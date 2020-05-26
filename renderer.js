@@ -33,7 +33,7 @@ $( function() {
 var i = 1
 
 // // Switch view
-var newView = ''
+var newView = $('#PlutoTwitter')
 function switchView() {
   
   viewSelector = ('.wrapper.').concat($(this).parent().attr("class").replace(' ','.'))
@@ -50,7 +50,7 @@ function switchView() {
 // Add workflow steps
 $('.dropdown-selection').each(function(){
   $(this).click(function(){
-
+    
     var step = $(this).clone().removeClass('dropdown-selection')
     step.find('i').text('remove_circle_outline').addClass('RemoveButtons')
     step.find('a').addClass('viewSwitch')
@@ -85,6 +85,16 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
   viewTag = ('.wrapper.' + ($(this).closest('li').attr('class'))).replace(' ', '.')
   $(viewTag).remove()
   $(this).closest('li').remove();
+  // Show PlutoF Twitter if all steps are removed
+  if (document.querySelectorAll("#SelectedSteps li").length < 1) {
+    // array does not exist, is not an array, or is empty
+    // ⇒ do not attempt to process array
+    console.log("tere")
+    newView = $('#PlutoTwitter')
+    $(newView).fadeIn( 250, function(){
+    });
+  }
+
 });
 
 

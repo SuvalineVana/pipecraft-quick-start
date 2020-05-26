@@ -1,5 +1,7 @@
-FROM alpine:3.11
-RUN apk add --no-cache openjdk8-jre-base
-RUN apk add wget unzip
-RUN wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.39.zip
-RUN unzip Trimmomatic-0.39.zip
+FROM alpine:3.10
+RUN apk add git
+RUN apk add autoconf
+RUN apk add automake
+RUN apk add build-base
+RUN git clone https://github.com/torognes/swarm.git
+RUN cd swarm && make

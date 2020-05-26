@@ -5,7 +5,7 @@ services:
 #Cut adapters/primers
   #CUTADAPT
  cutadapt:
-  image: cutadapt:latest
+  image: pipecraft/cutadapt:2.10
   env_file:
    - env_files\cutadapt.env
   volumes:
@@ -15,7 +15,7 @@ services:
 #Cut adapters/primers
   #CUTADAPT
  trimmomatic:
-  image: trimmomatic:0.39
+  image: pipecraft/trimmomatic:0.39
   env_file:
    - env_files\trimmomatic.env
   volumes:
@@ -27,7 +27,7 @@ services:
 #Create circular consensus sequences (PacBio)
   #PBCSS
  pbccs-create-circular-consensus-sequence:
-  image: pacbio:pipecraft
+  image: pipecraft/pacbio:latest
   env_file: 
    - env_files\pbccs-create-consensus-seq.env
   volumes:
@@ -36,7 +36,7 @@ services:
   command: [./execute/pbccs-create-circular-consensus-sequence.sh]
   #BAX2BAMS
  bax2bams-create-circular-consensus-sequence:
-  image: pacbio:pipecraft
+  image: pipecraft/pacbio:latest
   env_file: 
    - env_files\bax2bams-create-consensus-seq.env
   volumes:
@@ -47,7 +47,7 @@ services:
 #Assemble paired-end sequences
   #PANDAseq
  pandaseq-assemble-paired-end-sequences:
-  image: pandaseq:2.11
+  image: pipecraft/pandaseq:2.11
   env_file: 
    - env_files\pandaseq-assemble-paired-end-sequences.env
   volumes:
@@ -56,7 +56,7 @@ services:
   command: [./execute/pandaseq-assemble-paired-end-sequences.sh]
   #FLASH
  flash-assemble-paired-end-sequences:
-  image: flash:2
+  image: pipecraft/flash:2
   env_file: 
    - env_files\flash-assemble-paired-end-sequences.env
   volumes:
@@ -65,7 +65,7 @@ services:
   command: [./execute/flash-assemble-paired-end-sequences.sh]
   #VSEARCH
  vsearch-assemble-paired-end-sequences:
-  image: mothur:latest
+  image: pipecraft/vsearch:2.14.2
   env_file: 
    - env_files\vsearch-assemble-paired-end-sequences.env
   volumes:
@@ -76,7 +76,7 @@ services:
 #Quality filter
   #VSEARCH
  vsearh-quality-filter:
-  image: mothur:latest
+  image: pipecraft/vsearch:2.14.2
   env_file:
    - env_files\vsearch-quality-filter-variables.env
   volumes:
@@ -85,7 +85,7 @@ services:
   command: [./execute/vsearch-quality-filter.sh]
   #MOTHUR
  mothur-quality-filter:
-  image: mothur:latest
+  image: pipecraft/mothur:1.43
   env_file:
    - env_files\mothur-quality-filter-variables.env
   volumes:
@@ -94,7 +94,7 @@ services:
   command: [./execute/mothur-quality-filter.sh]
   #OBITOOLS
  obitools-quality-filter:
-  image: obitools:final
+  image: pipecraft/obitools:3
   env_file:
    - env_files\obitools-quality-filter-variables.env
   volumes:
@@ -103,7 +103,7 @@ services:
   command: [./execute/obitools-quality-filter.sh]
   #DADA2
  dada2-quality-filter:
-    image: dada2:test
+    image: pipecraft/dada2:3.10
     env_file:
      - env_files\dada2-quality-filter-variables.env
     volumes:
@@ -114,7 +114,7 @@ services:
 #Demultiplex
   #MOTHUR
  mothur-demultiplex:
-  image: mothur:1.43
+  image: pipecraft/mothur:1.43
   env_file:
    - env_files\mothur-demultiplex-variables.env
   volumes:
@@ -123,7 +123,7 @@ services:
   command: [./execute/mothur-demultiplex.sh]
   #OBITOOLS
  obitools-demultiplex:
-  image: obitools:latest
+  image: pipecraft/obitools:3
   env_file:
    - env_files\obitools-demultiplex-variables.env
   volumes:
@@ -134,7 +134,7 @@ services:
 #Cluster
   #CD-HIT
  cd-hit-cluster:
-  image: cdhit:4.8.1
+  image: pipecraft/cdhit:4.8.1
   env_file:
    - env_files\cd-hit-cluster-variables.env
   volumes:
@@ -143,7 +143,7 @@ services:
   command: [./execute/cd-hit-cluster.sh]
   #VSEARCH
  vsearch-cluster:
-  image: vsearch:latest
+  image: pipecraft/vsearch:2.14.2
   env_file:
    - env_files\vsearch-cluster-variables.env
   volumes:
@@ -152,7 +152,7 @@ services:
   command: [./execute/vsearch-cluster.sh]
   #SWARM
  swarm-cluster:
-  image: :latest
+  image: pipecraft/swarm:3.0.0
   env_file:
    - env_files\swarm-cluster-variables.env
   volumes:
@@ -161,7 +161,7 @@ services:
   command: [./execute/swarm-cluster.sh]
   #MOTHUR
  mothur-cluster:
-  image: mothur:1.43
+  image: pipecraft/mothur:1.43
   env_file:
    - env_files\mothur-cluster-variables.env
   volumes:
@@ -171,7 +171,7 @@ services:
 #Taxonomy
   #MOTHUR
  mothur-taxonomy:
-  image: mothur:1.43
+  image: pipecraft/mothur:1.43
   env_file:
    - env_files\mothur-taxonomy-variables.env
   volumes:
@@ -180,7 +180,7 @@ services:
   command: [./execute/mothur-taxonomy.sh]
   #BLAST
  blast-taxonomy:
-  image: blast:latest
+  image: ncbi/blast
   env_file:
    - env_files\blast-taxonomy-variables.env
   volumes:

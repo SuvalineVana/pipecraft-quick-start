@@ -4,7 +4,44 @@
 window.$ = window.jQuery = require('jquery');
 var child_process = require('child_process');
 const { dialog } = require('electron').remote
+const fs = require('fs')
+
+
+function TruncateEnvFile(serviceName){
+  envFilePath = 'env_files/' + serviceName + '.env'
+  fs.readFile(envFilePath, function (err, data) {
+    if (err) throw err;
+    theFile = data.toString().split("\n");
+    theFile.splice(-3, 3);
+    fs.writeFile('script_folder/SetupTest.sh', theFile.join("\n"), function (err) {
+        if (err) {
+            return console.log(err);
+        }
+        // console.log("Removed last 3 lines");
+        // console.log(theFile.length);
+    });
+  });
+}
+
+function AppendToEnvFile(env_variable, serviceName){
+  envFilePath = 'env_files/' + serviceName + '.env'
+  line2append = env_variable + '\n'
+  fs.appendFile(envFilePath, line2append, function (err) {
+    if (err) {
+      // append failed
+    } else {
+      // done
+    }
+  })
+}
+
+
 // materialize-css
+
+
+$(document).ready(function() {
+  $('input#input_text, textarea#textarea2').characterCounter();
+});
 
 $(document).ready(function(){
   $('.sidenav').sidenav();
@@ -14,6 +51,7 @@ $(document).ready(function(){
 $(document).ready(function(){
   $('.collapsible').collapsible();
 });
+
 document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.dropdown-trigger');
   var instances = M.Dropdown.init(elems);
@@ -32,8 +70,12 @@ $( function() {
 } );
 var i = 1
 
-// // Switch view
+// Switch view
+  // Home screen
 var newView = $('#PlutoTwitter')
+$(newView).fadeIn( 500, function(){
+});
+
 function switchView() {
   
   viewSelector = ('.wrapper.').concat($(this).parent().attr("class").replace(' ','.'))
@@ -91,7 +133,7 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
     // ⇒ do not attempt to process array
     console.log("tere")
     newView = $('#PlutoTwitter')
-    $(newView).fadeIn( 250, function(){
+    $(newView).fadeIn( 500, function(){
     });
   }
 

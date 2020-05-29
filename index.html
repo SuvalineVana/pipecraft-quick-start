@@ -404,10 +404,31 @@
                 </p>
             </div>
             <div class="collapsible-body"><span>
-              <div class="input-field">
-                <input id="example" type="text" style="text-transform:uppercase;">
-                <label for="example">place holder</label>
-              </div>
+              <div>
+                <span class="label">Minimum number of full-length subreads required to generate CCS for a ZMW:</span>
+                <div class="input-field inline">
+                  <input class="InlineNumericInput" id="--min-passes" type="number" value="3" min="1">
+                </div>
+              <div>
+                <span class="label">Minimum SNR of subreads to use for generating CCS:</span>
+                <div class="input-field inline">
+                  <input class="InlineNumericInput" id="--min-snr" type="number" value="2.5" min="1" step="0.5">
+                </div>
+              <div>
+                <span class="label">Minimum draft length before polishing:</span>
+                <div class="input-field inline">
+                  <input class="InlineNumericInput" id="--min-length" type="number" value="10" min="1">
+                </div>
+              <div>
+                <span class="label">Maximum draft length before polishing:</span>
+                <div class="input-field inline">
+                  <input class="InlineNumericInput" id="--max-length" type="number" value="50000" min="0">
+                </div>
+              <div>
+                <span class="label">Minimum predicted accuracy in:</span>
+                <div class="input-field inline">
+                  <input class="InlineNumericInput" id="--min-rq" type="number" value="0.99" min="0" max="1" step="0.01">
+                </div>
             </span></div>
           </li>
           <li>
@@ -421,13 +442,14 @@
                 </p>
             </div>
             <div class="collapsible-body">
-                under construction
+              bax2bam converts the legacy PacBio basecall format (bax.h5) into the BAM
+              basecall format.
             </div>
           </li>
       </div>
 
       <!-- PlutoF twitter timeline -->
-      <div class="wrapper" id="PlutoTwitter">
+      <div class="wrapper hideView" id="PlutoTwitter">
         <a class="twitter-timeline" data-width="960" data-height="660" data-theme="light" href="https://twitter.com/plutof_platform?ref_src=twsrc%5Etfw">Tweets by plutof_platform</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </div>
 

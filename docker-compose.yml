@@ -10,10 +10,10 @@ services:
    - env_files\cutadapt.env
   volumes:
    - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
-   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
+   - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quickstart\input_folder\SampleName_S1_L001_R1_001.fastq
   command: [./execute/cutadapt.sh]
 #Cut adapters/primers
-  #CUTADAPT
+  #TRIMMOMATIC
  trimmomatic:
   image: pipecraft/trimmomatic:0.39
   env_file:

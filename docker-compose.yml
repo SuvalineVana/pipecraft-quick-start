@@ -150,6 +150,15 @@ services:
    - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\script_folder:/execute
    - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
   command: [./execute/vsearch-cluster.sh]
+  #USEARCH
+ usearch-cluster:
+  image: usearch:latest
+  env_file:
+   - env_files\usearch-cluster-variables.env
+  volumes:
+   - ./script_folder:/execute
+   - ./input_folder:/input
+  command: [./execute/usearch-cluster.sh]
   #SWARM
  swarm-cluster:
   image: pipecraft/swarm:3.0.0

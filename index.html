@@ -141,7 +141,7 @@
             <div class="collapsible-header">DADA2
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="dada2-quality-filter">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -158,7 +158,7 @@
             <div class="collapsible-header">OBITOOLS
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="obitools-quality-filter">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -169,6 +169,35 @@
                 <input id="example" type="text" style="text-transform:uppercase;">
                 <label for="example">place holder</label>
               </div>
+            </span></div>
+          </li>
+          <li>
+            <div class="collapsible-header">Trimmomatic
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label value="trimmomatic-quality-filter">
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body"><span>
+                <span class="label">Cut bases off the start of your reads, if below this threshold quality</span>
+                <div class="input-field inline">
+                  <input class="InlineNumericInput" id="LEADING:" type="number" value="1" min="1" step="1">
+                </div>
+                <span class="label">Cut bases off the end of your reads, if below this threshold quality:</span>
+                <div class="input-field inline">
+                  <input class="InlineNumericInput" id="TRAILING:" type="number" value="1" min="1" step="1">
+                </div>
+                <span class="label">Drop the read if it is below a specified length:</span>
+                <div class="input-field inline">
+                  <input class="InlineNumericInput" id="MINLEN:" type="number" value="999" min="1" step="1">
+                </div>
+                <span class="label">Drop the read if the average quality is below the specified level</span>
+                <div class="input-field inline">
+                  <input class="InlineNumericInput" id="AVGQUAL:" type="number" value="30" min="0">
+                </div>
             </span></div>
           </li>
       </div>

@@ -2,11 +2,16 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 window.$ = window.jQuery = require('jquery');
-var child_process = require('child_process');
 const { dialog } = require('electron').remote
-const fs = require('fs')
+const fs = require('fs');
+// const {exec} = require('child_process');
+// const { sync } = require('child_process');
+const { spawnSync } = require('child_process')
+const {spawn} = require('child_process');
+let Shell2 = require('node-powershell-await');
 
 
+// ENV file management functions
 function TruncateEnvFile(serviceName){
   envFilePath = 'env_files/' + serviceName + '.env'
   fs.readFile(envFilePath, function (err, data) {
@@ -35,9 +40,7 @@ function AppendToEnvFile(env_variable, serviceName){
   })
 }
 
-
 // materialize-css
-
 
 $(document).ready(function() {
   $('input#input_text, textarea#textarea2').characterCounter();
@@ -70,18 +73,18 @@ $( function() {
 } );
 var i = 1
 
-// Switch view
-  // Home screen
+// Home screen
 var newView = $('#PlutoTwitter')
 $(newView).fadeIn( 500, function(){
 });
 
+// Switch view
 function switchView() {
   
   viewSelector = ('.wrapper.').concat($(this).parent().attr("class").replace(' ','.'))
   oldview = newView
   newView = $(viewSelector)
-  console.log(viewSelector)
+  // console.log(viewSelector)
   // $(viewSelector).toggleClass('hideView')
   $(oldview).fadeOut( 250, function() {
     $(newView).fadeIn( 250, function(){
@@ -139,51 +142,78 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
 
 });
 
-
 // Run Analysis
-
 // Setup
-const path = require('path');
-const compose =require('docker-compose')
-
-function runService(serviceName){
-  compose.upOne(serviceName,{ cwd: path.join(__dirname), log: true })
-  .then(
-    () => { console.log('done')},
-    err => { console.log('something went wrong:', err.message)}
-  );
+function writeLog(serviceName, runLog){
+  logName = 'logs/' + serviceName +'_log.txt'
+  fs.writeFile(logName, runLog, function(err) {
+    if(err) {
+        return console.log(err);
+    }
+    console.log("The file was saved!");
+}); 
 }
 
-// On click execute docker services 
+function execShellCommand(cmd) {
+  const exec = require('child_process').exec;
+  return new Promise((resolve, reject) => {
+   exec(cmd, (error, stdout, stderr) => {
+    if (error) {
+     console.warn(error);
+    }
+    resolve(stdout? stdout : stderr);
+   });
+  });
+}
 
-$('#runButton').click(function(){
-  $(".viewSwitch").each(function(index){
-    console.log('nr '+ index +' in run order')
-    dockerInputTag = ('.wrapper.' + $(this).parent().attr('class').replace(' ', '.'))
-    console.log($(this).parent().attr('class'))
-    console.log($(dockerInputTag))
-    // $(dockerInputTag).find(':checkbox').each(function(){
-    //   console.log($(this).parent.attr("name"))
-    // })
-    console.log(index)
-    // runService('cutadapt')
-    // runService('mothur')
-    // child_process.execSync('docker-compose run cutadapt')
+async function RunDockerCompose(serviceName){
+  const runLog = await execShellCommand('docker-compose run ' + serviceName);
+  console.log(runLog);
+  writeLog(serviceName, runLog)
+}
+
+function collectParams(WorkFlowTag){
+  serviceName = ""
+  $(WorkFlowTag).find(':checkbox').each(function(){
+    if (this.checked == true){
+      serviceName = $(this).parent().attr("value")
+      console.log(serviceName)
+      return serviceName
+    }
   })
+}
+
+async function processStepsInfo(workFlowSteps){
+  for (const item of workFlowSteps) {
+    WorkFlowTag = ('.wrapper.' + item.closest('li').getAttribute('class').replace(' ','.'))
+    console.log(WorkFlowTag)
+    collectParams(WorkFlowTag)
+    if (serviceName == ""){
+      console.log('No steps selected')
+      break
+    }
+    await RunDockerCompose(serviceName)
+    console.log('Log collection function should go here')
+    console.log('Incase of an error, break loop here and Alert User')
+  }
+}
+
+// Run Button
+$('#runButton').click(async function(){
+  workFlowSteps = $(".viewSwitch");
+  await processStepsInfo(workFlowSteps);
+  console.log('The whole workflow has completed: Show user stats and save configuration file')
 })
 
 // Do not collapse if checkbox is clicked
 $(".not-collapse").on("click", function(e) { e.stopPropagation(); });
-
 
 // Allow only 1 checkbox to be checked
 $('input[type="checkbox"]').on('change', function() {
   $('input[type="checkbox"]').not(this).prop('checked', false);
 });
 
-
 // Select input files and write them to a list
-
 const fileSelectButton = document.getElementById('FileSelectButton');
 fileSelectButton.addEventListener('click', function(){
     dialog.showOpenDialog({
@@ -195,22 +225,3 @@ fileSelectButton.addEventListener('click', function(){
         console.log(err)
       })
 })
-
-
-// var spawn = require('child_process').spawn;
-// var cp = spawn(process.env.comspec, ['/c', 'dir', '-arg1', '-arg2']);
-
-// cp.stdout.on("data", function(data) {
-//     console.log(data.toString());
-// });
-
-// cp.stderr.on("data", function(data) {
-//     console.error(data.toString());
-// });
-
-// const runButton = document.getElementById('Run');
-// runButton.addEventListener('click', function(){
-//   child_process.exec('docker run --rm -ti hello-world');
-//   child_process.execSync('docker-compose run cutadapt cutadapt/Mi_seq_ITS.sh');
-//   console.log('done')
-// })

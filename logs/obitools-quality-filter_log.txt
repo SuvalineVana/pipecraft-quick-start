@@ -1,0 +1,44 @@
+usage: obi [-h] [--version] [--log OBI:LOG]
+           {align,alignpairedend,annotate,build_ref_db,cat,clean,clean_dms,count,ecopcr,ecotag,export,grep,head,history,import,less,ls,ngsfilter,sort,stats,tail,test,uniq}
+           ...
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --version             Print the version of The OBITools 3
+  --log OBI:LOG         Create a logfile
+
+subcommands:
+  valid subcommands
+
+  {align,alignpairedend,annotate,build_ref_db,cat,clean,clean_dms,count,ecopcr,ecotag,export,grep,head,history,import,less,ls,ngsfilter,sort,stats,tail,test,uniq}
+                        additional help
+    align               Aligns one sequence column with itself or two sequence
+                        columns
+    alignpairedend      Aligns paired-ended reads
+    annotate            Annotate views with new tags and edit existing
+                        annotations
+    build_ref_db        Tag a set of sequences for PCR and sequencing errors
+                        identification
+    cat                 Concatenate views.
+    clean               Tag a set of sequences for PCR and sequencing errors
+                        identification
+    clean_dms           Clean a DMS from unfinished views and columns
+    count               Counts sequence records
+    ecopcr              in silico PCR
+    ecotag              Taxonomic assignment of sequences
+    export              Export a view to a different file format
+    grep                Grep view lines that match the given predicates
+    head                Keep the N first lines of a view.
+    history             Command line histories and view history graphs
+    import              Imports sequences from different formats into a DMS
+    less                Less equivalent
+    ls                  Print a preview of a DMS, view, column....
+    ngsfilter           Assigns sequence records to the corresponding
+                        experiment/sample based on DNA tags and primers
+    sort                Sort view lines according to the value of a given
+                        attribute.
+    stats               Compute basic statistics for attribute values.
+    tail                Keep the N last lines of a view.
+    test                Tests if the obitools are working properly
+    uniq                Group sequence records together
+ENV FILE WORKING

@@ -23,7 +23,10 @@
     "materialize-css": "^1.0.0-rc.2"
   },
   "dependencies": {
-    "jquery": "^3.4.1",
+    "@rauschma/stringio": "^1.4.0",
+    "jquery": "^3.5.1",
+    "node-powershell": "^4.0.0",
+    "node-powershell-await": "^1.0.4",
     "popper.js": "^1.16.1"
   }
 }

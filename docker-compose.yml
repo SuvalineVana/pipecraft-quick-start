@@ -111,6 +111,16 @@ services:
      - C:\Users\m_4_r\Desktop\materializeDEMO\pipecraft-quick-start\input_folder:/input
     command: ["Rscript", "execute/dada2-quality-filter.R"]
 
+#   #TRIMMOMATIC
+#  trimmomatic-quality-filter:
+#   image: pipecraft/trimmomatic:0.39
+#   env_file:
+#    - env_files\trimmomatic-quality-filter.env
+#   volumes:
+#     - ./script_folder:/execute
+#     - .${input}:/${input}
+#   command: [./execute/trimmomatic.sh]
+
 #Demultiplex
   #MOTHUR
  mothur-demultiplex:

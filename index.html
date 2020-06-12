@@ -41,7 +41,7 @@
             <div class="collapsible-header">cutadapt
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="cutadapt-cut">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -62,7 +62,7 @@
             <div class="collapsible-header">Trimmomatic
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="trimmomatic-cut">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -76,7 +76,7 @@
             <div class="collapsible-header"></i>Mothur
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="mothur-cut">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -107,7 +107,7 @@
             <div class="collapsible-header">VSEARCH
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="vsearch-quality-filter">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -124,7 +124,7 @@
             <div class="collapsible-header">MOTHUR
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="mothur-quality-filter">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -209,7 +209,7 @@
             <div class="collapsible-header">MOTHUR
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="mothur-demultiplex">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -226,7 +226,7 @@
             <div class="collapsible-header">OBITOOLS
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="obitools-demultiplex">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -314,7 +314,7 @@
             <div class="collapsible-header">MOTHUR
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="mothur-cluster">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -331,7 +331,7 @@
             <div class="collapsible-header">VSEARCH
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="vsearch-cluster">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -348,7 +348,7 @@
             <div class="collapsible-header">CD-HIT
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="cd-hit-cluster">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -365,7 +365,7 @@
             <div class="collapsible-header">SWARM
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="swarm-cluster">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -387,7 +387,7 @@
             <div class="collapsible-header">MOTHUR
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="mothur-taxonomy">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -404,7 +404,7 @@
             <div class="collapsible-header">BLAST
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="blast-taxonomy">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -423,10 +423,25 @@
       <div class="wrapper ccs hideView blank">
         <ul class="collapsible vertical-center">
           <li>
+            <div class="collapsible-header">BAX2BAMS
+              <form action="#"></form>
+                <p class="adapter-checkbox not-collapse">
+                  <label value="bax2bams-create-circular-consensus-sequence"> 
+                    <input type="checkbox" />
+                    <span></span>
+                  </label>
+                </p>
+            </div>
+            <div class="collapsible-body">
+              bax2bam converts the legacy PacBio basecall format (bax.h5) into the BAM
+              basecall format.
+            </div>
+          </li>
+          <li>
             <div class="collapsible-header">PBCSS
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="pbccs-create-circular-consensus-sequence">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -460,21 +475,6 @@
                 </div>
             </span></div>
           </li>
-          <li>
-            <div class="collapsible-header">BAX2BAMS
-              <form action="#"></form>
-                <p class="adapter-checkbox not-collapse">
-                  <label>
-                    <input type="checkbox" />
-                    <span></span>
-                  </label>
-                </p>
-            </div>
-            <div class="collapsible-body">
-              bax2bam converts the legacy PacBio basecall format (bax.h5) into the BAM
-              basecall format.
-            </div>
-          </li>
       </div>
 
       <!-- PlutoF twitter timeline -->
@@ -489,7 +489,7 @@
             <div class="collapsible-header">PANDAseq
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="pandaseq-assemble-paired-end-sequences">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -506,7 +506,7 @@
             <div class="collapsible-header">FLASH
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="flash-assemble-paired-end-sequences">
                     <input type="checkbox" />
                     <span></span>
                   </label>
@@ -523,7 +523,7 @@
             <div class="collapsible-header">VSEARCH
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
-                  <label>
+                  <label value="vsearch-assemble-paired-end-sequences">
                     <input type="checkbox" />
                     <span></span>
                   </label>

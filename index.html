@@ -4,7 +4,7 @@
     <!-- Materialize + Icons + JqueryUI -->
     <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link type='text/css' rel="stylesheet" href="node_modules\materialize-css\dist\css\materialize.css" media="screen,projection">
+    <link type='text/css' rel="stylesheet" href="assets/materialize.css" media="screen,projection">
     <link rel="stylesheet" href="assets\jquery-ui.css">
     <meta charset="UTF-8">
 
@@ -42,7 +42,7 @@
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
                   <label value="cutadapt-cut">
-                    <input type="checkbox" />
+                    <input type="checkbox" name="cut"/>
                     <span></span>
                   </label>
                 </p>
@@ -63,7 +63,7 @@
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
                   <label value="trimmomatic-cut">
-                    <input type="checkbox" />
+                    <input type="checkbox" name="cut" />
                     <span></span>
                   </label>
                 </p>
@@ -77,7 +77,7 @@
               <form action="#"></form>
                 <p class="adapter-checkbox not-collapse">
                   <label value="mothur-cut">
-                    <input type="checkbox" />
+                    <input type="checkbox" name="cut"/>
                     <span></span>
                   </label>
                 </p>
@@ -542,7 +542,7 @@
     <!-- Scripts -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./renderer.js"></script>
-    <script type="text/javascript" src="node_modules\materialize-css\dist\js\materialize.min.js"></script>
+    <script type="text/javascript" src="assets/materialize.min.js"></script>
     <script src="assets\jquery-ui.js"></script>
   </body>
 </html>

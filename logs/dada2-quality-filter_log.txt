@@ -1,0 +1,152 @@
+[1] "ENV FILE WORKING"
+
+		Information on package ‘dada2’
+
+Description:
+
+Package:                dada2
+Type:                   Package
+Title:                  Accurate, high-resolution sample inference from
+                        amplicon sequencing data
+Description:            The dada2 package infers exact amplicon
+                        sequence variants (ASVs) from high-throughput
+                        amplicon sequencing data, replacing the coarser
+                        and less accurate OTU clustering approach. The
+                        dada2 pipeline takes as input demultiplexed
+                        fastq files, and outputs the sequence variants
+                        and their sample-wise abundances after removing
+                        substitution and chimera errors. Taxonomic
+                        classification is available via a native
+                        implementation of the RDP naive Bayesian
+                        classifier, and species-level assignment to 16S
+                        rRNA gene fragments by exact matching.
+Version:                1.14.1
+Date:                   2020-02-19
+Maintainer:             Benjamin Callahan
+                        <benjamin.j.callahan@gmail.com>
+Author:                 Benjamin Callahan
+                        <benjamin.j.callahan@gmail.com>, Paul McMurdie,
+                        Susan Holmes
+License:                LGPL-3
+LazyLoad:               yes
+Depends:                R (>= 3.4.0), Rcpp (>= 0.12.0), methods (>=
+                        3.4.0)
+Imports:                Biostrings (>= 2.42.1), ggplot2 (>= 2.1.0),
+                        reshape2 (>= 1.4.1), ShortRead (>= 1.32.0),
+                        RcppParallel (>= 4.3.0), parallel (>= 3.2.0),
+                        IRanges (>= 2.6.0), XVector (>= 0.16.0),
+                        BiocGenerics (>= 0.22.0)
+Suggests:               BiocStyle, knitr, rmarkdown
+LinkingTo:              Rcpp, RcppParallel
+SystemRequirements:     GNU make
+VignetteBuilder:        knitr
+biocViews:              ImmunoOncology, Microbiome, Sequencing,
+                        Classification, Metagenomics
+URL:                    http://benjjneb.github.io/dada2/
+BugReports:             https://github.com/benjjneb/dada2/issues
+LazyData:               true
+Collate:                'RcppExports.R' 'allClasses.R' 'allPackage.R'
+                        'chimeras.R' 'dada.R' 'errorModels.R'
+                        'filter.R' 'misc.R' 'multiSample.R' 'paired.R'
+                        'plot-methods.R' 'sequenceIO.R'
+                        'show-methods.R' 'taxonomy.R'
+RoxygenNote:            6.1.1
+git_url:                https://git.bioconductor.org/packages/dada2
+git_branch:             RELEASE_3_10
+git_last_commit:        26fefaa
+git_last_commit_date:   2020-02-21
+Date/Publication:       2020-02-22
+NeedsCompilation:       yes
+Packaged:               2020-02-23 02:36:25 UTC; biocbuild
+Built:                  R 3.6.0; x86_64-pc-linux-musl; 2020-05-25
+                        13:25:37 UTC; unix
+
+Index:
+
+PacBioErrfun            Estimate error rates from transition counts in
+                        PacBio CCS data.
+addSpecies              Add species-level annotation to a taxonomic
+                        table.
+assignSpecies           Taxonomic assignment to the species level by
+                        exact matching.
+assignTaxonomy          Classifies sequences against reference training
+                        dataset.
+c,dada-method           Change concatenation of dada-class objects to
+                        list construction.
+c,derep-method          Change concatenation of derep-class objects to
+                        list construction.
+collapseNoMismatch      Combine together sequences that are identical
+                        up to shifts and/or length.
+dada                    High resolution sample inference from amplicon
+                        data.
+dada-class              The object class returned by 'dada'
+dada2-package           DADA2 package
+derep-class             A class representing dereplicated sequences
+derepFastq              Read in and dereplicate a fastq file.
+errBalancedF            An empirical error matrix.
+errBalancedR            An empirical error matrix.
+fastqFilter             Filter and trim a fastq file.
+fastqPairedFilter       Filters and trims paired forward and reverse
+                        fastq files.
+filterAndTrim           Filter and trim fastq file(s).
+getDadaOpt              Get DADA options
+getErrors               Extract already computed error rates.
+getSequences            Get vector of sequences from input object.
+getUniques              Get the uniques-vector from the input object.
+inflateErr              Inflates an error rate matrix by a specified
+                        factor, while accounting for saturation.
+isBimera                Determine if input sequence is a bimera of
+                        putative parent sequences.
+isBimeraDenovo          Identify bimeras from collections of unique
+                        sequences.
+isBimeraDenovoTable     Identify bimeras in a sequence table.
+isPhiX                  Determine if input sequence(s) match the phiX
+                        genome.
+isShiftDenovo           Identify sequences that are identical to a more
+                        abundant sequence up to an overall shift.
+learnErrors             Learns the error rates from an input list, or
+                        vector, of file names or a list of
+                        'derep-class' objects.
+loessErrfun             Use a loess fit to estimate error rates from
+                        transition counts.
+makeSequenceTable       Construct a sample-by-sequence observation
+                        matrix.
+mergePairs              Merge denoised forward and reverse reads.
+mergeSequenceTables     Merge two or more sample-by-sequence
+                        observation matrices.
+names<-,dada,ANY-method
+                        Deactivate renaming of dada-class objects.
+names<-,derep,ANY-method
+                        Deactivate renaming of derep-class objects.
+noqualErrfun            Estimate error rates for each type of
+                        transition while ignoring quality scores.
+nwalign                 Needleman-Wunsch alignment.
+nwhamming               Hamming distance after Needlman-Wunsch
+                        alignment.
+plotComplexity          Plot sequence complexity profile of a fastq
+                        file.
+plotErrors              Plot observed and estimated error rates.
+plotQualityProfile      Plot quality profile of a fastq file.
+rc                      Reverse complement DNA sequences.
+removeBimeraDenovo      Remove bimeras from collections of unique
+                        sequences.
+removePrimers           Removes primers and orients reads in a
+                        consistent direction.
+seqComplexity           Determine if input sequence(s) are low
+                        complexity.
+setDadaOpt              Set DADA options
+show,derep-method       method extensions to show for dada2 objects.
+tperr1                  An empirical error matrix.
+uniques-vector          The named integer vector format used to
+                        represent collections of unique DNA sequences.
+uniquesToFasta          Write a uniques vector to a FASTA file
+writeFasta,character-method
+                        Writes a named character vector of DNA
+                        sequences to a fasta file. Values are the
+                        sequences, and names are used for the id lines.
+
+Further information is available in the following vignettes in
+directory ‘/usr/lib/R/library/dada2/doc’:
+
+dada2-intro: Introduction to dada2 (source, pdf)
+

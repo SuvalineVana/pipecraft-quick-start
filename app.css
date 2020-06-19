@@ -6,9 +6,11 @@
     float: right;
 }
 
-body {
-    overflow: hidden; /* Hide scrollbars */
-  }
+/* Hide scrollbars */ 
+
+/* body {
+    overflow: hidden; 
+} */
 
 .user-view {
     height: 150px;

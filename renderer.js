@@ -109,6 +109,10 @@ $('.dropdown-selection').each(function(){
     view.addClass(i.toString())
     step.appendTo('#SelectedSteps')
     view.appendTo('body')
+    cbGroupName = view.attr('class')
+    view.find(':checkbox').attr("name", cbGroupName);
+    console.log(view.find(':checkbox'))
+    console.log(view.attr('class'))
     M.AutoInit();
 
     i++
@@ -117,10 +121,14 @@ $('.dropdown-selection').each(function(){
 
 
     // Allow only 1 checkbox to be checked
+    // $('input[type="checkbox"]').on('change', function() {
+    //   console.log($(this).siblings())
+    //   $('input[type="checkbox"]').not(this).prop('checked', false);
+    // });
     $('input[type="checkbox"]').on('change', function() {
-      $('input[type="checkbox"]').not(this).prop('checked', false);
+      $('input[name="' + this.name + '"]').not(this).prop('checked', false);
     });
-    
+
   })  
 })
 
@@ -178,6 +186,7 @@ function collectParams(WorkFlowTag){
     if (this.checked == true){
       serviceName = $(this).parent().attr("value")
       console.log(serviceName)
+      console.log("Parameters should be collected here and writte to appropriate ENV file")
       return serviceName
     }
   })
@@ -206,12 +215,16 @@ $('#runButton').click(async function(){
 })
 
 // Do not collapse if checkbox is clicked
-$(".not-collapse").on("click", function(e) { e.stopPropagation(); });
+// $(".not-collapse").on("click", function(e) { e.stopPropagation(); });
 
 // Allow only 1 checkbox to be checked
-$('input[type="checkbox"]').on('change', function() {
-  $('input[type="checkbox"]').not(this).prop('checked', false);
-});
+// $('input[type="checkbox"]').on('change', function() {
+//   $('input[type="checkbox"]').not(this).prop('checked', false);
+// });
+
+// $('input[type="checkbox"]').on('change', function() {
+//   $(this).siblings('input[type="checkbox"]').not(this).prop('checked', false);
+// });
 
 // Select input files and write them to a list
 const fileSelectButton = document.getElementById('FileSelectButton');

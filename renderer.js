@@ -110,6 +110,10 @@ $('.dropdown-selection').each(function(){
     step.appendTo('#SelectedSteps')
     view.appendTo('body')
     M.AutoInit();
+    cbGroupName = view.attr('class')
+    view.find(':checkbox').attr("name", cbGroupName);
+    console.log(view.find(':checkbox'))
+    console.log(view.attr('class'))
 
     i++
     // Do not collapse if checkbox is clicked
@@ -118,7 +122,7 @@ $('.dropdown-selection').each(function(){
 
     // Allow only 1 checkbox to be checked
     $('input[type="checkbox"]').on('change', function() {
-      $('input[type="checkbox"]').not(this).prop('checked', false);
+      $('input[name="' + this.name + '"]').not(this).prop('checked', false);
     });
     
   })  
@@ -205,13 +209,13 @@ $('#runButton').click(async function(){
   console.log('The whole workflow has completed: Show user stats and save configuration file')
 })
 
-// Do not collapse if checkbox is clicked
-$(".not-collapse").on("click", function(e) { e.stopPropagation(); });
+// // Do not collapse if checkbox is clicked
+// $(".not-collapse").on("click", function(e) { e.stopPropagation(); });
 
-// Allow only 1 checkbox to be checked
-$('input[type="checkbox"]').on('change', function() {
-  $('input[type="checkbox"]').not(this).prop('checked', false);
-});
+// // Allow only 1 checkbox to be checked
+// $('input[type="checkbox"]').on('change', function() {
+//   $('input[type="checkbox"]').not(this).prop('checked', false);
+// });
 
 // Select input files and write them to a list
 const fileSelectButton = document.getElementById('FileSelectButton');

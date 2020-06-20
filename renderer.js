@@ -164,6 +164,8 @@ function execShellCommand(cmd) {
    exec(cmd, (error, stdout, stderr) => {
     if (error) {
      console.warn(error);
+     serviceError = cmd.split(" ").slice(-1) + '-error'
+     writeLog(serviceError, error)
     }
     resolve(stdout? stdout : stderr);
    });
@@ -209,13 +211,6 @@ $('#runButton').click(async function(){
   console.log('The whole workflow has completed: Show user stats and save configuration file')
 })
 
-// // Do not collapse if checkbox is clicked
-// $(".not-collapse").on("click", function(e) { e.stopPropagation(); });
-
-// // Allow only 1 checkbox to be checked
-// $('input[type="checkbox"]').on('change', function() {
-//   $('input[type="checkbox"]').not(this).prop('checked', false);
-// });
 
 // Select input files and write them to a list
 const fileSelectButton = document.getElementById('FileSelectButton');

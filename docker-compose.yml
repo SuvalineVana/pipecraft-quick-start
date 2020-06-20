@@ -119,7 +119,8 @@ services:
   volumes:
     - ./script_folder:/execute
     - ${sisend_kaust}:/input
-  command: [./execute/trimmomatic-quality-filter.sh]
+  working_dir: /input
+  command: [/execute/trimmomatic-quality-filter.sh]
 
 #Demultiplex
   #MOTHUR

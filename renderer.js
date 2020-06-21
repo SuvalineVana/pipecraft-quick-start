@@ -212,14 +212,43 @@ $('#runButton').click(async function(){
 })
 
 
-// Select input files and write them to a list
+// Select input folder and save as env variable
 const fileSelectButton = document.getElementById('FileSelectButton');
-fileSelectButton.addEventListener('click', function(){
+fileSelectButton.addEventListener('click', async function(){
+
+
+    //Load the library and specify options
+    //Clear previos inputfolder from .env file
+    const replace = require('replace-in-file');
+    const options = {
+      files: '.env',
+      from: /sisend_kaust.*/g,
+      to: '',
+    };
+    
+    try {
+      const results = await replace(options)
+      console.log('Replacement results:', results);
+    }
+    catch (error) {
+      console.error('Error occurred:', error);
+    }
+
+    // Open windows file dialog
     dialog.showOpenDialog({
-        properties: ['openFile', 'multiSelections',]
+        properties: ['openFile', 'openDirectory',]
       }).then(result => {
-        InputFileList = result.filePaths
-        console.log(result.filePaths)
+        inputPathEnv = 'sisend_kaust=' + result.filePaths[0]
+        console.log(inputPathEnv)
+        // Append folder path as a variable to .env file
+        fs.appendFile('.env', inputPathEnv, function (err) {
+          if (err) {
+            // append failed
+          } else {
+            // done
+          }
+        })
+
       }).catch(err => {
         console.log(err)
       })

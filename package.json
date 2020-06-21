@@ -27,6 +27,7 @@
     "jquery": "^3.5.1",
     "node-powershell": "^4.0.0",
     "node-powershell-await": "^1.0.4",
-    "popper.js": "^1.16.1"
+    "popper.js": "^1.16.1",
+    "replace-in-file": "^6.1.0"
   }
 }

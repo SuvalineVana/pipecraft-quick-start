@@ -122,69 +122,88 @@
                       <p>Shorten and/or filter sequences in your FASTQ files.</p>
                     </div>
                     <div class="card-action">
-                      <a href="manuals\vsearch_manual.pdf" target="_new">This is a link</a>
-                      <a href="#">This is a link</a>
+                      <a href="#" class="manualLink" id="vsearch_manual.pdf">Read the VSEARCH maunal for more info</a>
                     </div>
                   </div>
                 </div>
                 <div class="col s6">
                   <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
-                      <span class="card-title">Card Title</span>
-                      <p>I am a very simple card. I am good at containing small bits of information.
-                      I am convenient because I require little markup to use effectively.</p>
+                      <span class="card-title">fastq_maxee</span>
+                      <p>discard sequences with more than the specified number of expected errors.</p>
                     </div>
                     <div class="card-action">
-                      <a href="#">This is a link</a>
-                      <a href="#">This is a link</a>
+                      <input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1">
                     </div>
                   </div>
                 </div>
                 <div class="col s6">
                   <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
-                      <span class="card-title">Card Title</span>
-                      <p>I am a very simple card. I am good at containing small bits of information.
-                      I am convenient because I require little markup to use effectively.</p>
+                      <span class="card-title">fastq_maxns</span>
+                      <p>discard  sequences  with more than the specified number of N’s.</p>
                     </div>
                     <div class="card-action">
-                      <a href="#">This is a link</a>
-                      <a href="#">This is a link</a>
+                      <input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1">
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col s10">fastq_maxee</div>
-                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
-              </div>
-              <div class="row">
-                <div class="col s10">fastq_maxns</div>
-                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
-              </div>
-              <div class="row">
-                <div class="col s10">fastq_maxlen</div>
-                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
-              </div>
-              <div class="row">
-                <div class="col s10">fastq_minlen</div>
-                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
-              </div>
-              <div class="row">
-                <div class="col s10">fastq_truncqual</div>
-                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
-              </div>
-              <div class="row">
-                <div class="col s10">fastq_maxee_rate</div>
-                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
-              </div>
-              <div class="row">
-                <div class="col s10">fastq_qmin</div>
-                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
-              </div>
-              <div class="row">
-                <div class="col s10 tooltipped" data-position="top" data-tooltip="(default = 41, for Illumina, user must choose 93 if pacbio)">Illumina or Pacbio</div>
-                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
+                <div class="col s6 extraOptions">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">fastq_maxlen</span>
+                      <p>discard  sequences  withmore than the specified number of bases.</p>
+                    </div>
+                    <div class="card-action">
+                      <input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1">
+                    </div>
+                  </div>
+                </div>
+                <div class="col s6 extraOptions">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">fastq_minlen</span>
+                      <p>discard  sequences  withless than the specified number of bases.</p>
+                    </div>
+                    <div class="card-action">
+                      <input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1">
+                    </div>
+                  </div>
+                </div>
+                  <a href="#" class="extraOptionsTrigger">Show more options</a>
+                <div class="col s6 extraOptions">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">fastq_truncqual</span>
+                      <p>runcate sequences starting from the first basewith the specified base quality score value or lower.</p>
+                    </div>
+                    <div class="card-action">
+                      <input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1">
+                    </div>
+                  </div>
+                </div>
+                <div class="col s6 extraOptions">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">fastq_maxee_rate</span>
+                      <p>discard sequences with more than the speci-fied number of expected errors per base.</p>
+                    </div>
+                    <div class="card-action">
+                      <input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1">
+                    </div>
+                  </div>
+                </div>
+                <div class="col s6 extraOptions">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">fastq_qmin</span>
+                      <p>Specify the minimum quality score accepted for FASTQ files.</p>
+                    </div>
+                    <div class="card-action">
+                      <input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1">
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </li>

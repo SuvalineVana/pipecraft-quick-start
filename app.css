@@ -91,6 +91,10 @@ p.adapter-checkbox {
  text-align: center;
 }
 
+.extraOptions {
+    display: none;
+}
+
 .label {
     display: inline-block;
     width: 450px;

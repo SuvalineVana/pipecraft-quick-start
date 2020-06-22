@@ -10,6 +10,33 @@ const { spawnSync } = require('child_process')
 const {spawn} = require('child_process');
 let Shell2 = require('node-powershell-await');
 
+const path = require('path');
+const { BrowserWindow } = require('electron').remote
+const PDFWindow = require('electron-pdf-window')
+var url = require('url');
+
+function openManual(manualName) {
+  const win = new BrowserWindow({ width: 1200, height: 800 })
+  PDFWindow.addSupport(win)
+  console.log(path.join(__dirname, '/manuals/' + manualName))
+  manualPath = path.join(__dirname, '/manuals/' + manualName)
+  win.loadURL(manualPath)
+}
+
+// // test for showing extra options
+// $('body').on('click', '.extraOptionsTrigger', function () {
+//   $(this).innerHTML = "Show less options"
+// })
+
+
+// test for showing PDF manual with electron
+
+$('body').on('click', '.manualLink', function () {
+  manualName = $(this).attr('id')
+  console.log(manualName);
+  openManual(manualName)
+});
+
 
 // ENV file management functions
 function TruncateEnvFile(serviceName){

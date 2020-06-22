@@ -42,6 +42,10 @@ function AppendToEnvFile(env_variable, serviceName){
 
 // materialize-css
 
+$(document).ready(function(){
+  $('.tooltipped').tooltip();
+});
+
 $(document).ready(function() {
   $('input#input_text, textarea#textarea2').characterCounter();
 });
@@ -65,13 +69,7 @@ $( function() {
   $( "#SelectedSteps" ).disableSelection();
 });
 
-// Jquery-ui
-$( function() {
-  $( document ).tooltip({
-    position: { at: "center-75 top-70"}
-  });
-} );
-var i = 1
+
 
 // Home screen
 var newView = $('#PlutoTwitter')
@@ -93,6 +91,7 @@ function switchView() {
 }
 
 // Add workflow steps
+var i = 1
 $('.dropdown-selection').each(function(){
   $(this).click(function(){
     

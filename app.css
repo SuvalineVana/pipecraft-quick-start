@@ -6,9 +6,7 @@
     float: right;
 }
 
-body {
-    overflow: hidden; /* Hide scrollbars */
-  }
+
 
 .user-view {
     height: 150px;
@@ -43,6 +41,7 @@ body {
     height: max-content;
     width: 100%;
     margin-top: 300px;
+    background: linear-gradient(to bottom, #FFFFFF, #ECE9E6);
 }
 
 #ADAPTER_FWD {
@@ -88,8 +87,16 @@ p.adapter-checkbox {
     background-color: #eee;
 }
 
+.InlineNumericInput{
+ text-align: center;
+}
+
 .label {
     display: inline-block;
-    width: 550px;
-    text-align: left;
-  }​
+    width: 450px;
+    text-align: start;
+}​
+
+.material-tooltip {
+    background-color: red;
+}

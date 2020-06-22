@@ -74,7 +74,7 @@ docker commit containerID name:version
 
 For analysis testing
 ```bash
-docker run --interactive --tty  -v C:\Users\m_4_r\Desktop\Docker\electron-quick-start:/destination  pipecraft:alfa bash
+docker run --interactive --tty  -v C:\Users\m_4_r\Desktop\electron-quick-start:/destination  pipecraft:alfa bash
 ```
 
 For build

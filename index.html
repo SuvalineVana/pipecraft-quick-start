@@ -4,7 +4,7 @@
     <!-- Materialize + Icons + JqueryUI -->
     <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link type='text/css' rel="stylesheet" href="node_modules\materialize-css\dist\css\materialize.css" media="screen,projection">
+    <link type='text/css' rel="stylesheet" href="assets/materialize.css" media="screen,projection">
     <link rel="stylesheet" href="assets\jquery-ui.css">
     <meta charset="UTF-8">
 
@@ -113,12 +113,80 @@
                   </label>
                 </p>
             </div>
-            <div class="collapsible-body"><span>
-              <div class="input-field">
-                <input id="example" type="text" style="text-transform:uppercase;">
-                <label for="example">place holder</label>
+            <div class="collapsible-body">
+              <div class="row">
+                <div class="col s12">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">fastq_filter</span>
+                      <p>Shorten and/or filter sequences in your FASTQ files.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="manuals\vsearch_manual.pdf" target="_new">This is a link</a>
+                      <a href="#">This is a link</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col s6">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">Card Title</span>
+                      <p>I am a very simple card. I am good at containing small bits of information.
+                      I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">This is a link</a>
+                      <a href="#">This is a link</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col s6">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">Card Title</span>
+                      <p>I am a very simple card. I am good at containing small bits of information.
+                      I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">This is a link</a>
+                      <a href="#">This is a link</a>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </span></div>
+              <div class="row">
+                <div class="col s10">fastq_maxee</div>
+                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
+              </div>
+              <div class="row">
+                <div class="col s10">fastq_maxns</div>
+                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
+              </div>
+              <div class="row">
+                <div class="col s10">fastq_maxlen</div>
+                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
+              </div>
+              <div class="row">
+                <div class="col s10">fastq_minlen</div>
+                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
+              </div>
+              <div class="row">
+                <div class="col s10">fastq_truncqual</div>
+                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
+              </div>
+              <div class="row">
+                <div class="col s10">fastq_maxee_rate</div>
+                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
+              </div>
+              <div class="row">
+                <div class="col s10">fastq_qmin</div>
+                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
+              </div>
+              <div class="row">
+                <div class="col s10 tooltipped" data-position="top" data-tooltip="(default = 41, for Illumina, user must choose 93 if pacbio)">Illumina or Pacbio</div>
+                <div class="col s2"><input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1"></div>
+              </div>
+            </div>
           </li>
           <li>
             <div class="collapsible-header">MOTHUR
@@ -182,21 +250,28 @@
                 </p>
             </div>
             <div class="collapsible-body"><span>
-                <span class="label">Cut bases off the start of your reads, if below this threshold quality</span>
+                <span class="label tooltipped" data-position="top" data-tooltip=" Perform a sliding window trimming, cutting once the requiredQuality within the windowSize falls below a threshold.">SLIDINGWINDOW: windowSize: </span>
                 <div class="input-field inline">
-                  <input class="InlineNumericInput" id="LEADING:" type="number" value="1" min="1" step="1">
+                  <input class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1">
                 </div>
-                <span class="label">Cut bases off the end of your reads, if below this threshold quality:</span>
+                <span class="label tooltipped left-align" data-position="top" data-tooltip="Cut the specified number of bases from the start of the read.">
+                  HEADCROP:
+                </span>
                 <div class="input-field inline">
-                  <input class="InlineNumericInput" id="TRAILING:" type="number" value="1" min="1" step="1">
+                  <input class="InlineNumericInput" id="windowSize" type="number" value="4" min="1" step="1">
                 </div>
-                <span class="label">Drop the read if it is below a specified length:</span>
+                <span class="label tooltipped" data-position="top" data-tooltip="Cut bases off the start of a read, if below a threshold quality.">LEADING: quality</span>
                 <div class="input-field inline">
-                  <input class="InlineNumericInput" id="MINLEN:" type="number" value="999" min="1" step="1">
+                  <input class="InlineNumericInput" id="LEADING" type="number" value="3" min="1" step="1">
                 </div>
-                <span class="label">Drop the read if the average quality is below the specified level</span>
+                <span class="label tooltipped" data-position="top" data-tooltip="Cut bases off the end of a read, if below a threshold quality.">TRAILING: quality<quality>:</span>
                 <div class="input-field inline">
-                  <input class="InlineNumericInput" id="AVGQUAL:" type="number" value="30" min="0">
+                  <input class="InlineNumericInput" id="TRAILING" type="number" value="3" min="1" step="1">
+                </div>
+                <span class="label tooltipped" data-position="top" data-tooltip="Drop the read if it is below a specified length">MINLEN: lenght<length>
+                </span>
+                <div class="input-field inline">
+                  <input class="InlineNumericInput" id="MINLEN" type="number" value="999" min="1" step="1">
                 </div>
             </span></div>
           </li>

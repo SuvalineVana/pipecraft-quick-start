@@ -5147,7 +5147,7 @@ small {
   top: 0;
   pointer-events: none;
   visibility: hidden;
-  background-color: #323232;
+  background-color: rgba(76, 175, 80, 0.7);
 }
 
 .backdrop {
@@ -5883,6 +5883,8 @@ body.keyboard-focused .dropdown-content li:focus {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 2rem;
+  height: 100%;
+  text-align: center;
 }
 
 .sidenav .collapsible,

@@ -3,8 +3,8 @@ RUN apk add git \
     && apk add autoconf \
     && apk add automake \
     && apk add build-base \
+    && apk add zlib\
     && git clone https://github.com/torognes/vsearch.git \
     && cd vsearch && ./autogen.sh && ./configure && make && make install \
     && apk del autoconf \
-    && apk del automake \
-    && apk del build-base
+    && apk del automake

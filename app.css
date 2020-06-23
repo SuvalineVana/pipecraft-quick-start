@@ -31,8 +31,8 @@ body {
 
 .wrapper {
     display: flex;
-    width: 966px;
-    height: 663px;
+    width: 945px;
+    height: 660px;
     margin-left: 300px;
     justify-content: center;
 }
@@ -88,7 +88,9 @@ p.adapter-checkbox {
 }
 
 .InlineNumericInput{
- text-align: center;
+    text-align: center;
+    color: whitesmoke;
+    width: 30% !important;
 }
 
 .extraOptions {
@@ -103,4 +105,16 @@ p.adapter-checkbox {
 
 .material-tooltip {
     background-color: red;
+}
+
+.card-content {
+    background: linear-gradient(to bottom, #FFD194, #D1913C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.card-action {
+    background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.card {
+    border-radius: 10px;
 }

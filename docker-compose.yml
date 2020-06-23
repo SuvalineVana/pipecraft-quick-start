@@ -75,14 +75,15 @@ services:
     
 #Quality filter
   #VSEARCH
- vsearh-quality-filter:
-  image: pipecraft/vsearch:2.14.2
+ vsearch-quality-filter:
+  image: pipecraft/vsearch:2.15.0
   env_file:
    - env_files\vsearch-quality-filter-variables.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/vsearch-quality-filter.sh]
+  working_dir: /input
+  command: [/execute/vsearch-quality-filter.sh]
   #MOTHUR
  mothur-quality-filter:
   image: pipecraft/mothur:1.43

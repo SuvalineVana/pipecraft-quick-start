@@ -23,10 +23,16 @@ function openManual(manualName) {
   win.loadURL(manualPath)
 }
 
-// // test for showing extra options
-// $('body').on('click', '.extraOptionsTrigger', function () {
-//   $(this).innerHTML = "Show less options"
-// })
+// test for showing extra options
+$('body').on('click', '.extraOptionsTrigger', function () {
+  if ($(this).text() == 'Show more options') {
+    $(this).text("Show less options")
+  } else {
+    $(this).text("Show more options")
+  }
+  $(this).siblings(".extraOptions").toggle()
+  console.log($(this).text())
+})
 
 
 // test for showing PDF manual with electron

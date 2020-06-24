@@ -4,16 +4,15 @@
 window.$ = window.jQuery = require('jquery');
 const { dialog } = require('electron').remote
 const fs = require('fs');
-// const {exec} = require('child_process');
-// const { sync } = require('child_process');
 const { spawnSync } = require('child_process')
 const {spawn} = require('child_process');
 let Shell2 = require('node-powershell-await');
-
 const path = require('path');
 const { BrowserWindow } = require('electron').remote
 const PDFWindow = require('electron-pdf-window')
 var url = require('url');
+const { clear } = require('console');
+const replace = require('replace-in-file');
 
 function openManual(manualName) {
   const win = new BrowserWindow({ width: 1200, height: 800 })
@@ -36,7 +35,6 @@ $('body').on('click', '.extraOptionsTrigger', function () {
 
 
 // test for showing PDF manual with electron
-
 $('body').on('click', '.manualLink', function () {
   manualName = $(this).attr('id')
   console.log(manualName);
@@ -207,6 +205,32 @@ function execShellCommand(cmd) {
 async function RunDockerCompose(serviceName){
   const runLog = await execShellCommand('docker-compose run ' + serviceName);
   console.log(runLog);
+
+  const optionsForWorkDir = {
+    files: '.env',
+    from: /workdir.*/g,
+    to: '',
+  };
+
+  try {
+    const results = await replace(optionsForWorkDir)
+    console.log('Replacement results:', results);
+  }
+  catch (error) {
+    console.error('Error occurred:', error);
+  }
+
+  workDirPathEnv = 'workdir=/input/' + serviceName + '-output' +"\r\n"
+  console.log(workDirPathEnv) 
+  
+  fs.appendFile('.env', workDirPathEnv, function (err) {
+    if (err) {
+      // append failed
+    } else {
+      // done
+    }
+  })
+
   writeLog(serviceName, runLog)
 }
 
@@ -238,6 +262,31 @@ async function processStepsInfo(workFlowSteps){
 
 // Run Button
 $('#runButton').click(async function(){
+  const optionsClearWorkDir = {
+    files: '.env',
+    from: /workdir.*/g,
+    to: '',
+  };
+
+  try {
+    const results = await replace(optionsClearWorkDir)
+    console.log('Replacement results:', results);
+  }
+  catch (error) {
+    console.error('Error occurred:', error);
+  }
+  defaultWorkDir = "workdir=/input" +"\r\n"
+
+  fs.appendFile('.env', defaultWorkDir, function (err) {
+    if (err) {
+      // append failed
+    } else {
+      // done
+    }
+  })
+
+
+
   workFlowSteps = $(".viewSwitch");
   await processStepsInfo(workFlowSteps);
   console.log('The whole workflow has completed: Show user stats and save configuration file')
@@ -251,15 +300,15 @@ fileSelectButton.addEventListener('click', async function(){
 
     //Load the library and specify options
     //Clear previos inputfolder from .env file
-    const replace = require('replace-in-file');
-    const options = {
+
+    const optionsForInputDir = {
       files: '.env',
       from: /sisend_kaust.*/g,
       to: '',
     };
     
     try {
-      const results = await replace(options)
+      const results = await replace(optionsForInputDir)
       console.log('Replacement results:', results);
     }
     catch (error) {
@@ -270,7 +319,7 @@ fileSelectButton.addEventListener('click', async function(){
     dialog.showOpenDialog({
         properties: ['openFile', 'openDirectory',]
       }).then(result => {
-        inputPathEnv = 'sisend_kaust=' + result.filePaths[0]
+        inputPathEnv = 'sisend_kaust=' + result.filePaths[0] +"\r\n"
         console.log(inputPathEnv)
         // Append folder path as a variable to .env file
         fs.appendFile('.env', inputPathEnv, function (err) {

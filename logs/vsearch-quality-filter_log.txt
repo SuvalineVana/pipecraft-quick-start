@@ -1,0 +1,21 @@
+ENV FILE WORKING
+vsearch v2.15.0_linux_x86_64, 1.9GB RAM, 2 cores
+https://github.com/torognes/vsearch
+
+Reading input file 100%
+3242 sequences kept (of which 0 truncated), 4061 sequences discarded.
+vsearch v2.15.0_linux_x86_64, 1.9GB RAM, 2 cores
+https://github.com/torognes/vsearch
+
+Reading input file 100%
+2612 sequences kept (of which 0 truncated), 4691 sequences discarded.
+vsearch v2.15.0_linux_x86_64, 1.9GB RAM, 2 cores
+https://github.com/torognes/vsearch
+
+Reading input file 100%
+8896 sequences kept (of which 0 truncated), 8599 sequences discarded.
+vsearch v2.15.0_linux_x86_64, 1.9GB RAM, 2 cores
+https://github.com/torognes/vsearch
+
+Reading input file 100%
+3826 sequences kept (of which 0 truncated), 13669 sequences discarded.

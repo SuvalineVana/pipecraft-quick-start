@@ -82,7 +82,7 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  working_dir: /input
+  working_dir: ${workdir}
   command: [/execute/vsearch-quality-filter.sh]
   #MOTHUR
  mothur-quality-filter:

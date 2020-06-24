@@ -1,0 +1,3 @@
+Error: Command failed: docker-compose run vsearch-quality-filter
+The sisend_kaust variable is not set. Defaulting to a blank string.
+Cannot create container for service vsearch-quality-filter: create .: volume name is too short, names should be at least two alphanumeric characters

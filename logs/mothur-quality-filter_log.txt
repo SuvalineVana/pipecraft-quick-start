@@ -1,0 +1,434 @@
+Processing NCMV166_S153_L001_R1_001.fastq
+/input/mothur-quality-filter-output/
+Linux version
+
+Using ReadLine,Boost,GSL
+mothur v.1.43.0
+Last updated: 10/21/2019
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://forum.mothur.org
+
+Type 'quit()' to exit program
+
+[NOTE]: Setting random seed to 19760620.
+
+Script Mode
+
+
+mothur > set.dir(output=/input/mothur-quality-filter-output/)
+Mothur's directories:
+outputDir=/input/mothur-quality-filter-output/
+
+mothur > fastq.info(fastq=NCMV166_S153_L001_R1_001.fastq)
+7303
+
+Output File Names: 
+/input/mothur-quality-filter-output/NCMV166_S153_L001_R1_001.fasta
+/input/mothur-quality-filter-output/NCMV166_S153_L001_R1_001.qual
+
+
+mothur > quit()
+
+
+It took 17 seconds to run 3 commands from your script.
+
+Processing NCMV166_S153_L001_R2_001.fastq
+/input/mothur-quality-filter-output/
+Linux version
+
+Using ReadLine,Boost,GSL
+mothur v.1.43.0
+Last updated: 10/21/2019
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://forum.mothur.org
+
+Type 'quit()' to exit program
+
+[NOTE]: Setting random seed to 19760620.
+
+Script Mode
+
+
+mothur > set.dir(output=/input/mothur-quality-filter-output/)
+Mothur's directories:
+outputDir=/input/mothur-quality-filter-output/
+
+mothur > fastq.info(fastq=NCMV166_S153_L001_R2_001.fastq)
+7303
+
+Output File Names: 
+/input/mothur-quality-filter-output/NCMV166_S153_L001_R2_001.fasta
+/input/mothur-quality-filter-output/NCMV166_S153_L001_R2_001.qual
+
+
+mothur > quit()
+
+
+It took 17 seconds to run 3 commands from your script.
+
+Processing NCMV84_S73_L001_R1_001.fastq
+/input/mothur-quality-filter-output/
+Linux version
+
+Using ReadLine,Boost,GSL
+mothur v.1.43.0
+Last updated: 10/21/2019
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://forum.mothur.org
+
+Type 'quit()' to exit program
+
+[NOTE]: Setting random seed to 19760620.
+
+Script Mode
+
+
+mothur > set.dir(output=/input/mothur-quality-filter-output/)
+Mothur's directories:
+outputDir=/input/mothur-quality-filter-output/
+
+mothur > fastq.info(fastq=NCMV84_S73_L001_R1_001.fastq)
+10000
+17495
+
+Output File Names: 
+/input/mothur-quality-filter-output/NCMV84_S73_L001_R1_001.fasta
+/input/mothur-quality-filter-output/NCMV84_S73_L001_R1_001.qual
+
+
+mothur > quit()
+
+
+It took 40 seconds to run 3 commands from your script.
+
+Processing NCMV84_S73_L001_R2_001.fastq
+/input/mothur-quality-filter-output/
+Linux version
+
+Using ReadLine,Boost,GSL
+mothur v.1.43.0
+Last updated: 10/21/2019
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://forum.mothur.org
+
+Type 'quit()' to exit program
+
+[NOTE]: Setting random seed to 19760620.
+
+Script Mode
+
+
+mothur > set.dir(output=/input/mothur-quality-filter-output/)
+Mothur's directories:
+outputDir=/input/mothur-quality-filter-output/
+
+mothur > fastq.info(fastq=NCMV84_S73_L001_R2_001.fastq)
+10000
+17495
+
+Output File Names: 
+/input/mothur-quality-filter-output/NCMV84_S73_L001_R2_001.fasta
+/input/mothur-quality-filter-output/NCMV84_S73_L001_R2_001.qual
+
+
+mothur > quit()
+
+
+It took 39 seconds to run 3 commands from your script.
+
+Linux version
+
+Using ReadLine,Boost,GSL
+mothur v.1.43.0
+Last updated: 10/21/2019
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://forum.mothur.org
+
+Type 'quit()' to exit program
+
+[NOTE]: Setting random seed to 19760620.
+
+Script Mode
+
+
+mothur > trim.seqs(fasta=NCMV166_S153_L001_R1_001.fasta ,qwindowaverage=30 ,qwindowsize=32 ,maxambig=0    )
+
+Using 2 processors.
+1000
+1000
+2000
+2000
+3000
+3000
+3651
+3652
+
+Removing group: scrap because all sequences have been removed.
+It took 0 secs to trim 7303 sequences.
+
+
+Output File Names: 
+NCMV166_S153_L001_R1_001.trim.fasta
+NCMV166_S153_L001_R1_001.scrap.fasta
+
+
+mothur > quit()
+
+
+It took 0 seconds to run 2 commands from your script.
+
+Linux version
+
+Using ReadLine,Boost,GSL
+mothur v.1.43.0
+Last updated: 10/21/2019
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://forum.mothur.org
+
+Type 'quit()' to exit program
+
+[NOTE]: Setting random seed to 19760620.
+
+Script Mode
+
+
+mothur > trim.seqs(fasta=NCMV166_S153_L001_R2_001.fasta ,qwindowaverage=30 ,qwindowsize=32 ,maxambig=0    )
+
+Using 2 processors.
+1000
+1000
+2000
+2000
+3000
+3000
+3652
+3651
+
+Removing group: scrap because all sequences have been removed.
+It took 0 secs to trim 7303 sequences.
+
+
+Output File Names: 
+NCMV166_S153_L001_R2_001.trim.fasta
+NCMV166_S153_L001_R2_001.scrap.fasta
+
+
+mothur > quit()
+
+
+It took 0 seconds to run 2 commands from your script.
+
+Linux version
+
+Using ReadLine,Boost,GSL
+mothur v.1.43.0
+Last updated: 10/21/2019
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://forum.mothur.org
+
+Type 'quit()' to exit program
+
+[NOTE]: Setting random seed to 19760620.
+
+Script Mode
+
+
+mothur > trim.seqs(fasta=NCMV84_S73_L001_R1_001.fasta ,qwindowaverage=30 ,qwindowsize=32 ,maxambig=0    )
+
+Using 2 processors.
+1000
+1000
+2000
+2000
+3000
+3000
+4000
+4000
+5000
+5000
+6000
+6000
+7000
+7000
+8000
+8000
+8748
+8747
+
+Removing group: scrap because all sequences have been removed.
+It took 1 secs to trim 17495 sequences.
+
+
+Output File Names: 
+NCMV84_S73_L001_R1_001.trim.fasta
+NCMV84_S73_L001_R1_001.scrap.fasta
+
+
+mothur > quit()
+
+
+It took 1 seconds to run 2 commands from your script.
+
+Linux version
+
+Using ReadLine,Boost,GSL
+mothur v.1.43.0
+Last updated: 10/21/2019
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://forum.mothur.org
+
+Type 'quit()' to exit program
+
+[NOTE]: Setting random seed to 19760620.
+
+Script Mode
+
+
+mothur > trim.seqs(fasta=NCMV84_S73_L001_R2_001.fasta ,qwindowaverage=30 ,qwindowsize=32 ,maxambig=0    )
+
+Using 2 processors.
+1000
+1000
+2000
+2000
+3000
+3000
+4000
+4000
+5000
+5000
+6000
+6000
+7000
+7000
+8000
+8000
+8747
+8748
+
+Removing group: scrap because all sequences have been removed.
+It took 1 secs to trim 17495 sequences.
+
+
+Output File Names: 
+NCMV84_S73_L001_R2_001.trim.fasta
+NCMV84_S73_L001_R2_001.scrap.fasta
+
+
+mothur > quit()
+
+
+It took 1 seconds to run 2 commands from your script.
+

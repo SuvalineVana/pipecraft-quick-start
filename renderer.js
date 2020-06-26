@@ -184,7 +184,7 @@ function writeLog(serviceName, runLog){
     if(err) {
         return console.log(err);
     }
-    console.log("The file was saved!");
+    console.log("The log file was saved!");
 }); 
 }
 
@@ -203,6 +203,7 @@ function execShellCommand(cmd) {
 }
 
 async function RunDockerCompose(serviceName){
+  console.log("Starting step")
   const runLog = await execShellCommand('docker-compose run ' + serviceName);
   console.log(runLog);
 
@@ -230,26 +231,39 @@ async function RunDockerCompose(serviceName){
       // done
     }
   })
-
   writeLog(serviceName, runLog)
 }
 
-function collectParams(WorkFlowTag){
+async function collectParams(WorkFlowTag){
   serviceName = ""
-  $(WorkFlowTag).find(':checkbox').each(function(){
+  $(WorkFlowTag).find(':checkbox').each(async function(){
     if (this.checked == true){
       serviceName = $(this).parent().attr("value")
-      console.log(serviceName)
+      envFileToClear= 'env_files/' + serviceName + '.env'
+      await fs.truncate(envFileToClear, 0, function(){console.log('done')})
       return serviceName
     }
   })
+  
+  $(WorkFlowTag).find("#" + serviceName).find('.InlineNumericInput').each(function(){
+    if ($(this)[0].value !== "") {
+      env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'='+$(this).attr('id')+$(this)[0].value
+      console.log(env_variable)
+      AppendToEnvFile(env_variable, serviceName)
+    } else {
+      env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'= '
+      console.log(env_variable)
+      AppendToEnvFile(env_variable, serviceName)
+    }
+  })
+  console.log("All env variables written")
 }
 
 async function processStepsInfo(workFlowSteps){
   for (const item of workFlowSteps) {
     WorkFlowTag = ('.wrapper.' + item.closest('li').getAttribute('class').replace(' ','.'))
     console.log(WorkFlowTag)
-    collectParams(WorkFlowTag)
+    await collectParams(WorkFlowTag)
     if (serviceName == ""){
       console.log('No steps selected')
       break
@@ -288,6 +302,7 @@ $('#runButton').click(async function(){
 
 
   workFlowSteps = $(".viewSwitch");
+  console.log(workFlowSteps)
   await processStepsInfo(workFlowSteps);
   console.log('The whole workflow has completed: Show user stats and save configuration file')
 })

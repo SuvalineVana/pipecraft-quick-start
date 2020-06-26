@@ -78,7 +78,7 @@ services:
  vsearch-quality-filter:
   image: pipecraft/vsearch:2.15.0
   env_file:
-   - env_files\vsearch-quality-filter-variables.env
+   - ./env_files/vsearch-quality-filter.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
@@ -88,11 +88,12 @@ services:
  mothur-quality-filter:
   image: pipecraft/mothur:1.43
   env_file:
-   - env_files\mothur-quality-filter-variables.env
+   - ./env_files/mothur-quality-filter.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/mothur-quality-filter.sh]
+  working_dir: ${workdir}
+  command: [/execute/mothur-quality-filter.sh]
   #OBITOOLS
  obitools-quality-filter:
   image: pipecraft/obitools:3

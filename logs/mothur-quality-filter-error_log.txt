@@ -1,6 +1,0 @@
-Error: Command failed: docker-compose run mothur-quality-filter
-TERM environment variable not set.
-TERM environment variable not set.
-TERM environment variable not set.
-TERM environment variable not set.
-TERM environment variable not set.

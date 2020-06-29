@@ -16,5 +16,5 @@ cd $output
 
 for fa in *fasta
 do 
-    mothur "#trim.seqs(fasta=$fa $qwindowaverage $qwindowsize $maxambig $qthreshold $minlength $maxlength $processors)"
+    mothur "#trim.seqs(fasta=$fa $qwindowaverage $qwindowsize $maxambig $qthreshold $minlength $maxlength $processors)" &
 done

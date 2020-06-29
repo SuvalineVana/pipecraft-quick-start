@@ -107,21 +107,22 @@ services:
  dada2-quality-filter:
     image: pipecraft/dada2:3.10
     env_file:
-     - env_files\dada2-quality-filter-variables.env
+     - ./env_files/dada2-quality-filter.env
     volumes:
      - ./script_folder:/execute
      -  ${sisend_kaust}:/input
-    command: ["Rscript", "execute/dada2-quality-filter.R"]
+    working_dir: ${workdir}
+    command: ["Rscript", "/execute/dada2-quality-filter.R"]
 
   #TRIMMOMATIC
  trimmomatic-quality-filter:
   image: pipecraft/trimmomatic:0.39
   env_file:
-   - env_files\trimmomatic-quality-filter.env
+   - ./env_files/trimmomatic-quality-filter.env
   volumes:
     - ./script_folder:/execute
     - ${sisend_kaust}:/input
-  working_dir: /input
+  working_dir: ${workdir}
   command: [/execute/trimmomatic-quality-filter.sh]
 
 #Demultiplex

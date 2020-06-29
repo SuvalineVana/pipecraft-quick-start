@@ -385,7 +385,7 @@
                       <p> Remove reads with length less than minLen. minLen is enforced after all other trimming and truncation.</p>
                     </div>
                     <div class="card-action">
-                      <input style="display: inline-block;" class="InlineNumericInput" id="--fastq_truncqual " type="number" value="20" min="0" step="1">
+                      <input style="display: inline-block;" class="InlineNumericInput" id="minLen=" type="number" value="20" min="0" step="1">
                     </div>
                   </div>
                 </div>
@@ -461,7 +461,7 @@
                       <p>Perform a sliding window trimming, cutting once the average quality within the window falls below a threshold</p>
                     </div>
                     <div class="card-action">
-                      <input style="display: inline-block;" class="InlineNumericInput" id="SLIDINGWINDOW:" type="number" value="" min="1" step="1">
+                      <input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number" value="" min="1" step="1">
                     </div>
                   </div>
                 </div>
@@ -472,7 +472,7 @@
                       <p>Perform a sliding window trimming, cutting once the average quality within the window falls below a threshold.</p>
                     </div>
                     <div class="card-action">
-                      <input style="display: inline-block;" class="InlineNumericInput" id=":" type="number" value="" min="0" step="1">
+                      <input style="display: inline-block;" class="InlineNumericInput" id="requiredQuality" type="number" value="" min="0" step="1">
                     </div>
                   </div>
                 </div>

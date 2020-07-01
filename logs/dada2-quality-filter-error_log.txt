@@ -1,5 +1,0 @@
-Error: Command failed: docker-compose run dada2-quality-filter
-Loading required package: Rcpp
-Error: UserArgumentMismatch
-  'maxEE=1' must be a character with encoding < 128
-Execution halted

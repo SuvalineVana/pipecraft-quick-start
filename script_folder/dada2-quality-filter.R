@@ -1,12 +1,15 @@
-a = Sys.getenv('ENV_FILE_TEST')
+#load dada2
 library("dada2")
 
+#check for lingering output dir and delete if needed
 if (dir.exists("/input/dada2-quality-filter-output")) {
     unlink("/input/dada2-quality-filter-output", recursive=TRUE)
 }
 
+#create new output dir
 dir.create('/input/dada2-quality-filter-output')
 
+#load environment variables
 maxEE = Sys.getenv('maxEE')
 maxN = Sys.getenv('maxN')
 truncQ = Sys.getenv('truncQ')
@@ -15,21 +18,23 @@ minLen = Sys.getenv('minLen')
 maxLen = Sys.getenv('maxLen')
 minQ = Sys.getenv('minQ')
 
-x = iconv(maxEE, from = '', to = 'UTF-8')
-x
-Encoding(x)
+#define input and output file paths
+input = list.files(pattern = "fastq")
+output = paste('/input/dada2-quality-filter-output/',input, sep="")
 
+#save parameters to comma separated string
 library(stringr)
-parameters = paste(maxEE, maxN, truncQ, truncLen, minLen, maxLen, minQ, sep=',')
-parameters = str_replace_all(parameters, ',,', ',')
-Encoding(parameters)
+parameters = paste(maxEE, maxN, truncQ, truncLen, minLen, maxLen, minQ, sep=', ')
+parameters = str_replace_all(parameters, ', ,', ',')
 
+#construct the full command for execution
+command = paste('out <-','filterAndTrim(','input','output','rev=NULL','filt.rev=NULL',parameters,'compress=FALSE','verbose=TRUE)', sep=", ")
+command = str_replace(command, ', ', ' ')
+command = str_replace(command, ', ', '')
 
+#turns string into an expression, and evaluates the expression.
+eval(parse(text = command))
 
-# input = list.files(pattern = "fastq")
-# output = paste('/input/dada2-quality-filter-output/',input, sep="")
-# out <- filterAndTrim(input, output, rev = NULL, filt.rev = NULL, maxEE, compress=FALSE)
-# head(out)
-
-
-# readRenviron("C:/Users/m_4_r/Desktop/materializeDEMO/pipecraft-quick-start/env_files/dada2-quality-filter.env")
+#show stats
+command
+head(out)

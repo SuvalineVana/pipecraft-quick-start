@@ -15,7 +15,7 @@ BIOS-level hardware virtualization support must be enabled in the BIOS settings.
 
 ```bash
 # Clone this repository
-git clone https://github.com/electron/pipecraft-quick-start
+git clone https://github.com/SuvalineVana/pipecraft-quick-start.git
 # Go into the repository
 cd pipecraft-quick-start
 # Install dependencies

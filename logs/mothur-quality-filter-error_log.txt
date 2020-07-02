@@ -1,0 +1,11 @@
+Error: Command failed: docker-compose run mothur-quality-filter
+gzip: *fastq.gz: No such file or directory
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+/execute/mothur-quality-filter.sh: 37: /execute/mothur-quality-filter.sh: Syntax error: "(" unexpected

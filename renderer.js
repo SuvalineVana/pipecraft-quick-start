@@ -339,6 +339,7 @@ fileSelectButton.addEventListener('click', async function(){
         // Append folder path as a variable to .env file
         fs.appendFile('.env', inputPathEnv, function (err) {
           if (err) {
+            console.log('append failed')
             // append failed
           } else {
             // done

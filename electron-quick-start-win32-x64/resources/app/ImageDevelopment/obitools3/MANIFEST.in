@@ -1,0 +1,12 @@
+include setup.py
+recursive-include python *.pyx *.pxd *.c *.h
+recursive-include src *.c *.h
+include src/CMakeLists.txt
+recursive-include doc/sphinx/source *.txt *.rst *.py
+recursive-include doc/sphinx/sphinxext *.py
+include doc/sphinx/Makefile
+include doc/sphinx/Doxyfile
+include README.txt
+include requirements.txt
+include scripts/obi
+

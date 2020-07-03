@@ -1,0 +1,5 @@
+FROM conda/miniconda2:latest
+RUN conda config --add channels bioconda \   
+    && conda install -c bioconda pbccs \  
+    && conda install -c bioconda bax2bam \  
+    && conda clean --all --yes 

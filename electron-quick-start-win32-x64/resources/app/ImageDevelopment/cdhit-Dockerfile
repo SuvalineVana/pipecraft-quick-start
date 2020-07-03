@@ -1,0 +1,9 @@
+FROM alpine:3.10
+RUN apk add git \
+    && git clone https://github.com/weizhongli/cdhit \
+    && apk add build-base \
+    && apk add zlib-dev \
+    && cd cdhit \
+    && make \
+    && apk del git
+ENV PATH="/cdhit:$PATH"

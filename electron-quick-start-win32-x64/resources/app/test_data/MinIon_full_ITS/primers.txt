@@ -1,0 +1,13 @@
+#This data is basically sama as pacbio data.
+
+forward	CGACCWGCGGARGGATCATTA
+reverse	CCTCCSCTTANTDATATGC
+
+PRIMERS (and tag) still in the sequences, need to remove. 
+Has to be done with e.g. cutadapt, where there is -e option to allow mismatches.
+I have no workflow for this.
+
+Important is to note that sequences may be also 3'-5' oriented.
+Check if cutadapt takes this inot account, or we first need to reorient all reads to 5'-3' based on primers.
+
+

@@ -7,21 +7,21 @@ services:
  cutadapt-cut:
   image: pipecraft/cutadapt:2.10
   env_file:
-   - env_files\cutadapt-cut.env
+   - ./env_files/cutadapt-cut.env
   volumes:
    - ./script_folder:/execute
    - ${sisend_kaust}:/input
-  command: [./execute/cutadapt-cut.sh]
+  command: [/execute/cutadapt-cut.sh]
 #Cut adapters/primers
   #TRIMMOMATIC
  trimmomatic-cut:
   image: pipecraft/trimmomatic:0.39
   env_file:
-   - env_files\trimmomatic-cut.env
+   - ./env_files/trimmomatic-cut.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/trimmomatic-cut.sh]
+  command: [/execute/trimmomatic-cut.sh]
 
 
 #Create circular consensus sequences (PacBio)
@@ -29,49 +29,50 @@ services:
  pbccs-create-circular-consensus-sequence:
   image: pipecraft/pacbio:latest
   env_file: 
-   - env_files\pbccs-create-consensus-seq.env
+   - ./env_files/pbccs-create-consensus-seq.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/pbccs-create-circular-consensus-sequence.sh]
+  command: [/execute/pbccs-create-circular-consensus-sequence.sh]
   #BAX2BAMS
  bax2bams-create-circular-consensus-sequence:
   image: pipecraft/pacbio:latest
   env_file: 
-   - env_files\bax2bams-create-consensus-seq.env
+   - ./env_files/bax2bams-create-consensus-seq.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/bax2bams-create-circular-consensus-sequence.sh]
+  command: [/execute/bax2bams-create-circular-consensus-sequence.sh]
 
 #Assemble paired-end sequences
   #PANDAseq
  pandaseq-assemble-paired-end-sequences:
   image: pipecraft/pandaseq:2.11
   env_file: 
-   - env_files\pandaseq-assemble-paired-end-sequences.env
+   - ./env_files/pandaseq-assemble-paired-end-sequences.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/pandaseq-assemble-paired-end-sequences.sh]
+  working_dir: ${workdir}
+  command: [/execute/pandaseq-assemble-paired-end-sequences.sh]
   #FLASH
  flash-assemble-paired-end-sequences:
   image: pipecraft/flash:2
   env_file: 
-   - env_files\flash-assemble-paired-end-sequences.env
+   - ./env_files/flash-assemble-paired-end-sequences.env
   volumes:
     - ./script_folder:/execute
     -  ${sisend_kaust}:/input
-  command: [./execute/flash-assemble-paired-end-sequences.sh]
+  command: [/execute/flash-assemble-paired-end-sequences.sh]
   #VSEARCH
  vsearch-assemble-paired-end-sequences:
   image: pipecraft/vsearch:2.14.2
   env_file: 
-   - env_files\vsearch-assemble-paired-end-sequences.env
+   - ./env_files/vsearch-assemble-paired-end-sequences.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/vsearch-assemble-paired-end-sequences.sh]
+  command: [/execute/vsearch-assemble-paired-end-sequences.sh]
     
 #Quality filter
   #VSEARCH
@@ -98,11 +99,11 @@ services:
  obitools-quality-filter:
   image: pipecraft/obitools:3
   env_file:
-   - env_files\obitools-quality-filter-variables.env
+   - ./env_files/obitools-quality-filter-variables.env
   volumes:
    - ./script_folder:/obitools3/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/obitools-quality-filter.sh]
+  command: [/execute/obitools-quality-filter.sh]
   #DADA2
  dada2-quality-filter:
     image: pipecraft/dada2:3.10
@@ -130,84 +131,84 @@ services:
  mothur-demultiplex:
   image: pipecraft/mothur:1.43
   env_file:
-   - env_files\mothur-demultiplex-variables.env
+   - ./env_files/mothur-demultiplex-variables.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/mothur-demultiplex.sh]
+  command: [/execute/mothur-demultiplex.sh]
   #OBITOOLS
  obitools-demultiplex:
   image: pipecraft/obitools:3
   env_file:
-   - env_files\obitools-demultiplex-variables.env
+   - ./env_files/obitools-demultiplex-variables.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/obitools-demultiplex.sh]
+  command: [/execute/obitools-demultiplex.sh]
 
 #Cluster
   #CD-HIT
  cd-hit-cluster:
   image: pipecraft/cdhit:4.8.1
   env_file:
-   - env_files\cd-hit-cluster-variables.env
+   - ./env_files/cd-hit-cluster-variables.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/cd-hit-cluster.sh]
+  command: [/execute/cd-hit-cluster.sh]
   #VSEARCH
  vsearch-cluster:
   image: pipecraft/vsearch:2.14.2
   env_file:
-   - env_files\vsearch-cluster-variables.env
+   - ./env_files/vsearch-cluster-variables.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/vsearch-cluster.sh]
+  command: [/execute/vsearch-cluster.sh]
   #USEARCH
  usearch-cluster:
   image: usearch:latest
   env_file:
-   - env_files\usearch-cluster-variables.env
+   - ./env_files/usearch-cluster-variables.env
   volumes:
    - ./script_folder:/execute
    - ./input_folder:/input
-  command: [./execute/usearch-cluster.sh]
+  command: [/execute/usearch-cluster.sh]
   #SWARM
  swarm-cluster:
   image: pipecraft/swarm:3.0.0
   env_file:
-   - env_files\swarm-cluster-variables.env
+   - ./env_files/swarm-cluster-variables.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/swarm-cluster.sh]
+  command: [/execute/swarm-cluster.sh]
   #MOTHUR
  mothur-cluster:
   image: pipecraft/mothur:1.43
   env_file:
-   - env_files\mothur-cluster-variables.env
+   - ./env_files/mothur-cluster-variables.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/mothur-cluster.sh]
+  command: [/execute/mothur-cluster.sh]
 #Taxonomy
   #MOTHUR
  mothur-taxonomy:
   image: pipecraft/mothur:1.43
   env_file:
-   - env_files\mothur-taxonomy-variables.env
+   - ./env_files/mothur-taxonomy-variables.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/mothur-taxonomy.sh]
+  command: [/execute/mothur-taxonomy.sh]
   #BLAST
  blast-taxonomy:
   image: ncbi/blast
   env_file:
-   - env_files\blast-taxonomy-variables.env
+   - ./env_files/blast-taxonomy-variables.env
   volumes:
    - ./script_folder:/execute
    -  ${sisend_kaust}:/input
-  command: [./execute/blast-taxonomy.sh]
+  command: [/execute/blast-taxonomy.sh]
 

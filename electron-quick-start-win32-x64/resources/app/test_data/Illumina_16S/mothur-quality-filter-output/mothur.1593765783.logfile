@@ -1,0 +1,51 @@
+Linux version
+
+Using ReadLine,Boost,GSL
+mothur v.1.43.0
+Last updated: 10/21/2019
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://forum.mothur.org
+
+Type 'quit()' to exit program
+
+[NOTE]: Setting random seed to 19760620.
+
+Script Mode
+
+
+mothur > trim.seqs(fasta=NCMV84_S73_L001_R1_001.fasta ,qwindowaverage=30 ,qwindowsize=32 ,maxambig=0    , qfile=NCMV84_S73_L001_R1_001.qual)
+
+Using 2 processors.
+
+Removing group: scrap because all sequences have been removed.
+It took 15 secs to trim 17495 sequences.
+
+
+Output File Names: 
+NCMV84_S73_L001_R1_001.trim.fasta
+NCMV84_S73_L001_R1_001.scrap.fasta
+NCMV84_S73_L001_R1_001.trim.qual
+NCMV84_S73_L001_R1_001.scrap.qual
+
+
+mothur > quit()
+
+
+It took 15 seconds to run 2 commands from your script.
+
+script.
+

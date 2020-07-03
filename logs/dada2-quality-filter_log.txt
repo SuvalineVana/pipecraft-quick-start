@@ -1,0 +1,6 @@
+[1] "out <- filterAndTrim(input, output, rev=NULL, filt.rev=NULL, maxEE=1, maxN=0, truncLen=0, minLen=20, minQ=0, compress=FALSE, verbose=TRUE)"
+                               reads.in reads.out
+NCMV166_S153_L001_R1_001.fastq     7303      2911
+NCMV166_S153_L001_R2_001.fastq     7303      2548
+NCMV84_S73_L001_R1_001.fastq      17495      7801
+NCMV84_S73_L001_R2_001.fastq      17495      3737

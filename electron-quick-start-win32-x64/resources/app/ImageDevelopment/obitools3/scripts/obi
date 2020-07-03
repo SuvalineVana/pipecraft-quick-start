@@ -1,0 +1,65 @@
+#!/usr/local/bin/python3.5
+'''
+obi -- OBITools3
+
+obi is a package for the management of analyses and data in DNA metabarcoding
+
+@author:     Celine Mercier
+
+@license:    CeCILL-V2
+
+@contact:    celine.mercier@metabarcoding.org
+'''
+
+
+default_config = { 'software'       : "The OBITools 3",
+                   'log'            : False,
+                   'loglevel'       : 'INFO',
+                   'inputURI'       : None,
+                   'outputURI'      : None,
+                   'defaultdms'     : None,
+                   'inputview'      : None,
+                   'outputview'     : None,
+                   'skip'           : 0,
+                   'only'           : None,
+                   'fileformat'     : None,
+                   'skiperror'      : True,
+                   'qualityformat'  : b'sanger',
+                   'offset'         : -1,
+                   'noquality'      : False,
+                   'seqtype'        : b'nuc',
+                   "header"         : False,
+                   "sep"            : None,
+                   "quote"          : [b"'",b'"'],
+                   "dec"            : b".",
+                   "nastring"       : b"NA",
+                   "stripwhite"     : True,
+                   "blanklineskip"  : True,
+                   "commentchar"    : b"#",
+                   "nocreatedms"    : False
+                  }
+
+root_config_name='obi'
+
+from obitools3.apps.config import getConfiguration     # @UnresolvedImport
+from obitools3.version import version
+
+__all__     = []
+__version__ = version
+__date__    = '2019-09-22'
+__updated__ = '2019-09-22'
+
+DEBUG = 1
+TESTRUN = 0
+PROFILE = 0
+
+
+if __name__ =="__main__":
+    
+    config = getConfiguration(root_config_name,
+                              default_config)    
+                
+    config[root_config_name]['module'].run(config)
+    
+    
+    

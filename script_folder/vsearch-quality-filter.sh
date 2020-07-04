@@ -15,4 +15,10 @@ do
     cat info
 done
 
+###S ->  #compolsury options: --fastq_maxee, fastq_maxns, 
+#optional: (cannot be as default vaules! Must be excluded if not selected): 
+    # --fastq_maxee_rate, fastq_maxlen,  fastq_trunclen;
+        #--fastq_minlen (default:1),
+
+
 rm info

@@ -1,0 +1,31 @@
+Traceback (most recent call last):
+  File "docker-compose", line 6, in <module>
+  File "compose\cli\main.py", line 68, in main
+  File "compose\cli\main.py", line 121, in perform_command
+  File "compose\cli\main.py", line 762, in run
+  File "compose\cli\main.py", line 1151, in run_one_off_container
+  File "compose\project.py", line 468, in initialize
+  File "compose\network.py", line 257, in initialize
+  File "compose\network.py", line 61, in ensure
+  File "compose\network.py", line 93, in inspect
+  File "site-packages\docker\utils\decorators.py", line 34, in wrapper
+  File "site-packages\docker\utils\decorators.py", line 19, in wrapped
+  File "site-packages\docker\api\network.py", line 200, in inspect_network
+  File "site-packages\docker\utils\decorators.py", line 46, in inner
+  File "site-packages\docker\api\client.py", line 189, in _get
+  File "site-packages\requests\sessions.py", line 488, in get
+  File "site-packages\requests\sessions.py", line 475, in request
+  File "site-packages\requests\sessions.py", line 596, in send
+  File "site-packages\requests\adapters.py", line 423, in send
+  File "site-packages\requests\packages\urllib3\connectionpool.py", line 595, in urlopen
+  File "site-packages\requests\packages\urllib3\connectionpool.py", line 363, in _make_request
+  File "httplib.py", line 1042, in request
+  File "httplib.py", line 1082, in _send_request
+  File "httplib.py", line 1038, in endheaders
+  File "httplib.py", line 882, in _send_output
+  File "httplib.py", line 844, in send
+  File "site-packages\docker\transport\npipeconn.py", line 31, in connect
+  File "site-packages\docker\transport\npipesocket.py", line 22, in wrapped
+  File "site-packages\docker\transport\npipesocket.py", line 50, in connect
+pywintypes.error: (2, 'WaitNamedPipe', 'The system cannot find the file specified.')
+Failed to execute script docker-compose

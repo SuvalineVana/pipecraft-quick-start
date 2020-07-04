@@ -8,6 +8,12 @@ gunzip *fastq.gz
 output='/input/mothur-quality-filter-output/'
 rm -r -f $output
 
+###S
+#Renaming R1 and R2 fastq files so the files would be suitable for PandaSeq
+tr " " "Ã" < $R1fastq > R1r.fastq
+tr " " "Ã" < $R2fastq > R1r.fastq #loop and change to variables. These are inputs for the next step
+###S
+
 #Split fastq file(s) into fasta and qual file(s)
 for f in *fastq
 do
@@ -50,6 +56,25 @@ do
     echo $qfile
     mothur "#make.fastq(fasta=$fa, qfile=$qfile)" &
 done
+
+
+###S
+#Renaming R1 and R2 back to original names (so that the assemblers could work)
+tr "Ã" " " < R1r.trim.fastq > R1r.trim_x.fastq
+tr "_" ":" < R1r.trim_x.fastq > R1r.trim.fastq_nameOK.fastq
+rm R1r.trim_x.fastq
+
+tr "Ã" " " < R2r.trim.fastq > R2r.trim_x.fastq
+tr "_" ":" < R2r.trim_x.fastq > R2r.trim.fastq_nameOK.fastq
+rm R2r.trim_x.fastq
+
+#Sorting out only paired R1 and R2 sequences (singles into separate fastq)
+ #python code from github.com/enormandeau/Scripts/blob/master/fastqCombinePairedEnd.py 
+python fastqCombinePairedEnd.txt R1r.trim.fastq_nameOK.fastq R2r.trim.fastq_nameOK.fastq
+
+cat R1r.trim.fastq_nameOK.fastq_pairs_R1.fastq | paste - - - - | sort -k1,1 -t " " | tr "\t" "\n" > R1.trim_pairs_sorted_to_assembling.fastq
+cat R2r.trim.fastq_nameOK.fastq_pairs_R2.fastq | paste - - - - | sort -k1,1 -t " " | tr "\t" "\n" > R2.trim_pairs_sorted_to_assembling.fastq
+###S
 
 #remove all unnecessary file(s)
 end=`date +%s`

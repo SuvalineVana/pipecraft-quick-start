@@ -1,5 +1,0 @@
-FROM alpine:3.10
-
-RUN apk add --no-cache python3-dev && apk --no-cache add build-base && apk --no-cache add  python3
-RUN python3 -m pip install cutadapt
-RUN apk del build-base && apk del python3-dev

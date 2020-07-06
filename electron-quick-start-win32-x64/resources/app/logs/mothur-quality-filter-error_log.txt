@@ -1,2 +1,0 @@
-Error: Command failed: docker-compose run mothur-quality-filter
-In file .\.env: environment variable name '<<<<<<< HEAD' may not contain whitespace.

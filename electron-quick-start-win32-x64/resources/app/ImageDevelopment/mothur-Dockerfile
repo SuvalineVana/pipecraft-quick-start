@@ -1,7 +1,0 @@
-FROM ubuntu:18.04
-ARG DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update -y && apt-get install wget -y && apt-get install libreadline7 -y && apt-get install unzip -y && wget https://github.com/mothur/mothur/releases/download/v.1.43.0/Mothur.Ubuntu_18.zip
-RUN unzip Mothur.Ubuntu_18.zip && rm Mothur.Ubuntu_18.zip && rm -r /var/lib/apt/lists/*
-RUN apt-get remove wget -y && apt-get remove unzip -y
-ENV PATH "$PATH:/mothur"

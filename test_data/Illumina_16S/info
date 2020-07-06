@@ -1,0 +1,27 @@
+vsearch v2.15.0_linux_x86_64, 1.9GB RAM, 2 cores
+https://github.com/torognes/vsearch
+
+Merging reads 100%
+     17495  Pairs
+      5467  Merged (31.2%)
+     12028  Not merged (68.8%)
+
+Pairs that failed merging due to various reasons:
+         6  too few kmers found on same diagonal
+        62  multiple potential alignments
+     10575  too many differences
+      1206  alignment score too low, or score drop too high
+       179  staggered read pairs
+
+Statistics of all reads:
+    250.98  Mean read length
+
+Statistics of merged reads:
+    253.03  Mean fragment length
+      0.68  Standard deviation of fragment length
+      0.58  Mean expected error in forward sequences
+      1.02  Mean expected error in reverse sequences
+      0.17  Mean expected error in merged sequences
+      0.19  Mean observed errors in merged region of forward sequences
+      0.30  Mean observed errors in merged region of reverse sequences
+      0.49  Mean observed errors in merged region

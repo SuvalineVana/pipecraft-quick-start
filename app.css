@@ -118,3 +118,7 @@ p.adapter-checkbox {
 .card {
     border-radius: 10px;
 }
+
+.switch {
+    margin: 16px;
+}

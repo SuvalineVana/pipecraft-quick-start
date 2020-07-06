@@ -141,7 +141,7 @@ $('.dropdown-selection').each(function(){
     view.appendTo('body')
     M.AutoInit();
     cbGroupName = view.attr('class')
-    view.find(':checkbox').attr("name", cbGroupName);
+    view.find('.serviceCB').attr("name", cbGroupName);
     console.log(view.find(':checkbox'))
     console.log(view.attr('class'))
 
@@ -150,8 +150,10 @@ $('.dropdown-selection').each(function(){
     $(".not-collapse").on("click", function(e) { e.stopPropagation(); });
 
 
-    // Allow only 1 checkbox to be checked
+    // Allow only 1 checkbox to be checked per step
     $('input[type="checkbox"]').on('change', function() {
+      // console.log(this.name)
+      // console.log($('input[name="' + this.name + '"]'))
       $('input[name="' + this.name + '"]').not(this).prop('checked', false);
     });
     
@@ -204,6 +206,7 @@ function execShellCommand(cmd) {
 
 async function RunDockerCompose(serviceName){
   console.log("Starting step")
+  console.log(serviceName)
   const runLog = await execShellCommand('docker-compose run ' + serviceName);
   console.log(runLog);
 
@@ -236,7 +239,7 @@ async function RunDockerCompose(serviceName){
 
 async function collectParams(WorkFlowTag){
   serviceName = ""
-  $(WorkFlowTag).find(':checkbox').each(async function(){
+  $(WorkFlowTag).find('.serviceCB').each(async function(){
     if (this.checked == true){
       serviceName = $(this).parent().attr("value")
       envFileToClear= 'env_files/' + serviceName + '.env'
@@ -252,6 +255,18 @@ async function collectParams(WorkFlowTag){
       AppendToEnvFile(env_variable, serviceName)
     } else {
       env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'= '
+      console.log(env_variable)
+      AppendToEnvFile(env_variable, serviceName)
+    }
+  })
+
+  $(WorkFlowTag).find("#" + serviceName).find('.onOff').each(function(){
+    if ($(this).is(':checked')) {
+      env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'=ON'
+      console.log(env_variable)
+      AppendToEnvFile(env_variable, serviceName)
+    } else {
+      env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'=OFF'
       console.log(env_variable)
       AppendToEnvFile(env_variable, serviceName)
     }

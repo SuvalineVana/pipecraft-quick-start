@@ -10,6 +10,5 @@ RUN apk add git \
     && cd pandaseq && ./autogen.sh && ./configure && make && make install \
     && apk del git \
     && apk del automake \
-    && apk del autoconf \
-    && apk del build-base
+    && apk del autoconf
 

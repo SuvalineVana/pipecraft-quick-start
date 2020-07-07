@@ -1,0 +1,21 @@
+NCMV166_S153_L001_R1_001.fastq
+NCMV166_S153_L001_R2_001.fastq
+NCMV84_S73_L001_R1_001.fastq
+NCMV84_S73_L001_R2_001.fastq
+primers.txt
+script.sh
+/usr/local/bin/pandaseq -h
+/pandaseq/pandaseq -h
+-o 1
+
+-l 1
+
+OFF
+works
+#Assembling sequneces with pandaseq
+Processing NCMV166_S153_L001_R1_001.fastq
+Processing NCMV166_S153_L001_R2_001.fastq
+Processing NCMV84_S73_L001_R1_001.fastq
+Processing NCMV84_S73_L001_R2_001.fastq
+Paired-end sequences assembled with pandaseq
+0

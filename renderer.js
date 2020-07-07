@@ -243,7 +243,7 @@ async function collectParams(WorkFlowTag){
     if (this.checked == true){
       serviceName = $(this).parent().attr("value")
       envFileToClear= 'env_files/' + serviceName + '.env'
-      await fs.truncate(envFileToClear, 0, function(){console.log('done')})
+      await fs.truncate(envFileToClear, 0, function(){console.log('env file ready')})
       return serviceName
     }
   })

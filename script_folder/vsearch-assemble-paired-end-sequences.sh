@@ -1,11 +1,13 @@
 #!/bin/sh
 #vsearch -h
 mkdir vsearch-assemble-paired-end-sequences-output
-echo $fastq_minmergelen
-echo $mergestagger
-echo $fastq_minovlen
-echo $fastq_maxdiffs
 
+# echo $fastq_minmergelen
+# echo $mergestagger
+# echo $fastq_minovlen
+# echo $fastq_maxdiffs
+
+#Check mergestaggering
 if [ $mergestagger == "ON" ]
 then
     echo 'mergestagger ON'
@@ -31,6 +33,8 @@ echo "#Assembling sequneces with vsearch"
     # #optional (cannot be as default vaules! Must be excluded if not selected): 
     #     #fastqout_notmerged_fwd, fastqout_notmerged_rev, fastq_truncqual, fastq_allowmergestagger, fastq_maxns, fastq_maxee, maxdiffs
     # #note: no trimming needed if using optional vsearch options here (e.g. maxee)
+
+
 for R1 in *R1*.fastq*
 do
 	echo "Processing $R1"
@@ -41,6 +45,7 @@ do
     # #logname='vsearch-quality-filter-output/'$f'_log.txt'
     vsearch --fastq_mergepairs $R1 --reverse $R2 --fastqout $output $minovlen $fastq_minmergelen $fastq_maxdiffs $mergestagger 2> info
     cat info
+    #this loop does not ye include saving outputs that did not merge
 done
 
 echo "done"

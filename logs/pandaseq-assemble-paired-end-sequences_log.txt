@@ -1,0 +1,3 @@
+#Assembling sequneces with pandaseq
+Paired-end sequences assembled with pandaseq
+2

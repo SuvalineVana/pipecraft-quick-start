@@ -8,7 +8,7 @@ do
     R2=$(echo $R1 | sed 's/R1/R2/g')
     mergedName=$(echo $R1 | sed 's/R1.*/merged.fastq/g')
     output='/input/pandaseq-assemble-paired-end-sequences-output/'$mergedName
-    log='/input/pandaseq-assemble-paired-end-sequences-output/'$(echo $mergedName | sed 's/.fastq/_assembly.log/g')
+    log='/input/pandaseq-assemble-paired-end-sequences-output/'$(echo $mergedName | sed 's/.fastq/_assembly_log.txt/g')
     unpaired='/input/pandaseq-assemble-paired-end-sequences-output/'$(echo $mergedName | sed 's/merged.*/unpaired.txt/g')
     
     #Check writeUnpaired

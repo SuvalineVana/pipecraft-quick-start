@@ -958,8 +958,19 @@
                 <div class="col s4 extraOptions">
                   <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
+                      <span class="card-title">maxOverlap</span>
+                      <p>Set the maximum overlap length expected in approximately 90% of read pairs.</p>
+                    </div>
+                    <div class="card-action">
+                      <input style="display: inline-block;" class="InlineNumericInput" id="-M " type="number" value="" min="1" step="1">
+                    </div>
+                  </div>
+                </div>
+                <div class="col s4 extraOptions">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
                       <span class="card-title">read length.</span>
-                      <p>Average read length.</p>
+                      <p>Average read length.</p><br><br>
                     </div>
                     <div class="card-action">
                       <input style="display: inline-block;" class="InlineNumericInput" id="-r " type="number" value="1" min="1" step="1">
@@ -970,10 +981,32 @@
                   <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
                       <span class="card-title">fragment length</span>
-                      <p>Average fragment length</p>
+                      <p>Average fragment length</p><br><br>
                     </div>
                     <div class="card-action">
                       <input style="display: inline-block;" class="InlineNumericInput" id="-f " type="number" value="1" min="1" step="1">
+                    </div>
+                  </div>
+                </div>
+                <div class="col s8 extraOptions">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">standard deviation of fragment lengths</span>
+                      <p>f you do not know standard deviation of the fragment library, you can probably assume that the standard deviation is 10% of the average fragment length</p><br><br>
+                    </div>
+                    <div class="card-action">
+                      <input style="display: inline-block;" class="InlineNumericInput" id="-s " type="number" value="" min="1" step="1">
+                    </div>
+                  </div>
+                </div>
+                <div class="col s4 extraOptions">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">phredOffset</span>
+                      <p>Set the smallest ASCII value of the characters used to represent quality values of bases in fastq files. 33 for latest Illumina and Sanger or 64 for earlier Illumina.</p>
+                    </div>
+                    <div class="card-action">
+                      <input style="display: inline-block;" class="InlineNumericInput" id="-p " type="number" value="" min="1" step="1">
                     </div>
                   </div>
                 </div>

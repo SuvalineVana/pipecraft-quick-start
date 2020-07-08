@@ -63,6 +63,7 @@ services:
   volumes:
     - ./script_folder:/execute
     -  ${sisend_kaust}:/input
+  working_dir: ${workdir}
   command: [/execute/flash-assemble-paired-end-sequences.sh]
   #VSEARCH
  vsearch-assemble-paired-end-sequences:

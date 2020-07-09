@@ -239,6 +239,7 @@ async function RunDockerCompose(serviceName){
 
 async function collectParams(WorkFlowTag){
   serviceName = ""
+  // Find selected service
   $(WorkFlowTag).find('.serviceCB').each(async function(){
     if (this.checked == true){
       serviceName = $(this).parent().attr("value")
@@ -247,7 +248,7 @@ async function collectParams(WorkFlowTag){
       return serviceName
     }
   })
-  
+  // Capture numeric input
   $(WorkFlowTag).find("#" + serviceName).find('.InlineNumericInput').each(function(){
     if ($(this)[0].value !== "") {
       env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'='+$(this).attr('id')+$(this)[0].value
@@ -259,7 +260,7 @@ async function collectParams(WorkFlowTag){
       AppendToEnvFile(env_variable, serviceName)
     }
   })
-
+  // Capture ON/OFF input
   $(WorkFlowTag).find("#" + serviceName).find('.onOff').each(function(){
     if ($(this).is(':checked')) {
       env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'=ON'

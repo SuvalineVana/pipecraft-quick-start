@@ -348,7 +348,7 @@ fileSelectButton.addEventListener('click', async function(){
 
     // Open windows file dialog
     dialog.showOpenDialog({
-        properties: ['openFile', 'openDirectory',]
+        properties: ['openDirectory', 'showHiddenFiles']
       }).then(result => {
         inputPathEnv = 'sisend_kaust=' + result.filePaths[0] +"\r\n"
         console.log(inputPathEnv)

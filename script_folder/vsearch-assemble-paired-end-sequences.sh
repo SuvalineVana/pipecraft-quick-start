@@ -5,6 +5,24 @@ if [ -d "/input/vsearch-assemble-paired-end-sequences-output" ]; then
     rm -r  /input/vsearch-assemble-paired-end-sequences-output
 fi
 mkdir /input/vsearch-assemble-paired-end-sequences-output
+mkdir /input/vsearch-assemble-paired-end-sequences-output/singles_and_unpaired
+
+#Resynchronize 2 fastq or fastq.gz files (R1 and R2) after they have been trimmed and cleaned
+for R1 in *R1*.fastq*
+do
+    R2=$(echo $R1 | sed 's/R1/R2/g')
+    echo "Resynchronizing $R1 and $R2"
+    fastqCombinePairedEnd.py $R1 $R2
+fi
+
+
+#Clean-up after Resynchronization
+# NCMV166_S153_L001_R1_001.fastq
+# NCMV166_S153_L001_R2_001.fastq
+# NCMV166_S153_L001_R1_001.fastq_pairs_R1.fastq
+# NCMV166_S153_L001_R2_001.fastq_pairs_R2.fastq
+# NCMV166_S153_L001_R1_001.fastq_singles.fastq 
+
 
 # echo $fastq_minmergelen
 # echo $mergestagger
@@ -29,11 +47,11 @@ do
 	echo "Processing $R1"
     R2=$(echo $R1 | sed 's/R1/R2/g')
     echo "Processing $R2"
-    mergedName=$(echo $R1 | sed 's/R1/merged/g')
+    mergedName=$(echo $R1 | sed 's/R1.*/merged.fastq/g')
     output='/input/vsearch-assemble-paired-end-sequences-output/'$mergedName
-    # #logname='vsearch-quality-filter-output/'$f'_log.txt'
-    vsearch --fastq_mergepairs $R1 --reverse $R2 --fastqout $output $minovlen $fastq_minmergelen $fastq_maxdiffs $mergestagger 2> info
-    cat info
+    log='/input/vsearch-assemble-paired-end-sequences-output/'$(echo $mergedName | sed 's/merged.fastq/assembly_log.txt/g')
+    vsearch --fastq_mergepairs $R1 --reverse $R2 --fastqout $output $minovlen $fastq_minmergelen $fastq_maxdiffs $mergestagger 2> $log
+    cat $log
     #this loop does not ye include saving outputs that did not merge
 done
 

@@ -1,5 +1,7 @@
 FROM alpine:3.10
+ADD ImageDevelopment/fastqCombinePairedEnd.py /usr/local/bin/
 RUN apk add git \
+    && apk add python3 \
     && apk add bzip2-dev \
     && apk add zlib-dev \
     && apk add libtool \
@@ -12,4 +14,5 @@ RUN apk add git \
     && apk del automake \
     && apk del autoconf \
     && apk del build-base
+    
 

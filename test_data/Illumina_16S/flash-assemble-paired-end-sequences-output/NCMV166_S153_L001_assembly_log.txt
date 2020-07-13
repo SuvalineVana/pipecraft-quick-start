@@ -1,0 +1,44 @@
+[FLASH] Starting FLASH v2.2.00
+[FLASH] Fast Length Adjustment of SHort reads
+[FLASH]  
+[FLASH] Input files:
+[FLASH]     NCMV166_S153_L001_R1_001.fastq
+[FLASH]     NCMV166_S153_L001_R2_001.fastq
+[FLASH]  
+[FLASH] Output files:
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV166_S153_L001_merged.extendedFrags.fastq
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV166_S153_L001_merged.notCombined_1.fastq
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV166_S153_L001_merged.notCombined_2.fastq
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV166_S153_L001_merged.hist
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV166_S153_L001_merged.histogram
+[FLASH]  
+[FLASH] Parameters:
+[FLASH]     Min overlap:           10
+[FLASH]     Min overlap outie:     35
+[FLASH]     Max overlap:           250
+[FLASH]     Max mismatch density:  0.250000
+[FLASH]     Allow "outie" pairs:   true
+[FLASH]     Cap mismatch quals:    false
+[FLASH]     Combiner threads:      2
+[FLASH]     Input format:          FASTQ, phred_offset=33
+[FLASH]     Output format:         FASTQ, phred_offset=33
+[FLASH]  
+[FLASH] Starting reader and writer threads
+[FLASH] Starting 2 combiner threads
+[FLASH] Processed 7303 read pairs
+[FLASH]  
+[FLASH] Read combination statistics:
+[FLASH]     Total pairs:       7303
+[FLASH]     Discarded pairs:   0
+[FLASH]     Percent Discarded: 0.00%
+[FLASH]     Combined pairs:    7073
+[FLASH]         Innie pairs:   7058 (99.79% of combined)
+[FLASH]         Outie pairs:   15 (0.21% of combined)
+[FLASH]     Uncombined pairs:  230
+[FLASH]     Percent combined:  96.85%
+[FLASH]  
+[FLASH] Writing histogram files.
+[FLASH]  
+[FLASH] FLASH v2.2.00 complete!
+[FLASH] 0.534 seconds elapsed
+[FLASH] Finished with 2 warnings (see above)

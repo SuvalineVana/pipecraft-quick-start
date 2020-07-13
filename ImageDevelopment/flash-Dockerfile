@@ -1,5 +1,7 @@
 FROM alpine:3.10
+ADD ImageDevelopment/fastqCombinePairedEnd.py /usr/local/bin/
 RUN apk add git \
+    && apk add python3 \
     && apk add build-base \
     && apk add zlib-dev \
     && git clone https://github.com/dstreett/FLASH2 \

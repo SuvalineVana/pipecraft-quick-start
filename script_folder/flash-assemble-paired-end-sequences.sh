@@ -25,7 +25,7 @@ do
     mergedName=$(echo $R1 | sed 's/R1.*/merged/g')
     outputdir='/input/flash-assemble-paired-end-sequences-output/'
     output='/input/flash-assemble-paired-end-sequences-output/'$mergedName
-    log='/input/flash-assemble-paired-end-sequences-output/'$(echo $mergedName | sed 's/merged/merge_assembly_log.txt/g')
+    log='/input/flash-assemble-paired-end-sequences-output/'$(echo $mergedName | sed 's/merged/assembly_log.txt/g')
     echo $log
     flash2 $R1 $R2 $m $x $r $f $M $p $s -d $outputdir -o $mergedName > $log
     cat $log

@@ -1,6 +1,7 @@
 #!/bin/sh
 start=`date +%s`
 
+#Check for output dir create and write assing to variables
 if [ -d "/input/pandaseq-assemble-paired-end-sequences-output" ]; then
     rm -r  /input/pandaseq-assemble-paired-end-sequences-output
 fi

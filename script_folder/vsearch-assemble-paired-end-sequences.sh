@@ -35,7 +35,7 @@ else
     mergestagger='--fastq_nostagger'
 fi
 
-
+#vsearch core
 echo "#Assembling sequneces with vsearch"
 cd $outputDir
 for R1 in *R1*.fastq*
@@ -57,7 +57,7 @@ echo "Paired-end sequences assembled with vsearch"
 
 end=`date +%s`
 runtime=$((end-start))
-echo $runtime
+echo 'Total time:' $runtime 'seconds'
 ###S
     # #loop ->
     # echo "#Assembling $R1 and $R2"

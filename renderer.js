@@ -125,11 +125,11 @@ function switchView() {
 var i = 1
 $('.dropdown-selection').each(function(){
   $(this).click(function(){
-    
     var step = $(this).clone().removeClass('dropdown-selection')
     step.find('i').text('remove_circle_outline').addClass('RemoveButtons')
     step.find('a').addClass('viewSwitch')
     step.on('click', 'a', switchView)
+
     
     
     var viewClass = '.wrapper.blank.' + $(this).removeClass('dropdown-selection').attr('class')
@@ -144,6 +144,12 @@ $('.dropdown-selection').each(function(){
     view.find('.serviceCB').attr("name", cbGroupName);
     console.log(view.find(':checkbox'))
     console.log(view.attr('class'))
+
+    // Disable dropdown options until removed
+    $(this).find( "a" ).css( "color", "#ECEFF0" )
+    $(this).find( "a" ).css( "background-color", "#BAB8BA" )
+    $(this).find( "i" ).remove()
+    $(this).addClass("disabled")
 
     i++
     // Do not collapse if checkbox is clicked
@@ -163,6 +169,25 @@ $('.dropdown-selection').each(function(){
 // Remove workflow steps
 $( "#SelectedSteps" ).on( "click", "i", function( event ) {
   event.preventDefault();
+
+  // Enable in dropdown
+  classToEnable =$(this).parent().parent().attr('class').split(' ')[0]
+  console.log(classToEnable)
+  console.log($('.disabled.'+classToEnable))
+  $('.disabled.'+classToEnable).find( "a" ).css( "color", "black" )
+  $('.disabled.'+classToEnable).find( "a" ).css( "background-color", "transparent" )
+  
+  var materialIcon = document.createElement('i');
+  materialIcon.className = 'material-icons';
+  var materialIconAdd = document.createTextNode('add_circle_outline');
+  materialIcon.appendChild(materialIconAdd);
+
+  $('.disabled.'+classToEnable).find( "a" )[0].appendChild(materialIcon)
+  $('.disabled.'+classToEnable).removeClass('disabled').addClass('dropdown-slection')
+  // $('.dropdown-selection.'+classToEnable).find( "a" ).css( "color", "red" )
+  // $('.dropdown-selection.'+classToEnable).find( "a" ).css( "background-color", "white" )
+
+
   viewTag = ('.wrapper.' + ($(this).closest('li').attr('class'))).replace(' ', '.')
   $(viewTag).remove()
   $(this).closest('li').remove();
@@ -170,7 +195,6 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
   if (document.querySelectorAll("#SelectedSteps li").length < 1) {
     // array does not exist, is not an array, or is empty
     // ⇒ do not attempt to process array
-    console.log("tere")
     newView = $('#PlutoTwitter')
     $(newView).fadeIn( 500, function(){
     });

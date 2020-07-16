@@ -24,7 +24,7 @@ for fastqPairsR1 in *_pairs_R1.fastq; do mv "$fastqPairsR1" $outputDir"$(echo "$
 for fastqPairsR2 in *_pairs_R2.fastq; do mv "$fastqPairsR2" $outputDir"$(echo "$fastqPairsR2" | sed s/\_pairs_R2.fastq//)"; done
 for fastqSingles in *_singles.fastq; do mv "$fastqSingles" "$singlesAndUnpairedDir$fastqSingles"; done
 
-
+#flash core
 echo "#Assembling sequneces with flash"
 cd $outputDir
 for R1 in *R1*.fastq*
@@ -44,7 +44,8 @@ done
 wait
 
 find . -name '*.hist*' -delete
-find . -name '*.notCombined*' -delete
+for notCombined in *.notCombined*; do mv "$notCombined" "$singlesAndUnpairedDir$notCombined"; done
+#find . -name '*.notCombined*' -delete
 for f in *.extendedFrags*; do mv "$f" "$(echo "$f" | sed s/\.extendedFrags//)"; done
 
 echo "Paired-end sequences assembled with flash"

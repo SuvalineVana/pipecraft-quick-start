@@ -122,3 +122,7 @@ p.adapter-checkbox {
 .switch {
     margin: 16px;
 }
+
+.disabled {
+    pointer-events:none; //This makes it not clickable
+}

@@ -1,0 +1,1 @@
+Couldn't connect to Docker daemon. You might need to start Docker for Windows.

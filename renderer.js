@@ -183,7 +183,8 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
   materialIcon.appendChild(materialIconAdd);
 
   $('.disabled.'+classToEnable).find( "a" )[0].appendChild(materialIcon)
-  $('.disabled.'+classToEnable).removeClass('disabled').addClass('dropdown-slection')
+  $('.disabled.'+classToEnable).removeClass('disabled')
+   // $('.disabled.'+classToEnable).addClass('dropdown-slection')
   // $('.dropdown-selection.'+classToEnable).find( "a" ).css( "color", "red" )
   // $('.dropdown-selection.'+classToEnable).find( "a" ).css( "background-color", "white" )
 
@@ -220,6 +221,7 @@ function execShellCommand(cmd) {
    exec(cmd, (error, stdout, stderr) => {
     if (error) {
      console.warn(error);
+     alert(error)
      serviceError = cmd.split(" ").slice(-1) + '-error'
      writeLog(serviceError, error)
     }
@@ -316,6 +318,8 @@ async function processStepsInfo(workFlowSteps){
 
 // Run Button
 $('#runButton').click(async function(){
+  $("div.spanner").addClass("show")
+  $("div.overlay").addClass("show")
   const optionsClearWorkDir = {
     files: '.env',
     from: /workdir.*/g,
@@ -345,6 +349,8 @@ $('#runButton').click(async function(){
   console.log(workFlowSteps)
   await processStepsInfo(workFlowSteps);
   console.log('The whole workflow has completed: Show user stats and save configuration file')
+  $("div.spanner").removeClass("show")
+  $("div.overlay").removeClass("show")
 })
 
 

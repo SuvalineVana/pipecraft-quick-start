@@ -14,63 +14,6 @@ var url = require('url');
 const { clear } = require('console');
 const replace = require('replace-in-file');
 
-function openManual(manualName) {
-  const win = new BrowserWindow({ width: 1200, height: 800 })
-  PDFWindow.addSupport(win)
-  console.log(path.join(__dirname, '/manuals/' + manualName))
-  manualPath = path.join(__dirname, '/manuals/' + manualName)
-  win.loadURL(manualPath)
-}
-
-// test for showing extra options
-$('body').on('click', '.extraOptionsTrigger', function () {
-  if ($(this).text() == 'Show more options') {
-    $(this).text("Show less options")
-  } else {
-    $(this).text("Show more options")
-  }
-  $(this).siblings(".extraOptions").toggle()
-  console.log($(this).text())
-})
-
-
-// test for showing PDF manual with electron
-$('body').on('click', '.manualLink', function () {
-  manualName = $(this).attr('id')
-  console.log(manualName);
-  openManual(manualName)
-});
-
-
-// ENV file management functions
-function TruncateEnvFile(serviceName){
-  envFilePath = 'env_files/' + serviceName + '.env'
-  fs.readFile(envFilePath, function (err, data) {
-    if (err) throw err;
-    theFile = data.toString().split("\n");
-    theFile.splice(-3, 3);
-    fs.writeFile('script_folder/SetupTest.sh', theFile.join("\n"), function (err) {
-        if (err) {
-            return console.log(err);
-        }
-        // console.log("Removed last 3 lines");
-        // console.log(theFile.length);
-    });
-  });
-}
-
-function AppendToEnvFile(env_variable, serviceName){
-  envFilePath = 'env_files/' + serviceName + '.env'
-  line2append = env_variable + '\n'
-  fs.appendFile(envFilePath, line2append, function (err) {
-    if (err) {
-      // append failed
-    } else {
-      // done
-    }
-  })
-}
-
 // materialize-css
 
 $(document).ready(function(){
@@ -100,7 +43,88 @@ $( function() {
   $( "#SelectedSteps" ).disableSelection();
 });
 
+//// FUNCTIONS
+// Open pdf manual
+function openManual(manualName) {
+  const win = new BrowserWindow({ width: 1200, height: 800 })
+  PDFWindow.addSupport(win)
+  console.log(path.join(__dirname, '/manuals/' + manualName))
+  manualPath = path.join(__dirname, '/manuals/' + manualName)
+  win.loadURL(manualPath)
+}
 
+// Append a env_variable to service env file
+function AppendToEnvFile(env_variable, serviceName){
+  envFilePath = 'env_files/' + serviceName + '.env'
+  line2append = env_variable + '\n'
+  fs.appendFile(envFilePath, line2append, function (err) {
+    if (err) {
+      // append failed
+    } else {
+      // done
+    }
+  })
+}
+
+// Clear line from .env file
+async function clearEnvLine(line){
+  const line2clear = new RegExp(line + '.*', 'g')
+  const options = {
+  files: '.env',
+  from: line2clear,
+  to: '',
+}
+  try {
+    const results = await replace(options)
+    console.log('Replacement results:', results)
+  }
+  catch (error) {
+    console.error('Error occurred:', error)
+  }
+}
+
+function writeLog(serviceName, runLog){
+  logName = 'logs/' + serviceName +'_log.txt'
+  fs.writeFile(logName, runLog, function(err) {
+    if(err) {
+        return console.log(err);
+    }
+    console.log('output written to: ' + logName);
+}); 
+}
+
+function execShellCommand(cmd) {
+  const exec = require('child_process').exec;
+  return new Promise((resolve, reject) => {
+   exec(cmd, (error, stdout, stderr) => {
+    if (error) {
+     console.warn(error);
+     alert(error)
+     serviceError = cmd.split(" ").slice(-1) + '-error'
+     writeLog(serviceError, error)
+    }
+    resolve(stdout? stdout : stderr);
+   });
+  });
+}
+
+//Show extra options
+$('body').on('click', '.extraOptionsTrigger', function () {
+  if ($(this).text() == 'Show more options') {
+    $(this).text("Show less options")
+  } else {
+    $(this).text("Show more options")
+  }
+  $(this).siblings(".extraOptions").toggle()
+  console.log($(this).text())
+})
+
+//Show PDF manual with electron
+$('body').on('click', '.manualLink', function () {
+  manualName = $(this).attr('id')
+  console.log(manualName);
+  openManual(manualName)
+});
 
 // Home screen
 var newView = $('#PlutoTwitter')
@@ -203,61 +227,54 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
 
 });
 
+// Select input folder and save as env variable
+const fileSelectButton = document.getElementById('FileSelectButton');
+fileSelectButton.addEventListener('click', async function(){
+    //Clear previos inputfolder from .env file
+    clearEnvLine('sisend_kaust')
+    // Open windows file dialog
+    dialog.showOpenDialog({
+        properties: ['openDirectory', 'showHiddenFiles']
+      }).then(result => {
+        inputPathEnv = 'sisend_kaust=' + result.filePaths[0] +"\r\n"
+        console.log(inputPathEnv)
+        // Append folder path as a variable to .env file
+        fs.appendFile('.env', inputPathEnv, function (err) {
+          if (err) {
+            console.log('append failed')
+          } else {
+            console.log('input folder added')
+          }
+        })
+      }).catch(err => {
+        console.log(err)
+      })
+})
+
 // Run Analysis
 // Setup
-function writeLog(serviceName, runLog){
-  logName = 'logs/' + serviceName +'_log.txt'
-  fs.writeFile(logName, runLog, function(err) {
-    if(err) {
-        return console.log(err);
-    }
-    console.log("The log file was saved!");
-}); 
+
+async function processStepsInfo(workFlowSteps){
+  for (const item of workFlowSteps) {
+    WorkFlowTag = ('.wrapper.' + item.closest('li').getAttribute('class').replace(' ','.'))
+    await collectParams(WorkFlowTag)
+    await RunDockerCompose(serviceName)
+    // Place to pause for step-by-step mode
+  }
 }
 
-function execShellCommand(cmd) {
-  const exec = require('child_process').exec;
-  return new Promise((resolve, reject) => {
-   exec(cmd, (error, stdout, stderr) => {
-    if (error) {
-     console.warn(error);
-     alert(error)
-     serviceError = cmd.split(" ").slice(-1) + '-error'
-     writeLog(serviceError, error)
-    }
-    resolve(stdout? stdout : stderr);
-   });
-  });
-}
 
 async function RunDockerCompose(serviceName){
   console.log("Starting step")
   console.log(serviceName)
   const runLog = await execShellCommand('docker-compose run ' + serviceName);
   console.log(runLog);
-
-  const optionsForWorkDir = {
-    files: '.env',
-    from: /workdir.*/g,
-    to: '',
-  };
-
-  try {
-    const results = await replace(optionsForWorkDir)
-    console.log('Replacement results:', results);
-  }
-  catch (error) {
-    console.error('Error occurred:', error);
-  }
-
+  clearEnvLine('workdir')
   workDirPathEnv = 'workdir=/input/' + serviceName + '-output' +"\r\n"
-  console.log(workDirPathEnv) 
-  
+  console.log(workDirPathEnv)  
   fs.appendFile('.env', workDirPathEnv, function (err) {
     if (err) {
-      // append failed
     } else {
-      // done
     }
   })
   writeLog(serviceName, runLog)
@@ -269,8 +286,9 @@ async function collectParams(WorkFlowTag){
   $(WorkFlowTag).find('.serviceCB').each(async function(){
     if (this.checked == true){
       serviceName = $(this).parent().attr("value")
+      console.log(serviceName)
       envFileToClear= 'env_files/' + serviceName + '.env'
-      await fs.truncate(envFileToClear, 0, function(){console.log('env file ready')})
+      fs.truncate(envFileToClear, 0, function(){console.log('env file ready')})
       return serviceName
     }
   })
@@ -301,98 +319,31 @@ async function collectParams(WorkFlowTag){
   console.log("All env variables written")
 }
 
-async function processStepsInfo(workFlowSteps){
-  for (const item of workFlowSteps) {
-    WorkFlowTag = ('.wrapper.' + item.closest('li').getAttribute('class').replace(' ','.'))
-    console.log(WorkFlowTag)
-    await collectParams(WorkFlowTag)
-    if (serviceName == ""){
-      console.log('No steps selected')
-      break
-    }
-    await RunDockerCompose(serviceName)
-    console.log('Log collection function should go here')
-    console.log('Incase of an error, break loop here and Alert User')
-  }
-}
-
 // Run Button
 $('#runButton').click(async function(){
+
   $("div.spanner").addClass("show")
   $("div.overlay").addClass("show")
-  const optionsClearWorkDir = {
-    files: '.env',
-    from: /workdir.*/g,
-    to: '',
-  };
 
-  try {
-    const results = await replace(optionsClearWorkDir)
-    console.log('Replacement results:', results);
-  }
-  catch (error) {
-    console.error('Error occurred:', error);
-  }
+  await clearEnvLine('workdir')
   defaultWorkDir = "workdir=/input" +"\r\n"
-
   fs.appendFile('.env', defaultWorkDir, function (err) {
     if (err) {
-      // append failed
     } else {
-      // done
     }
   })
-
-
 
   workFlowSteps = $(".viewSwitch");
   console.log(workFlowSteps)
   await processStepsInfo(workFlowSteps);
+  configSteps = $( "#SelectedSteps" )
+  for (i=0; i < configSteps.length; i++) {
+    console.log(configSteps[i])
+  }
   console.log('The whole workflow has completed: Show user stats and save configuration file')
+
   $("div.spanner").removeClass("show")
   $("div.overlay").removeClass("show")
 })
 
 
-// Select input folder and save as env variable
-const fileSelectButton = document.getElementById('FileSelectButton');
-fileSelectButton.addEventListener('click', async function(){
-
-
-    //Load the library and specify options
-    //Clear previos inputfolder from .env file
-
-    const optionsForInputDir = {
-      files: '.env',
-      from: /sisend_kaust.*/g,
-      to: '',
-    };
-    
-    try {
-      const results = await replace(optionsForInputDir)
-      console.log('Replacement results:', results);
-    }
-    catch (error) {
-      console.error('Error occurred:', error);
-    }
-
-    // Open windows file dialog
-    dialog.showOpenDialog({
-        properties: ['openDirectory', 'showHiddenFiles']
-      }).then(result => {
-        inputPathEnv = 'sisend_kaust=' + result.filePaths[0] +"\r\n"
-        console.log(inputPathEnv)
-        // Append folder path as a variable to .env file
-        fs.appendFile('.env', inputPathEnv, function (err) {
-          if (err) {
-            console.log('append failed')
-            // append failed
-          } else {
-            // done
-          }
-        })
-
-      }).catch(err => {
-        console.log(err)
-      })
-})

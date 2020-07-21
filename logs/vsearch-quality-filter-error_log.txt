@@ -1,2 +1,0 @@
-Error: Command failed: docker-compose run vsearch-quality-filter
-Named volume "undefined:/input:rw" is used in service "cutadapt-cut" but no declaration was found in the volumes section.

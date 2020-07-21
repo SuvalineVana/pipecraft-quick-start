@@ -1,2 +1,0 @@
-Error: Command failed: docker-compose run vsearch-assemble-paired-end-sequences
-Couldn't connect to Docker daemon. You might need to start Docker for Windows.

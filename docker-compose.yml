@@ -10,7 +10,7 @@ services:
    - ./env_files/cutadapt-cut.env
   volumes:
    - ./script_folder:/execute
-   - ${sisend_kaust}:/input
+   - ${userDir}:/input
   command: [/execute/cutadapt-cut.sh]
 #Cut adapters/primers
   #TRIMMOMATIC
@@ -20,7 +20,7 @@ services:
    - ./env_files/trimmomatic-cut.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/trimmomatic-cut.sh]
 
 
@@ -32,7 +32,7 @@ services:
    - ./env_files/pbccs-create-consensus-seq.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/pbccs-create-circular-consensus-sequence.sh]
   #BAX2BAMS
  bax2bams-create-circular-consensus-sequence:
@@ -41,7 +41,7 @@ services:
    - ./env_files/bax2bams-create-consensus-seq.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/bax2bams-create-circular-consensus-sequence.sh]
 
 #Assemble paired-end sequences
@@ -52,7 +52,7 @@ services:
    - ./env_files/pandaseq-assemble-paired-end-sequences.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   working_dir: ${workdir}
   command: [/execute/pandaseq-assemble-paired-end-sequences.sh]
   #FLASH
@@ -62,7 +62,7 @@ services:
    - ./env_files/flash-assemble-paired-end-sequences.env
   volumes:
     - ./script_folder:/execute
-    -  ${sisend_kaust}:/input
+    -  ${userDir}:/input
   working_dir: ${workdir}
   command: [/execute/flash-assemble-paired-end-sequences.sh]
   #VSEARCH
@@ -72,7 +72,7 @@ services:
    - ./env_files/vsearch-assemble-paired-end-sequences.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   working_dir: ${workdir}
   command: [/execute/vsearch-assemble-paired-end-sequences.sh]
     
@@ -84,7 +84,7 @@ services:
    - ./env_files/vsearch-quality-filter.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   working_dir: ${workdir}
   command: [/execute/vsearch-quality-filter.sh]
   #MOTHUR
@@ -94,7 +94,7 @@ services:
    - ./env_files/mothur-quality-filter.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   working_dir: ${workdir}
   command: [/execute/mothur-quality-filter.sh]
   #OBITOOLS
@@ -104,7 +104,7 @@ services:
    - ./env_files/obitools-quality-filter-variables.env
   volumes:
    - ./script_folder:/obitools3/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/obitools-quality-filter.sh]
   #DADA2
  dada2-quality-filter:
@@ -113,7 +113,7 @@ services:
      - ./env_files/dada2-quality-filter.env
     volumes:
      - ./script_folder:/execute
-     -  ${sisend_kaust}:/input
+     -  ${userDir}:/input
     working_dir: ${workdir}
     command: ["Rscript", "/execute/dada2-quality-filter.R"]
 
@@ -124,7 +124,7 @@ services:
    - ./env_files/trimmomatic-quality-filter.env
   volumes:
     - ./script_folder:/execute
-    - ${sisend_kaust}:/input
+    - ${userDir}:/input
   working_dir: ${workdir}
   command: [/execute/trimmomatic-quality-filter.sh]
 
@@ -136,7 +136,7 @@ services:
    - ./env_files/mothur-demultiplex-variables.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/mothur-demultiplex.sh]
   #OBITOOLS
  obitools-demultiplex:
@@ -145,7 +145,7 @@ services:
    - ./env_files/obitools-demultiplex-variables.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/obitools-demultiplex.sh]
 
 #Cluster
@@ -156,7 +156,7 @@ services:
    - ./env_files/cd-hit-cluster-variables.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/cd-hit-cluster.sh]
   #VSEARCH
  vsearch-cluster:
@@ -165,7 +165,7 @@ services:
    - ./env_files/vsearch-cluster-variables.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/vsearch-cluster.sh]
   #USEARCH
  usearch-cluster:
@@ -183,7 +183,7 @@ services:
    - ./env_files/swarm-cluster-variables.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/swarm-cluster.sh]
   #MOTHUR
  mothur-cluster:
@@ -192,7 +192,7 @@ services:
    - ./env_files/mothur-cluster-variables.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/mothur-cluster.sh]
 #Taxonomy
   #MOTHUR
@@ -202,7 +202,7 @@ services:
    - ./env_files/mothur-taxonomy-variables.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/mothur-taxonomy.sh]
   #BLAST
  blast-taxonomy:
@@ -211,6 +211,6 @@ services:
    - ./env_files/blast-taxonomy-variables.env
   volumes:
    - ./script_folder:/execute
-   -  ${sisend_kaust}:/input
+   -  ${userDir}:/input
   command: [/execute/blast-taxonomy.sh]
 

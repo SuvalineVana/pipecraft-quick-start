@@ -68,7 +68,7 @@ function AppendToEnvFile(env_variable, serviceName){
 
 // Clear line from .env file
 async function clearEnvLine(line){
-  const line2clear = new RegExp(line + '.*', 'g')
+  const line2clear = new RegExp(line + '.*\n', 'g')
   const options = {
   files: '.env',
   from: line2clear,
@@ -76,7 +76,6 @@ async function clearEnvLine(line){
 }
   try {
     const results = await replace(options)
-    console.log('Replacement results:', results)
   }
   catch (error) {
     console.error('Error occurred:', error)
@@ -166,8 +165,6 @@ $('.dropdown-selection').each(function(){
     M.AutoInit();
     cbGroupName = view.attr('class')
     view.find('.serviceCB').attr("name", cbGroupName);
-    console.log(view.find(':checkbox'))
-    console.log(view.attr('class'))
 
     // Disable dropdown options until removed
     $(this).find( "a" ).css( "color", "#ECEFF0" )
@@ -231,19 +228,19 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
 const fileSelectButton = document.getElementById('FileSelectButton');
 fileSelectButton.addEventListener('click', async function(){
     //Clear previos inputfolder from .env file
-    clearEnvLine('sisend_kaust')
+    clearEnvLine('userDir')
     // Open windows file dialog
     dialog.showOpenDialog({
+        title: "Select the folder containing your sequnece files",
         properties: ['openDirectory', 'showHiddenFiles']
       }).then(result => {
-        inputPathEnv = 'sisend_kaust=' + result.filePaths[0] +"\r\n"
-        console.log(inputPathEnv)
+        inputPathEnv = 'userDir=' + result.filePaths[0] +'\n'
         // Append folder path as a variable to .env file
         fs.appendFile('.env', inputPathEnv, function (err) {
           if (err) {
             console.log('append failed')
           } else {
-            console.log('input folder added')
+            console.log('Local working directory set as: ' + result.filePaths[0] )
           }
         })
       }).catch(err => {
@@ -269,12 +266,13 @@ async function RunDockerCompose(serviceName){
   console.log(serviceName)
   const runLog = await execShellCommand('docker-compose run ' + serviceName);
   console.log(runLog);
-  clearEnvLine('workdir')
-  workDirPathEnv = 'workdir=/input/' + serviceName + '-output' +"\r\n"
-  console.log(workDirPathEnv)  
+  await clearEnvLine('workdir')
+  workDirPathEnv = 'workdir=/input/' + serviceName + '-output \n'
   fs.appendFile('.env', workDirPathEnv, function (err) {
     if (err) {
+      console.log(err)
     } else {
+      console.log("WorkingDir for next step is: " + workDirPathEnv)
     }
   })
   writeLog(serviceName, runLog)
@@ -326,7 +324,7 @@ $('#runButton').click(async function(){
   $("div.overlay").addClass("show")
 
   await clearEnvLine('workdir')
-  defaultWorkDir = "workdir=/input" +"\r\n"
+  defaultWorkDir = "workdir=/input \n"
   fs.appendFile('.env', defaultWorkDir, function (err) {
     if (err) {
     } else {
@@ -336,10 +334,10 @@ $('#runButton').click(async function(){
   workFlowSteps = $(".viewSwitch");
   console.log(workFlowSteps)
   await processStepsInfo(workFlowSteps);
-  configSteps = $( "#SelectedSteps" )
-  for (i=0; i < configSteps.length; i++) {
-    console.log(configSteps[i])
-  }
+  // configSteps = $( "#SelectedSteps" )
+  // for (i=0; i < configSteps.length; i++) {
+  //   console.log(configSteps[i])
+  // }
   console.log('The whole workflow has completed: Show user stats and save configuration file')
 
   $("div.spanner").removeClass("show")

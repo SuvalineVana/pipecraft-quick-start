@@ -13,6 +13,8 @@ const PDFWindow = require('electron-pdf-window')
 var url = require('url');
 const { clear } = require('console');
 const replace = require('replace-in-file');
+var configurationObject = {}
+var steps = []
 
 // materialize-css
 
@@ -44,6 +46,35 @@ $( function() {
 });
 
 //// FUNCTIONS
+
+//
+function loadConfiguration(){
+  // Load configuration steps
+  StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i")
+  for(var y = 0; y<StepsToClear.length; y++) {
+    StepsToClear[y].click();
+  }
+  for (z=0;  z < steps.length; z++){
+    document.querySelector('.dropdown-selection.' + steps[z]).click()
+  }
+  // Check configuration services
+  for (const [key, value] of Object.entries(configurationObject)) {
+    console.log(key, value);
+    console.log(document.getElementById(key))
+  }
+  // configurationObject[$(this).attr('id')] = $(this)[0].value
+}
+
+
+function saveConfiguration(){
+  // Save configuration steps
+  configSteps = $("#SelectedSteps > li")
+  for (i=0; i < configSteps.length; i++) {
+    steps[i] = configSteps.eq(i).attr('class').split(' ')[0]
+  } 
+  // Save configuration services
+}
+
 // Open pdf manual
 function openManual(manualName) {
   const win = new BrowserWindow({ width: 1200, height: 800 })
@@ -155,7 +186,7 @@ $('.dropdown-selection').each(function(){
 
     
     
-    var viewClass = '.wrapper.blank.' + $(this).removeClass('dropdown-selection').attr('class')
+    var viewClass = '.wrapper.blank.' + $(this).clone().removeClass('dropdown-selection').attr('class')
     var view = $(viewClass).clone().removeClass('blank')
     
     step.addClass(i.toString())
@@ -290,13 +321,17 @@ async function collectParams(WorkFlowTag){
       return serviceName
     }
   })
+  //
+
   // Capture numeric input
   $(WorkFlowTag).find("#" + serviceName).find('.InlineNumericInput').each(function(){
     if ($(this)[0].value !== "") {
+      configurationObject[$(this).attr('id')] = $(this)[0].value
       env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'='+$(this).attr('id')+$(this)[0].value
       console.log(env_variable)
       AppendToEnvFile(env_variable, serviceName)
     } else {
+      configurationObject[$(this).attr('id')] = $(this)[0].value
       env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'= '
       console.log(env_variable)
       AppendToEnvFile(env_variable, serviceName)
@@ -334,7 +369,7 @@ $('#runButton').click(async function(){
   workFlowSteps = $(".viewSwitch");
   console.log(workFlowSteps)
   await processStepsInfo(workFlowSteps);
-  // configSteps = $( "#SelectedSteps" )
+  // configSteps = $("#SelectedSteps > li").
   // for (i=0; i < configSteps.length; i++) {
   //   console.log(configSteps[i])
   // }
@@ -343,5 +378,3 @@ $('#runButton').click(async function(){
   $("div.spanner").removeClass("show")
   $("div.overlay").removeClass("show")
 })
-
-

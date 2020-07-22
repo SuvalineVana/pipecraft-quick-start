@@ -20,7 +20,6 @@ done
 #Remove unnecessary files
 rm /input/vsearch-quality-filter-output/quality-log
 
-echo "done"
 echo "Sequences filtered with vsearch"
 
 end=`date +%s`

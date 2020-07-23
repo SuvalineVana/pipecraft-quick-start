@@ -13,8 +13,9 @@ const PDFWindow = require('electron-pdf-window')
 var url = require('url');
 const { clear } = require('console');
 const replace = require('replace-in-file');
-var configurationObject = {}
-var steps = []
+let numericInputs = {}
+let checkedServices = {}
+let steps = []
 
 // materialize-css
 
@@ -58,21 +59,55 @@ function loadConfiguration(){
     document.querySelector('.dropdown-selection.' + steps[z]).click()
   }
   // Check configuration services
-  for (const [key, value] of Object.entries(configurationObject)) {
-    console.log(key, value);
-    console.log(document.getElementById(key))
+  for (const [sName, onValue] of Object.entries(checkedServices)) {
+    if ($('label[value=' + sName + ']>input[name*=wrapper]').prop('checked') == false){
+      document.querySelector('label[value=' + sName + ']>input[name*=wrapper]').click()
+    }
+    // Load numeric inputs
+    for (const [nrInputID, nrValue] of Object.entries(numericInputs)) {
+      // console.log($(':not(.blank)>label[value=' + sName + ']>#' + nrInputID))
+      console.log(sName)
+      console.log(nrInputID)
+      console.log(nrValue)
+      $('.wrapper:not(.blank)').find('#' + sName ).find('[id="'+ nrInputID +'"]').prop('value', nrValue)
+    }
+    // Load binary inputs (on/off) switches
   }
-  // configurationObject[$(this).attr('id')] = $(this)[0].value
 }
 
 
 function saveConfiguration(){
+  // Clear configuration objects
+  for (var member in numericInputs) delete numericInputs[member];
+  for (var member in checkedServices) delete checkedServices[member];
+  steps.length = 0;
   // Save configuration steps
   configSteps = $("#SelectedSteps > li")
   for (i=0; i < configSteps.length; i++) {
     steps[i] = configSteps.eq(i).attr('class').split(' ')[0]
   } 
   // Save configuration services
+  workFlowSteps = $(".viewSwitch");
+  for (const item of workFlowSteps) {
+    WorkFlowTag = ('.wrapper.' + item.closest('li').getAttribute('class').replace(' ','.'))
+    $(WorkFlowTag).find('.serviceCB').each(function(){
+      if (this.checked == true){
+        serviceSave = $(this).parent().attr("value")
+        checkedServices[serviceSave] = true;
+        $(WorkFlowTag).find("#" + serviceSave).find('.InlineNumericInput').each(function(){
+        numericInputs[$(this).attr('id')] = $(this)[0].value
+        });
+      }
+    });
+  }
+  // Save numeric inputs
+  // workFlowSteps = $(".viewSwitch");
+  // for (const item of workFlowSteps) {
+  //   WorkFlowTag = ('.wrapper.' + item.closest('li').getAttribute('class').replace(' ','.'))
+  //   $(WorkFlowTag).find("#" + serviceName).find('.InlineNumericInput').each(function(){
+  //     numericInput[$(this).attr('id')] = $(this)[0].value
+  //   });
+  // }
 }
 
 // Open pdf manual

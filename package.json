@@ -1,25 +1,24 @@
 {
-  "name": "electron-quick-start",
+  "name": "pipecraft-alfa",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "An electron UI for controlling and using biocontainers",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/SuvalineVana/pipecraft-quick-start",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "alfa",
+    "pipecraft"
   ],
-  "author": "GitHub",
+  "author": "Suvaline Vana",
   "license": "CC0-1.0",
   "devDependencies": {
     "docker-compose": "^0.23.3",
     "electron": "^8.0.0",
     "electron-packager": "^14.2.0",
+    "electron-reload": "^1.5.0",
     "materialize-css": "^1.0.0-rc.2"
   },
   "dependencies": {

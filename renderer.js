@@ -16,6 +16,7 @@ const replace = require('replace-in-file');
 let numericInputs = {}
 let checkedServices = {}
 let steps = []
+let onOffInputs = {}
 
 // materialize-css
 
@@ -48,7 +49,7 @@ $( function() {
 
 //// FUNCTIONS
 
-//
+//Load a previous or an external configuration via JSON
 function loadConfiguration(){
   // Load configuration steps
   StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i")
@@ -62,24 +63,47 @@ function loadConfiguration(){
   for (const [sName, onValue] of Object.entries(checkedServices)) {
     if ($('label[value=' + sName + ']>input[name*=wrapper]').prop('checked') == false){
       document.querySelector('label[value=' + sName + ']>input[name*=wrapper]').click()
-    }
-    // Load numeric inputs
-    for (const [nrInputID, nrValue] of Object.entries(numericInputs)) {
-      // console.log($(':not(.blank)>label[value=' + sName + ']>#' + nrInputID))
-      console.log(sName)
-      console.log(nrInputID)
-      console.log(nrValue)
-      $('.wrapper:not(.blank)').find('#' + sName ).find('[id="'+ nrInputID +'"]').prop('value', nrValue)
-    }
-    // Load binary inputs (on/off) switches
+    } 
+  }
+  // Load numeric inputs
+  for (const [key, value] of Object.entries(numericInputs)) {
+    var sName = key.split('|')[0]
+    var nrID  =  key.split('|')[1]
+    $('.wrapper:not(.blank)').find('#' + sName ).find('[id="'+ nrID +'"]').prop('value', value)
+  }
+  // Load binary inputs (on/off) switches
+  for (const [key, value] of Object.entries(onOffInputs)) {
+    var sName = key.split('|')[0]
+    var nrID  =  key.split('|')[1]
+    console.log(sName, nrID, value)
+    $('.wrapper:not(.blank)').find('#' + sName ).find('[id="'+ nrID +'"]').prop('checked', value)
   }
 }
 
+// READ, WRITE AND PARSER JSON
+// // Append all data
+// json.push(steps)
+// json.push(checkedServices)
+// json.push(numericInputs)
+// json.push(onOffInputs)
+// // Stringify
+// let data = JSON.stringify(json)
+// // Write to config file
+// fs.writeFileSync('./configurations/configName.json', data)
+
+// //Read and parse
+// let rawdata = fs.readFileSync('student.json');
+// let configObj = JSON.parse(rawdata);
+// var steps = configObj[0]
+// var checkedServices = configObj[1]
+// var numericInputs = configObj[2]
+// var onOffInputs = configObj[3]
 
 function saveConfiguration(){
   // Clear configuration objects
   for (var member in numericInputs) delete numericInputs[member];
   for (var member in checkedServices) delete checkedServices[member];
+  for (var member in onOffInputs) delete onOffInputs[member];
   steps.length = 0;
   // Save configuration steps
   configSteps = $("#SelectedSteps > li")
@@ -95,19 +119,22 @@ function saveConfiguration(){
         serviceSave = $(this).parent().attr("value")
         checkedServices[serviceSave] = true;
         $(WorkFlowTag).find("#" + serviceSave).find('.InlineNumericInput').each(function(){
-        numericInputs[$(this).attr('id')] = $(this)[0].value
+          numericInputs[serviceSave +'|'+$(this).attr('id')] = $(this)[0].value
+        });
+        $(WorkFlowTag).find("#" + serviceSave).find('.onOff').each(function(){
+          onOffInputs[serviceSave +'|'+$(this).attr('id')] = $(this).prop('checked')
         });
       }
     });
   }
-  // Save numeric inputs
-  // workFlowSteps = $(".viewSwitch");
-  // for (const item of workFlowSteps) {
-  //   WorkFlowTag = ('.wrapper.' + item.closest('li').getAttribute('class').replace(' ','.'))
-  //   $(WorkFlowTag).find("#" + serviceName).find('.InlineNumericInput').each(function(){
-  //     numericInput[$(this).attr('id')] = $(this)[0].value
-  //   });
-  // }
+  if (steps.length != Object.keys(checkedServices).length ) {
+    alert("A software must be checked for each step, remove unused steps");
+    return false;
+  }
+  console.log(steps)
+  console.log(checkedServices)
+  console.log(numericInputs)
+  console.log(onOffInputs)
 }
 
 // Open pdf manual
@@ -219,8 +246,6 @@ $('.dropdown-selection').each(function(){
     step.find('a').addClass('viewSwitch')
     step.on('click', 'a', switchView)
 
-    
-    
     var viewClass = '.wrapper.blank.' + $(this).clone().removeClass('dropdown-selection').attr('class')
     var view = $(viewClass).clone().removeClass('blank')
     
@@ -245,8 +270,6 @@ $('.dropdown-selection').each(function(){
 
     // Allow only 1 checkbox to be checked per step
     $('input[type="checkbox"]').on('change', function() {
-      // console.log(this.name)
-      // console.log($('input[name="' + this.name + '"]'))
       $('input[name="' + this.name + '"]').not(this).prop('checked', false);
     });
     
@@ -259,8 +282,6 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
 
   // Enable in dropdown
   classToEnable =$(this).parent().parent().attr('class').split(' ')[0]
-  console.log(classToEnable)
-  console.log($('.disabled.'+classToEnable))
   $('.disabled.'+classToEnable).find( "a" ).css( "color", "black" )
   $('.disabled.'+classToEnable).find( "a" ).css( "background-color", "transparent" )
   
@@ -271,9 +292,6 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
 
   $('.disabled.'+classToEnable).find( "a" )[0].appendChild(materialIcon)
   $('.disabled.'+classToEnable).removeClass('disabled')
-   // $('.disabled.'+classToEnable).addClass('dropdown-slection')
-  // $('.dropdown-selection.'+classToEnable).find( "a" ).css( "color", "red" )
-  // $('.dropdown-selection.'+classToEnable).find( "a" ).css( "background-color", "white" )
 
 
   viewTag = ('.wrapper.' + ($(this).closest('li').attr('class'))).replace(' ', '.')
@@ -361,12 +379,10 @@ async function collectParams(WorkFlowTag){
   // Capture numeric input
   $(WorkFlowTag).find("#" + serviceName).find('.InlineNumericInput').each(function(){
     if ($(this)[0].value !== "") {
-      configurationObject[$(this).attr('id')] = $(this)[0].value
       env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'='+$(this).attr('id')+$(this)[0].value
       console.log(env_variable)
       AppendToEnvFile(env_variable, serviceName)
     } else {
-      configurationObject[$(this).attr('id')] = $(this)[0].value
       env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'= '
       console.log(env_variable)
       AppendToEnvFile(env_variable, serviceName)
@@ -389,6 +405,7 @@ async function collectParams(WorkFlowTag){
 
 // Run Button
 $('#runButton').click(async function(){
+  
 
   $("div.spanner").addClass("show")
   $("div.overlay").addClass("show")
@@ -402,12 +419,14 @@ $('#runButton').click(async function(){
   })
 
   workFlowSteps = $(".viewSwitch");
-  console.log(workFlowSteps)
+  if ($(".serviceCB:checked").length != workFlowSteps.length) {
+    $("div.spanner").removeClass("show")
+    $("div.overlay").removeClass("show")
+    alert("A software must be checked for each step, remove unused steps");
+    return false;
+  }
+
   await processStepsInfo(workFlowSteps);
-  // configSteps = $("#SelectedSteps > li").
-  // for (i=0; i < configSteps.length; i++) {
-  //   console.log(configSteps[i])
-  // }
   console.log('The whole workflow has completed: Show user stats and save configuration file')
 
   $("div.spanner").removeClass("show")

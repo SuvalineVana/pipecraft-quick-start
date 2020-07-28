@@ -26,9 +26,9 @@
   margin-top: 30px;
 }
 
-#slide-out2>li>i {
+#slide-out2>a {
   text-align: center;
-  margin-top: 30px;
+  margin-bottom: 5px;
 }
 
 .user-view {
@@ -135,7 +135,7 @@ p.adapter-checkbox {
 }​
 
 .material-tooltip {
-    background-color: red;
+    color:red
 }
 
 .card-content {
@@ -154,8 +154,9 @@ p.adapter-checkbox {
     margin: 16px;
 }
 
+/* This makes it not clickable */
 .disabled {
-    pointer-events:none; //This makes it not clickable
+    pointer-events:none; 
 }
 
 /* Loading Spinner Overlay */
@@ -269,3 +270,16 @@ p.adapter-checkbox {
   .timeline-Tweet {
       pointer-events: none !important;
   }
+
+  /* nav-2 button desing */
+
+  .btn-nav-2>i.left {
+    margin-top: 25%;
+    font-size: 2rem;
+  }
+
+  .btn-nav-2.btn-small {
+    height: 50px;
+    line-height: 32.4px;
+    font-size: 20px;
+}

@@ -5147,7 +5147,7 @@ small {
   top: 0;
   pointer-events: none;
   visibility: hidden;
-  background-color: rgba(76, 175, 80, 0.7);
+  background-color: rgb(157, 226, 238);
 }
 
 .backdrop {

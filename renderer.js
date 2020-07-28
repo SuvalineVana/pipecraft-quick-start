@@ -17,9 +17,16 @@ let numericInputs = {}
 let checkedServices = {}
 let steps = []
 let onOffInputs = {}
+let conf2Save = []
 const {Menu, MenuItem} = require('electron').remote
+const slash = require('slash');
 
 // materialize-css
+
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.tooltipped');
+  var instances = M.Tooltip.init(elems, options);
+});
 
 $(document).ready(function(){
   $('.tooltipped').tooltip();
@@ -48,23 +55,24 @@ $( function() {
   $( "#SelectedSteps" ).disableSelection();
 });
 
+// Custom titlebar and menu
 const menu1 = new Menu();
 
 menu1.append(new MenuItem({
-	label: 'Documentation',
-	submenu: [
-		{
-			label: 'pdf',
-			click: () => console.log('Click on subitem 1')
-		},
-		{
-			type: 'separator'
-    },
-    {
-			label: 'online',
-			click: () => console.log('Click on subitem 1')
-		}
-	]
+	// label: 'Documentation',
+	// submenu: [
+	// 	{
+	// 		label: 'pdf',
+	// 		click: () => console.log('Click on subitem 1')
+	// 	},
+	// 	{
+	// 		type: 'separator'
+  //   },
+  //   {
+	// 		label: 'online',
+	// 		click: () => console.log('Click on subitem 1')
+	// 	}
+	// ]
 }));
 
 const customTitlebar = require('custom-electron-titlebar');
@@ -73,13 +81,6 @@ new customTitlebar.Titlebar({
   menu: menu1,
   maximizable: false 
 });
-
-
-
-// titlebar.updateMenu(menu);
- 
-
-
 
 
 //// FUNCTIONS
@@ -134,7 +135,7 @@ function loadConfiguration(){
 // var numericInputs = configObj[2]
 // var onOffInputs = configObj[3]
 
-function saveConfiguration(){
+function saveConfiguration(configSavePath){
   // Clear configuration objects
   for (var member in numericInputs) delete numericInputs[member];
   for (var member in checkedServices) delete checkedServices[member];
@@ -166,10 +167,13 @@ function saveConfiguration(){
     alert("A software must be checked for each step, remove unused steps");
     return false;
   }
-  console.log(steps)
-  console.log(checkedServices)
-  console.log(numericInputs)
-  console.log(onOffInputs)
+
+  conf2Save.push(steps)
+  conf2Save.push(checkedServices)
+  conf2Save.push(numericInputs)
+  conf2Save.push(onOffInputs)
+  let confJson = JSON.stringify(conf2Save)
+  fs.writeFileSync(configSavePath, confJson)
 }
 
 // Open pdf manual
@@ -366,6 +370,18 @@ fileSelectButton.addEventListener('click', async function(){
       }).catch(err => {
         console.log(err)
       })
+})
+
+const configSaveButton = document.getElementById('savecfg');
+configSaveButton.addEventListener('click', async function(){
+  dialog.showSaveDialog({
+    title: "Save current configuration",
+    filters :[{name: 'JSON', extensions: ['JSON',]}]
+  }).then(result => {
+    configSavePath = slash(result.filePath)
+    console.log(configSavePath)
+    saveConfiguration(configSavePath)
+  })
 })
 
 // Run Analysis

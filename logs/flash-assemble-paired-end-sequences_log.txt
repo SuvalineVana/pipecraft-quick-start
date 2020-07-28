@@ -1,0 +1,97 @@
+Resynchronizing NCMV166_S153_L001_R1_001.fastq and NCMV166_S153_L001_R2_001.fastq
+Resynchronizing NCMV84_S73_L001_R1_001.fastq and NCMV84_S73_L001_R2_001.fastq
+#Assembling sequneces with flash
+NCMV166_S153_L001_R1_001.fastq
+NCMV166_S153_L001_R2_001.fastq
+[FLASH] Starting FLASH v2.2.00
+[FLASH] Fast Length Adjustment of SHort reads
+[FLASH]  
+[FLASH] Input files:
+[FLASH]     NCMV166_S153_L001_R1_001.fastq
+[FLASH]     NCMV166_S153_L001_R2_001.fastq
+[FLASH]  
+[FLASH] Output files:
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV166_S153_L001_merged.extendedFrags.fastq
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV166_S153_L001_merged.notCombined_1.fastq
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV166_S153_L001_merged.notCombined_2.fastq
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV166_S153_L001_merged.hist
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV166_S153_L001_merged.histogram
+[FLASH]  
+[FLASH] Parameters:
+[FLASH]     Min overlap:           10
+[FLASH]     Min overlap outie:     35
+[FLASH]     Max overlap:           244
+[FLASH]     Max mismatch density:  0.250000
+[FLASH]     Allow "outie" pairs:   true
+[FLASH]     Cap mismatch quals:    false
+[FLASH]     Combiner threads:      2
+[FLASH]     Input format:          FASTQ, phred_offset=33
+[FLASH]     Output format:         FASTQ, phred_offset=33
+[FLASH]  
+[FLASH] Starting reader and writer threads
+[FLASH] Starting 2 combiner threads
+[FLASH] Processed 7303 read pairs
+[FLASH]  
+[FLASH] Read combination statistics:
+[FLASH]     Total pairs:       7303
+[FLASH]     Discarded pairs:   0
+[FLASH]     Percent Discarded: 0.00%
+[FLASH]     Combined pairs:    7068
+[FLASH]         Innie pairs:   7053 (99.79% of combined)
+[FLASH]         Outie pairs:   15 (0.21% of combined)
+[FLASH]     Uncombined pairs:  235
+[FLASH]     Percent combined:  96.78%
+[FLASH]  
+[FLASH] Writing histogram files.
+[FLASH]  
+[FLASH] FLASH v2.2.00 complete!
+[FLASH] 0.556 seconds elapsed
+[FLASH] Finished with 2 warnings (see above)
+NCMV84_S73_L001_R1_001.fastq
+NCMV84_S73_L001_R2_001.fastq
+[FLASH] Starting FLASH v2.2.00
+[FLASH] Fast Length Adjustment of SHort reads
+[FLASH]  
+[FLASH] Input files:
+[FLASH]     NCMV84_S73_L001_R1_001.fastq
+[FLASH]     NCMV84_S73_L001_R2_001.fastq
+[FLASH]  
+[FLASH] Output files:
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV84_S73_L001_merged.extendedFrags.fastq
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV84_S73_L001_merged.notCombined_1.fastq
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV84_S73_L001_merged.notCombined_2.fastq
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV84_S73_L001_merged.hist
+[FLASH]     /input/flash-assemble-paired-end-sequences-output//NCMV84_S73_L001_merged.histogram
+[FLASH]  
+[FLASH] Parameters:
+[FLASH]     Min overlap:           10
+[FLASH]     Min overlap outie:     35
+[FLASH]     Max overlap:           244
+[FLASH]     Max mismatch density:  0.250000
+[FLASH]     Allow "outie" pairs:   true
+[FLASH]     Cap mismatch quals:    false
+[FLASH]     Combiner threads:      2
+[FLASH]     Input format:          FASTQ, phred_offset=33
+[FLASH]     Output format:         FASTQ, phred_offset=33
+[FLASH]  
+[FLASH] Starting reader and writer threads
+[FLASH] Starting 2 combiner threads
+[FLASH] Processed 17495 read pairs
+[FLASH]  
+[FLASH] Read combination statistics:
+[FLASH]     Total pairs:       17495
+[FLASH]     Discarded pairs:   0
+[FLASH]     Percent Discarded: 0.00%
+[FLASH]     Combined pairs:    17038
+[FLASH]         Innie pairs:   16857 (98.94% of combined)
+[FLASH]         Outie pairs:   181 (1.06% of combined)
+[FLASH]     Uncombined pairs:  457
+[FLASH]     Percent combined:  97.39%
+[FLASH]  
+[FLASH] Writing histogram files.
+[FLASH]  
+[FLASH] FLASH v2.2.00 complete!
+[FLASH] 1.146 seconds elapsed
+[FLASH] Finished with 2 warnings (see above)
+Paired-end sequences assembled with flash
+6

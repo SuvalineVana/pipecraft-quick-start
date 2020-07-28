@@ -47,6 +47,12 @@ $( function() {
   $( "#SelectedSteps" ).disableSelection();
 });
 
+const customTitlebar = require('custom-electron-titlebar');
+ 
+new customTitlebar.Titlebar({
+    backgroundColor: customTitlebar.Color.fromHex('#444')
+});
+
 //// FUNCTIONS
 
 //Load a previous or an external configuration via JSON
@@ -256,6 +262,7 @@ $('.dropdown-selection').each(function(){
     M.AutoInit();
     cbGroupName = view.attr('class')
     view.find('.serviceCB').attr("name", cbGroupName);
+    $('.container-after-titlebar').append(view)
 
     // Disable dropdown options until removed
     $(this).find( "a" ).css( "color", "#ECEFF0" )

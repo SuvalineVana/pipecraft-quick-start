@@ -265,3 +265,7 @@ p.adapter-checkbox {
   .spanner.show, .spannerOverlay.show {
       opacity: 1
   }
+
+  .timeline-Tweet {
+      pointer-events: none !important;
+  }

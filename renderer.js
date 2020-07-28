@@ -17,6 +17,7 @@ let numericInputs = {}
 let checkedServices = {}
 let steps = []
 let onOffInputs = {}
+const {Menu, MenuItem} = require('electron').remote
 
 // materialize-css
 
@@ -47,11 +48,39 @@ $( function() {
   $( "#SelectedSteps" ).disableSelection();
 });
 
+const menu1 = new Menu();
+
+menu1.append(new MenuItem({
+	label: 'Documentation',
+	submenu: [
+		{
+			label: 'pdf',
+			click: () => console.log('Click on subitem 1')
+		},
+		{
+			type: 'separator'
+    },
+    {
+			label: 'online',
+			click: () => console.log('Click on subitem 1')
+		}
+	]
+}));
+
 const customTitlebar = require('custom-electron-titlebar');
- 
 new customTitlebar.Titlebar({
-    backgroundColor: customTitlebar.Color.fromHex('#444')
+  backgroundColor: customTitlebar.Color.fromHex('#757575'),
+  menu: menu1,
+  maximizable: false 
 });
+
+
+
+// titlebar.updateMenu(menu);
+ 
+
+
+
 
 //// FUNCTIONS
 

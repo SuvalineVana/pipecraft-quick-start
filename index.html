@@ -957,7 +957,7 @@
 
       <!-- PlutoF twitter timeline -->
       <div class="wrapper hideView" id="PlutoTwitter">
-        <a class="twitter-timeline" data-width="960" data-height="650" data-theme="light" href="https://twitter.com/plutof_platform?ref_src=twsrc%5Etfw">Tweets by plutof_platform</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a class="twitter-timeline" data-width="960" data-height="700" data-theme="light" data-chrome="transparent" href="https://twitter.com/plutof_platform?ref_src=twsrc%5Etfw">Tweets by plutof_platform</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </div>
 
       <!-- Assemble paired-end sequences -->
@@ -1241,5 +1241,19 @@
     <script src="./renderer.js" charset="utf-8"></script>
     <script type="text/javascript" src="node_modules\materialize-css\dist\js\materialize.min.js"></script>
     <script src="assets\jquery-ui.js"></script>
+    <script>
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];
+          if(!d.getElementById(id)){js=d.createElement(s);js.id=id;
+          js.src="https://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js,fjs);}
+      }(document,"script","twitter-wjs");
+    </script>
+    <script src="customize-twitter-1.1.min.js" type="text/javascript"></script>
+    <script>
+      var options = {
+          "url": "./app.css"
+      };
+      CustomizeTwitterWidget(options);
+    </script>
   </body>
 </html>

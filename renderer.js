@@ -82,11 +82,17 @@ new customTitlebar.Titlebar({
   maximizable: false 
 });
 
-
 //// FUNCTIONS
 
 //Load a previous or an external configuration via JSON
-function loadConfiguration(){
+function loadConfiguration(configLoadPath){
+  //Read and parse
+  let rawdata = fs.readFileSync(configLoadPath);
+  let configObj = JSON.parse(rawdata);
+  var steps = configObj[0]
+  var checkedServices = configObj[1]
+  var numericInputs = configObj[2]
+  var onOffInputs = configObj[3]
   // Load configuration steps
   StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i")
   for(var y = 0; y<StepsToClear.length; y++) {
@@ -127,20 +133,16 @@ function loadConfiguration(){
 // // Write to config file
 // fs.writeFileSync('./configurations/configName.json', data)
 
-// //Read and parse
-// let rawdata = fs.readFileSync('student.json');
-// let configObj = JSON.parse(rawdata);
-// var steps = configObj[0]
-// var checkedServices = configObj[1]
-// var numericInputs = configObj[2]
-// var onOffInputs = configObj[3]
 
-function saveConfiguration(configSavePath){
+
+function saveConfiguration(){
   // Clear configuration objects
   for (var member in numericInputs) delete numericInputs[member];
   for (var member in checkedServices) delete checkedServices[member];
   for (var member in onOffInputs) delete onOffInputs[member];
+  for (var member in conf2Save) delete conf2Save[member];
   steps.length = 0;
+  console.log(conf2Save)
   // Save configuration steps
   configSteps = $("#SelectedSteps > li")
   for (i=0; i < configSteps.length; i++) {
@@ -163,6 +165,18 @@ function saveConfiguration(configSavePath){
       }
     });
   }
+  // if (steps.length != Object.keys(checkedServices).length ) {
+  //   alert("A software must be checked for each step, remove unused steps");
+  //   return false;
+  // }
+  // if (steps.length < 1) {
+  //   alert("No steps selected");
+  //   return false;
+  // }
+  if (steps.length < 1) {
+    alert("No steps selected");
+    return event.preventDefault();
+  }
   if (steps.length != Object.keys(checkedServices).length ) {
     alert("A software must be checked for each step, remove unused steps");
     return false;
@@ -172,8 +186,6 @@ function saveConfiguration(configSavePath){
   conf2Save.push(checkedServices)
   conf2Save.push(numericInputs)
   conf2Save.push(onOffInputs)
-  let confJson = JSON.stringify(conf2Save)
-  fs.writeFileSync(configSavePath, confJson)
 }
 
 // Open pdf manual
@@ -372,15 +384,45 @@ fileSelectButton.addEventListener('click', async function(){
       })
 })
 
+// Save current configuration Button
 const configSaveButton = document.getElementById('savecfg');
 configSaveButton.addEventListener('click', async function(){
+  saveConfiguration()
+  if (steps.length < 1) {
+    return false;
+  }
+  if (steps.length != Object.keys(checkedServices).length ) {
+    return false;
+  }
   dialog.showSaveDialog({
     title: "Save current configuration",
     filters :[{name: 'JSON', extensions: ['JSON',]}]
   }).then(result => {
     configSavePath = slash(result.filePath)
     console.log(configSavePath)
-    saveConfiguration(configSavePath)
+    let confJson = JSON.stringify(conf2Save)
+    fs.writeFileSync(configSavePath, confJson)
+  })
+})
+
+const configLoadButton = document.getElementById('loadcfg');
+configLoadButton.addEventListener('click', async function(){
+  // saveConfiguration()
+  // if (steps.length < 1) {
+  //   alert("No steps selected");
+  //   return false;
+  // }
+  // if (steps.length != Object.keys(checkedServices).length ) {
+  //   alert("A software must be checked for each step, remove unused steps");
+  //   return false;
+  // }
+  dialog.showOpenDialog({
+    title: "Select a previous configuration",
+    filters :[{name: 'JSON', extensions: ['JSON',]}]
+  }).then(result => {
+    configLoadPath = slash(result.filePaths[0])
+    console.log(configLoadPath)
+    loadConfiguration(configLoadPath)
   })
 })
 

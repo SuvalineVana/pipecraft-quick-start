@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
 
+
 const path = require('path')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -13,6 +14,10 @@ function createWindow () {
     width: 1280,
     height: 720,
     frame: false,
+    resizable: false,
+    maxWidth: 1280,
+    maximizable: false,
+    fullscreenable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true

@@ -213,4 +213,15 @@ services:
    - ./script_folder:/execute
    -  ${userDir}:/input
   command: [/execute/blast-taxonomy.sh]
+#Chimera detection
+  #VSEARCH
+ vsearch-chimera-detection:
+  image: pipecraft/vsearch:2.15.0
+  env_file:
+   - ./env_files/vsearch-chimera-detection.env
+  volumes:
+   - ./script_folder:/execute
+   -  ${userDir}:/input
+  working_dir: ${workdir}
+  command: [/execute/vsearch-chimera-detection.sh]
 

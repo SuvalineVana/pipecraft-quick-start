@@ -79,7 +79,8 @@ const customTitlebar = require('custom-electron-titlebar');
 new customTitlebar.Titlebar({
   backgroundColor: customTitlebar.Color.fromHex('#757575'),
   menu: menu1,
-  maximizable: false 
+  maximizable: false,
+  titleHorizontalAlignment :"center"
 });
 
 //// FUNCTIONS
@@ -121,19 +122,6 @@ function loadConfiguration(configLoadPath){
     $('.wrapper:not(.blank)').find('#' + sName ).find('[id="'+ nrID +'"]').prop('checked', value)
   }
 }
-
-// READ, WRITE AND PARSER JSON
-// // Append all data
-// json.push(steps)
-// json.push(checkedServices)
-// json.push(numericInputs)
-// json.push(onOffInputs)
-// // Stringify
-// let data = JSON.stringify(json)
-// // Write to config file
-// fs.writeFileSync('./configurations/configName.json', data)
-
-
 
 function saveConfiguration(){
   // Clear configuration objects
@@ -321,7 +309,7 @@ $('.dropdown-selection').each(function(){
 
 
     // Allow only 1 checkbox to be checked per step
-    $('input[type="checkbox"]').on('change', function() {
+    $('input[type="checkbox"].serviceCB').on('change', function() {
       $('input[name="' + this.name + '"]').not(this).prop('checked', false);
     });
     

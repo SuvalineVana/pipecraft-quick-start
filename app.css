@@ -283,3 +283,12 @@ p.adapter-checkbox {
     line-height: 32.4px;
     font-size: 20px;
 }
+
+.noshadow {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+  }
+  
+.DeepSpace {
+  background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

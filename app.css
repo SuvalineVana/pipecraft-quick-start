@@ -1,3 +1,7 @@
+.manualLink{
+  color: wheat !important;
+}
+
 .dropdown-trigger {
     width: 100%;
 }
@@ -139,11 +143,11 @@ p.adapter-checkbox {
 }
 
 .card-content {
-    background: linear-gradient(to bottom, #FFD194, #D1913C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to left, #bbd2c5, #536976)
 }
 
 .card-action {
-    background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364)
 }
 
 .card {

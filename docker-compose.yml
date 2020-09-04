@@ -11,6 +11,8 @@ services:
   volumes:
    - ./script_folder:/execute
    - ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/cutadapt-cut.sh]
 #Cut adapters/primers
   #TRIMMOMATIC
@@ -21,6 +23,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/trimmomatic-cut.sh]
 
 
@@ -33,6 +37,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/pbccs-create-circular-consensus-sequence.sh]
   #BAX2BAMS
  bax2bams-create-circular-consensus-sequence:
@@ -42,6 +48,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/bax2bams-create-circular-consensus-sequence.sh]
 
 #Assemble paired-end sequences
@@ -53,6 +61,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   working_dir: ${workdir}
   command: [/execute/pandaseq-assemble-paired-end-sequences.sh]
   #FLASH
@@ -63,6 +73,8 @@ services:
   volumes:
     - ./script_folder:/execute
     -  ${userDir}:/input
+    -  ${userDatabase}:/userdatabase
+    - ./pipe_base:/pipebase
   working_dir: ${workdir}
   command: [/execute/flash-assemble-paired-end-sequences.sh]
   #VSEARCH
@@ -73,6 +85,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   working_dir: ${workdir}
   command: [/execute/vsearch-assemble-paired-end-sequences.sh]
     
@@ -85,6 +99,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   working_dir: ${workdir}
   command: [/execute/vsearch-quality-filter.sh]
   #MOTHUR
@@ -95,6 +111,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   working_dir: ${workdir}
   command: [/execute/mothur-quality-filter.sh]
   #OBITOOLS
@@ -105,6 +123,8 @@ services:
   volumes:
    - ./script_folder:/obitools3/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/obitools-quality-filter.sh]
   #DADA2
  dada2-quality-filter:
@@ -114,6 +134,8 @@ services:
     volumes:
      - ./script_folder:/execute
      -  ${userDir}:/input
+     -  ${userDatabase}:/userdatabase
+     - ./pipe_base:/pipebase
     working_dir: ${workdir}
     command: ["Rscript", "/execute/dada2-quality-filter.R"]
 
@@ -125,6 +147,8 @@ services:
   volumes:
     - ./script_folder:/execute
     - ${userDir}:/input
+    -  ${userDatabase}:/userdatabase
+    - ./pipe_base:/pipebase
   working_dir: ${workdir}
   command: [/execute/trimmomatic-quality-filter.sh]
 
@@ -137,6 +161,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/mothur-demultiplex.sh]
   #OBITOOLS
  obitools-demultiplex:
@@ -146,6 +172,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/obitools-demultiplex.sh]
 
 #Cluster
@@ -157,6 +185,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/cd-hit-cluster.sh]
   #VSEARCH
  vsearch-cluster:
@@ -166,6 +196,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/vsearch-cluster.sh]
   #USEARCH
  usearch-cluster:
@@ -175,6 +207,8 @@ services:
   volumes:
    - ./script_folder:/execute
    - ./input_folder:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/usearch-cluster.sh]
   #SWARM
  swarm-cluster:
@@ -184,6 +218,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/swarm-cluster.sh]
   #MOTHUR
  mothur-cluster:
@@ -193,6 +229,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/mothur-cluster.sh]
 #Taxonomy
   #MOTHUR
@@ -203,6 +241,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/mothur-taxonomy.sh]
   #BLAST
  blast-taxonomy:
@@ -212,6 +252,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   command: [/execute/blast-taxonomy.sh]
 #Chimera detection
   #VSEARCH
@@ -222,6 +264,8 @@ services:
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input
+   -  ${userDatabase}:/userdatabase
+   - ./pipe_base:/pipebase
   working_dir: ${workdir}
   command: [/execute/vsearch-chimera-detection.sh]
 

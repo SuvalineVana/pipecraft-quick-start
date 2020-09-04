@@ -153,14 +153,7 @@ function saveConfiguration(){
       }
     });
   }
-  // if (steps.length != Object.keys(checkedServices).length ) {
-  //   alert("A software must be checked for each step, remove unused steps");
-  //   return false;
-  // }
-  // if (steps.length < 1) {
-  //   alert("No steps selected");
-  //   return false;
-  // }
+
   if (steps.length < 1) {
     alert("No steps selected");
     return event.preventDefault();
@@ -299,7 +292,7 @@ $('.dropdown-selection').each(function(){
 
     // Disable dropdown options until removed
     $(this).find( "a" ).css( "color", "#ECEFF0" )
-    $(this).find( "a" ).css( "background-color", "#BAB8BA" )
+    $(this).css( "background-color", "#BAB8BA" )
     $(this).find( "i" ).remove()
     $(this).addClass("disabled")
 
@@ -323,7 +316,7 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
   // Enable in dropdown
   classToEnable =$(this).parent().parent().attr('class').split(' ')[0]
   $('.disabled.'+classToEnable).find( "a" ).css( "color", "black" )
-  $('.disabled.'+classToEnable).find( "a" ).css( "background-color", "transparent" )
+  $('.disabled.'+classToEnable).css( "background-color", "transparent" )
   
   var materialIcon = document.createElement('i');
   materialIcon.className = 'material-icons';
@@ -371,6 +364,8 @@ fileSelectButton.addEventListener('click', async function(){
         console.log(err)
       })
 })
+
+
 
 // Save current configuration Button
 const configSaveButton = document.getElementById('savecfg');
@@ -513,4 +508,26 @@ $('#runButton').click(async function(){
 
   $("div.spanner").removeClass("show")
   $("div.overlay").removeClass("show")
+})
+
+$(document).on( "click",'#DatabaseSelectButton', async function() {
+    //Clear previos inputfolder from .env file
+    clearEnvLine('userDatabase')
+    // Open windows file dialog
+    dialog.showOpenDialog({
+        title: "Select the folder containing your sequnece files",
+        properties: ['openFile', 'showHiddenFiles']
+      }).then(result => {
+        inputPathEnv = 'userDatabase=' + result.filePaths +'\n'
+        // Append folder path as a variable to .env file
+        fs.appendFile('.env', inputPathEnv, function (err) {
+          if (err) {
+            console.log('append failed')
+          } else {
+            console.log('database file set as: ' + result.filePaths)
+          }
+        })
+      }).catch(err => {
+        console.log(err)
+      })
 })

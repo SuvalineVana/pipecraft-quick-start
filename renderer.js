@@ -21,7 +21,7 @@ let conf2Save = []
 const { Menu, MenuItem } = require('electron').remote
 const slash = require('slash');
 
-// materialize-css
+ // materialize-css
 
 document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.tooltipped');
@@ -365,8 +365,6 @@ fileSelectButton.addEventListener('click', async function () {
   })
 })
 
-
-
 // Save current configuration Button
 const configSaveButton = document.getElementById('savecfg');
 configSaveButton.addEventListener('click', async function () {
@@ -410,7 +408,6 @@ configLoadButton.addEventListener('click', async function () {
 })
 
 // Run Analysis
-// Setup
 
 async function processStepsInfo(workFlowSteps) {
   for (const item of workFlowSteps) {
@@ -420,7 +417,6 @@ async function processStepsInfo(workFlowSteps) {
     // Place to pause for step-by-step mode
   }
 }
-
 
 async function RunDockerCompose(serviceName) {
   console.log("Starting step")

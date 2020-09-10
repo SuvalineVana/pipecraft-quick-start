@@ -5,7 +5,7 @@ window.$ = window.jQuery = require('jquery');
 const { dialog } = require('electron').remote
 const fs = require('fs');
 const { spawnSync } = require('child_process')
-const {spawn} = require('child_process');
+const { spawn } = require('child_process');
 let Shell2 = require('node-powershell-await');
 const path = require('path');
 const { BrowserWindow } = require('electron').remote
@@ -18,61 +18,61 @@ let checkedServices = {}
 let steps = []
 let onOffInputs = {}
 let conf2Save = []
-const {Menu, MenuItem} = require('electron').remote
+const { Menu, MenuItem } = require('electron').remote
 const slash = require('slash');
 
 // materialize-css
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.tooltipped');
   var instances = M.Tooltip.init(elems, options);
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
   $('.tooltipped').tooltip();
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
   $('input#input_text, textarea#textarea2').characterCounter();
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
   $('.sidenav').sidenav();
   $('.sidenav').sidenav('open')
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
   $('.collapsible').collapsible();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.dropdown-trigger');
   var instances = M.Dropdown.init(elems);
 });
 
-$( function() {
-  $( "#SelectedSteps" ).sortable();
-  $( "#SelectedSteps" ).disableSelection();
+$(function () {
+  $("#SelectedSteps").sortable();
+  $("#SelectedSteps").disableSelection();
 });
 
 // Custom titlebar and menu
 const menu1 = new Menu();
 
 menu1.append(new MenuItem({
-	// label: 'Documentation',
-	// submenu: [
-	// 	{
-	// 		label: 'pdf',
-	// 		click: () => console.log('Click on subitem 1')
-	// 	},
-	// 	{
-	// 		type: 'separator'
+  // label: 'Documentation',
+  // submenu: [
+  // 	{
+  // 		label: 'pdf',
+  // 		click: () => console.log('Click on subitem 1')
+  // 	},
+  // 	{
+  // 		type: 'separator'
   //   },
   //   {
-	// 		label: 'online',
-	// 		click: () => console.log('Click on subitem 1')
-	// 	}
-	// ]
+  // 		label: 'online',
+  // 		click: () => console.log('Click on subitem 1')
+  // 	}
+  // ]
 }));
 
 const customTitlebar = require('custom-electron-titlebar');
@@ -80,13 +80,13 @@ new customTitlebar.Titlebar({
   backgroundColor: customTitlebar.Color.fromHex('#757575'),
   menu: menu1,
   maximizable: false,
-  titleHorizontalAlignment :"center"
+  titleHorizontalAlignment: "center"
 });
 
 //// FUNCTIONS
 
 //Load a previous or an external configuration via JSON
-function loadConfiguration(configLoadPath){
+function loadConfiguration(configLoadPath) {
   //Read and parse
   let rawdata = fs.readFileSync(configLoadPath);
   let configObj = JSON.parse(rawdata);
@@ -96,34 +96,34 @@ function loadConfiguration(configLoadPath){
   var onOffInputs = configObj[3]
   // Load configuration steps
   StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i")
-  for(var y = 0; y<StepsToClear.length; y++) {
+  for (var y = 0; y < StepsToClear.length; y++) {
     StepsToClear[y].click();
   }
-  for (z=0;  z < steps.length; z++){
+  for (z = 0; z < steps.length; z++) {
     document.querySelector('.dropdown-selection.' + steps[z]).click()
   }
   // Check configuration services
   for (const [sName, onValue] of Object.entries(checkedServices)) {
-    if ($('label[value=' + sName + ']>input[name*=wrapper]').prop('checked') == false){
+    if ($('label[value=' + sName + ']>input[name*=wrapper]').prop('checked') == false) {
       document.querySelector('label[value=' + sName + ']>input[name*=wrapper]').click()
-    } 
+    }
   }
   // Load numeric inputs
   for (const [key, value] of Object.entries(numericInputs)) {
     var sName = key.split('|')[0]
-    var nrID  =  key.split('|')[1]
-    $('.wrapper:not(.blank)').find('#' + sName ).find('[id="'+ nrID +'"]').prop('value', value)
+    var nrID = key.split('|')[1]
+    $('.wrapper:not(.blank)').find('#' + sName).find('[id="' + nrID + '"]').prop('value', value)
   }
   // Load binary inputs (on/off) switches
   for (const [key, value] of Object.entries(onOffInputs)) {
     var sName = key.split('|')[0]
-    var nrID  =  key.split('|')[1]
+    var nrID = key.split('|')[1]
     console.log(sName, nrID, value)
-    $('.wrapper:not(.blank)').find('#' + sName ).find('[id="'+ nrID +'"]').prop('checked', value)
+    $('.wrapper:not(.blank)').find('#' + sName).find('[id="' + nrID + '"]').prop('checked', value)
   }
 }
 
-function saveConfiguration(){
+function saveConfiguration() {
   // Clear configuration objects
   for (var member in numericInputs) delete numericInputs[member];
   for (var member in checkedServices) delete checkedServices[member];
@@ -133,22 +133,22 @@ function saveConfiguration(){
   console.log(conf2Save)
   // Save configuration steps
   configSteps = $("#SelectedSteps > li")
-  for (i=0; i < configSteps.length; i++) {
+  for (i = 0; i < configSteps.length; i++) {
     steps[i] = configSteps.eq(i).attr('class').split(' ')[0]
-  } 
+  }
   // Save configuration services
   workFlowSteps = $(".viewSwitch");
   for (const item of workFlowSteps) {
-    WorkFlowTag = ('.wrapper.' + item.closest('li').getAttribute('class').replace(' ','.'))
-    $(WorkFlowTag).find('.serviceCB').each(function(){
-      if (this.checked == true){
+    WorkFlowTag = ('.wrapper.' + item.closest('li').getAttribute('class').replace(' ', '.'))
+    $(WorkFlowTag).find('.serviceCB').each(function () {
+      if (this.checked == true) {
         serviceSave = $(this).parent().attr("value")
         checkedServices[serviceSave] = true;
-        $(WorkFlowTag).find("#" + serviceSave).find('.InlineNumericInput').each(function(){
-          numericInputs[serviceSave +'|'+$(this).attr('id')] = $(this)[0].value
+        $(WorkFlowTag).find("#" + serviceSave).find('.InlineNumericInput').each(function () {
+          numericInputs[serviceSave + '|' + $(this).attr('id')] = $(this)[0].value
         });
-        $(WorkFlowTag).find("#" + serviceSave).find('.onOff').each(function(){
-          onOffInputs[serviceSave +'|'+$(this).attr('id')] = $(this).prop('checked')
+        $(WorkFlowTag).find("#" + serviceSave).find('.onOff').each(function () {
+          onOffInputs[serviceSave + '|' + $(this).attr('id')] = $(this).prop('checked')
         });
       }
     });
@@ -158,7 +158,7 @@ function saveConfiguration(){
     alert("No steps selected");
     return event.preventDefault();
   }
-  if (steps.length != Object.keys(checkedServices).length ) {
+  if (steps.length != Object.keys(checkedServices).length) {
     alert("A software must be checked for each step, remove unused steps");
     return false;
   }
@@ -179,7 +179,7 @@ function openManual(manualName) {
 }
 
 // Append a env_variable to service env file
-function AppendToEnvFile(env_variable, serviceName){
+function AppendToEnvFile(env_variable, serviceName) {
   envFilePath = 'env_files/' + serviceName + '.env'
   line2append = env_variable + '\n'
   fs.appendFile(envFilePath, line2append, function (err) {
@@ -192,13 +192,13 @@ function AppendToEnvFile(env_variable, serviceName){
 }
 
 // Clear line from .env file
-async function clearEnvLine(line){
+async function clearEnvLine(line) {
   const line2clear = new RegExp(line + '.*\n', 'g')
   const options = {
-  files: '.env',
-  from: line2clear,
-  to: '',
-}
+    files: '.env',
+    from: line2clear,
+    to: '',
+  }
   try {
     const results = await replace(options)
   }
@@ -207,28 +207,28 @@ async function clearEnvLine(line){
   }
 }
 
-function writeLog(serviceName, runLog){
-  logName = 'logs/' + serviceName +'_log.txt'
-  fs.writeFile(logName, runLog, function(err) {
-    if(err) {
-        return console.log(err);
+function writeLog(serviceName, runLog) {
+  logName = 'logs/' + serviceName + '_log.txt'
+  fs.writeFile(logName, runLog, function (err) {
+    if (err) {
+      return console.log(err);
     }
     console.log('output written to: ' + logName);
-}); 
+  });
 }
 
 function execShellCommand(cmd) {
   const exec = require('child_process').exec;
   return new Promise((resolve, reject) => {
-   exec(cmd, (error, stdout, stderr) => {
-    if (error) {
-     console.warn(error);
-     alert(error)
-     serviceError = cmd.split(" ").slice(-1) + '-error'
-     writeLog(serviceError, error)
-    }
-    resolve(stdout? stdout : stderr);
-   });
+    exec(cmd, (error, stdout, stderr) => {
+      if (error) {
+        console.warn(error);
+        alert(error)
+        serviceError = cmd.split(" ").slice(-1) + '-error'
+        writeLog(serviceError, error)
+      }
+      resolve(stdout ? stdout : stderr);
+    });
   });
 }
 
@@ -252,27 +252,27 @@ $('body').on('click', '.manualLink', function () {
 
 // Home screen
 var newView = $('#PlutoTwitter')
-$(newView).fadeIn( 500, function(){
+$(newView).fadeIn(500, function () {
 });
 
 // Switch view
 function switchView() {
-  
-  viewSelector = ('.wrapper.').concat($(this).parent().attr("class").replace(' ','.'))
+
+  viewSelector = ('.wrapper.').concat($(this).parent().attr("class").replace(' ', '.'))
   oldview = newView
   newView = $(viewSelector)
   // console.log(viewSelector)
   // $(viewSelector).toggleClass('hideView')
-  $(oldview).fadeOut( 250, function() {
-    $(newView).fadeIn( 250, function(){
+  $(oldview).fadeOut(250, function () {
+    $(newView).fadeIn(250, function () {
     });
-  });  
+  });
 }
 
 // Add workflow steps
 var i = 1
-$('.dropdown-selection').each(function(){
-  $(this).click(function(){
+$('.dropdown-selection').each(function () {
+  $(this).click(function () {
     var step = $(this).clone().removeClass('dropdown-selection')
     step.find('i').text('remove_circle_outline').addClass('RemoveButtons')
     step.find('a').addClass('viewSwitch')
@@ -280,7 +280,7 @@ $('.dropdown-selection').each(function(){
 
     var viewClass = '.wrapper.blank.' + $(this).clone().removeClass('dropdown-selection').attr('class')
     var view = $(viewClass).clone().removeClass('blank')
-    
+
     step.addClass(i.toString())
     view.addClass(i.toString())
     step.appendTo('#SelectedSteps')
@@ -291,40 +291,40 @@ $('.dropdown-selection').each(function(){
     $('.container-after-titlebar').append(view)
 
     // Disable dropdown options until removed
-    $(this).find( "a" ).css( "color", "#ECEFF0" )
-    $(this).css( "background-color", "#BAB8BA" )
-    $(this).find( "i" ).remove()
+    $(this).find("a").css("color", "#ECEFF0")
+    $(this).css("background-color", "#BAB8BA")
+    $(this).find("i").remove()
     $(this).addClass("disabled")
 
     i++
     // Do not collapse if checkbox is clicked
-    $(".not-collapse").on("click", function(e) { e.stopPropagation(); });
+    $(".not-collapse").on("click", function (e) { e.stopPropagation(); });
 
 
     // Allow only 1 checkbox to be checked per step
-    $('input[type="checkbox"].serviceCB').on('change', function() {
+    $('input[type="checkbox"].serviceCB').on('change', function () {
       $('input[name="' + this.name + '"]').not(this).prop('checked', false);
     });
-    
-  })  
+
+  })
 })
 
 // Remove workflow steps
-$( "#SelectedSteps" ).on( "click", "i", function( event ) {
+$("#SelectedSteps").on("click", "i", function (event) {
   event.preventDefault();
 
   // Enable in dropdown
-  classToEnable =$(this).parent().parent().attr('class').split(' ')[0]
-  $('.disabled.'+classToEnable).find( "a" ).css( "color", "black" )
-  $('.disabled.'+classToEnable).css( "background-color", "transparent" )
-  
+  classToEnable = $(this).parent().parent().attr('class').split(' ')[0]
+  $('.disabled.' + classToEnable).find("a").css("color", "black")
+  $('.disabled.' + classToEnable).css("background-color", "transparent")
+
   var materialIcon = document.createElement('i');
   materialIcon.className = 'material-icons';
   var materialIconAdd = document.createTextNode('add_circle_outline');
   materialIcon.appendChild(materialIconAdd);
 
-  $('.disabled.'+classToEnable).find( "a" )[0].appendChild(materialIcon)
-  $('.disabled.'+classToEnable).removeClass('disabled')
+  $('.disabled.' + classToEnable).find("a")[0].appendChild(materialIcon)
+  $('.disabled.' + classToEnable).removeClass('disabled')
 
 
   viewTag = ('.wrapper.' + ($(this).closest('li').attr('class'))).replace(' ', '.')
@@ -335,7 +335,7 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
     // array does not exist, is not an array, or is empty
     // ⇒ do not attempt to process array
     newView = $('#PlutoTwitter')
-    $(newView).fadeIn( 500, function(){
+    $(newView).fadeIn(500, function () {
     });
   }
 
@@ -343,43 +343,43 @@ $( "#SelectedSteps" ).on( "click", "i", function( event ) {
 
 // Select input folder and save as env variable
 const fileSelectButton = document.getElementById('FileSelectButton');
-fileSelectButton.addEventListener('click', async function(){
-    //Clear previos inputfolder from .env file
-    clearEnvLine('userDir')
-    // Open windows file dialog
-    dialog.showOpenDialog({
-        title: "Select the folder containing your sequnece files",
-        properties: ['openDirectory', 'showHiddenFiles']
-      }).then(result => {
-        inputPathEnv = 'userDir=' + result.filePaths[0] +'\n'
-        // Append folder path as a variable to .env file
-        fs.appendFile('.env', inputPathEnv, function (err) {
-          if (err) {
-            console.log('append failed')
-          } else {
-            console.log('Local working directory set as: ' + result.filePaths[0] )
-          }
-        })
-      }).catch(err => {
-        console.log(err)
-      })
+fileSelectButton.addEventListener('click', async function () {
+  //Clear previos inputfolder from .env file
+  clearEnvLine('userDir')
+  // Open windows file dialog
+  dialog.showOpenDialog({
+    title: "Select the folder containing your sequnece files",
+    properties: ['openDirectory', 'showHiddenFiles']
+  }).then(result => {
+    inputPathEnv = 'userDir=' + result.filePaths[0] + '\n'
+    // Append folder path as a variable to .env file
+    fs.appendFile('.env', inputPathEnv, function (err) {
+      if (err) {
+        console.log('append failed')
+      } else {
+        console.log('Local working directory set as: ' + result.filePaths[0])
+      }
+    })
+  }).catch(err => {
+    console.log(err)
+  })
 })
 
 
 
 // Save current configuration Button
 const configSaveButton = document.getElementById('savecfg');
-configSaveButton.addEventListener('click', async function(){
+configSaveButton.addEventListener('click', async function () {
   saveConfiguration()
   if (steps.length < 1) {
     return false;
   }
-  if (steps.length != Object.keys(checkedServices).length ) {
+  if (steps.length != Object.keys(checkedServices).length) {
     return false;
   }
   dialog.showSaveDialog({
     title: "Save current configuration",
-    filters :[{name: 'JSON', extensions: ['JSON',]}]
+    filters: [{ name: 'JSON', extensions: ['JSON',] }]
   }).then(result => {
     configSavePath = slash(result.filePath)
     console.log(configSavePath)
@@ -389,7 +389,7 @@ configSaveButton.addEventListener('click', async function(){
 })
 
 const configLoadButton = document.getElementById('loadcfg');
-configLoadButton.addEventListener('click', async function(){
+configLoadButton.addEventListener('click', async function () {
   // saveConfiguration()
   // if (steps.length < 1) {
   //   alert("No steps selected");
@@ -401,7 +401,7 @@ configLoadButton.addEventListener('click', async function(){
   // }
   dialog.showOpenDialog({
     title: "Select a previous configuration",
-    filters :[{name: 'JSON', extensions: ['JSON',]}]
+    filters: [{ name: 'JSON', extensions: ['JSON',] }]
   }).then(result => {
     configLoadPath = slash(result.filePaths[0])
     console.log(configLoadPath)
@@ -412,9 +412,9 @@ configLoadButton.addEventListener('click', async function(){
 // Run Analysis
 // Setup
 
-async function processStepsInfo(workFlowSteps){
+async function processStepsInfo(workFlowSteps) {
   for (const item of workFlowSteps) {
-    WorkFlowTag = ('.wrapper.' + item.closest('li').getAttribute('class').replace(' ','.'))
+    WorkFlowTag = ('.wrapper.' + item.closest('li').getAttribute('class').replace(' ', '.'))
     await collectParams(WorkFlowTag)
     await RunDockerCompose(serviceName)
     // Place to pause for step-by-step mode
@@ -422,7 +422,7 @@ async function processStepsInfo(workFlowSteps){
 }
 
 
-async function RunDockerCompose(serviceName){
+async function RunDockerCompose(serviceName) {
   console.log("Starting step")
   console.log(serviceName)
   const runLog = await execShellCommand('docker-compose run ' + serviceName);
@@ -439,40 +439,40 @@ async function RunDockerCompose(serviceName){
   writeLog(serviceName, runLog)
 }
 
-async function collectParams(WorkFlowTag){
+async function collectParams(WorkFlowTag) {
   serviceName = ""
   // Find selected service
-  $(WorkFlowTag).find('.serviceCB').each(async function(){
-    if (this.checked == true){
+  $(WorkFlowTag).find('.serviceCB').each(async function () {
+    if (this.checked == true) {
       serviceName = $(this).parent().attr("value")
       console.log(serviceName)
-      envFileToClear= 'env_files/' + serviceName + '.env'
-      fs.truncate(envFileToClear, 0, function(){console.log('env file ready')})
+      envFileToClear = 'env_files/' + serviceName + '.env'
+      fs.truncate(envFileToClear, 0, function () { console.log('env file ready') })
       return serviceName
     }
   })
   //
 
   // Capture numeric input
-  $(WorkFlowTag).find("#" + serviceName).find('.InlineNumericInput').each(function(){
+  $(WorkFlowTag).find("#" + serviceName).find('.InlineNumericInput').each(function () {
     if ($(this)[0].value !== "") {
-      env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'='+$(this).attr('id')+$(this)[0].value
+      env_variable = $(this).attr('id').replace(/[ -=,]/g, '') + '=' + $(this).attr('id') + $(this)[0].value
       console.log(env_variable)
       AppendToEnvFile(env_variable, serviceName)
     } else {
-      env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'= '
+      env_variable = $(this).attr('id').replace(/[ -=,]/g, '') + '= '
       console.log(env_variable)
       AppendToEnvFile(env_variable, serviceName)
     }
   })
   // Capture ON/OFF input
-  $(WorkFlowTag).find("#" + serviceName).find('.onOff').each(function(){
+  $(WorkFlowTag).find("#" + serviceName).find('.onOff').each(function () {
     if ($(this).is(':checked')) {
-      env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'=ON'
+      env_variable = $(this).attr('id').replace(/[ -=,]/g, '') + '=ON'
       console.log(env_variable)
       AppendToEnvFile(env_variable, serviceName)
     } else {
-      env_variable = $(this).attr('id').replace(/[ -=,]/g, '')+'=OFF'
+      env_variable = $(this).attr('id').replace(/[ -=,]/g, '') + '=OFF'
       console.log(env_variable)
       AppendToEnvFile(env_variable, serviceName)
     }
@@ -481,8 +481,8 @@ async function collectParams(WorkFlowTag){
 }
 
 // Run Button
-$('#runButton').click(async function(){
-  
+$('#runButton').click(async function () {
+
 
   $("div.spanner").addClass("show")
   $("div.overlay").addClass("show")
@@ -510,24 +510,24 @@ $('#runButton').click(async function(){
   $("div.overlay").removeClass("show")
 })
 
-$(document).on( "click",'#DatabaseSelectButton', async function() {
-    //Clear previos inputfolder from .env file
-    clearEnvLine('userDatabase')
-    // Open windows file dialog
-    dialog.showOpenDialog({
-        title: "Select the folder containing your sequnece files",
-        properties: ['openFile', 'showHiddenFiles']
-      }).then(result => {
-        inputPathEnv = 'userDatabase=' + result.filePaths +'\n'
-        // Append folder path as a variable to .env file
-        fs.appendFile('.env', inputPathEnv, function (err) {
-          if (err) {
-            console.log('append failed')
-          } else {
-            console.log('database file set as: ' + result.filePaths)
-          }
-        })
-      }).catch(err => {
-        console.log(err)
-      })
+$(document).on("click", '#DatabaseSelectButton', async function () {
+  //Clear previos inputfolder from .env file
+  clearEnvLine('userDatabase')
+  // Open windows file dialog
+  dialog.showOpenDialog({
+    title: "Select the folder containing your sequnece files",
+    properties: ['openFile', 'showHiddenFiles']
+  }).then(result => {
+    inputPathEnv = 'userDatabase=' + result.filePaths + '\n'
+    // Append folder path as a variable to .env file
+    fs.appendFile('.env', inputPathEnv, function (err) {
+      if (err) {
+        console.log('append failed')
+      } else {
+        console.log('database file set as: ' + result.filePaths)
+      }
+    })
+  }).catch(err => {
+    console.log(err)
+  })
 })

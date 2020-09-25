@@ -1,0 +1,24 @@
+FROM ubuntu:xenial
+RUN apt-get update
+RUN apt install build-essential -y
+RUN apt install libcurl4-gnutls-dev -y
+RUN apt install libxml2-dev -y
+RUN apt install libssl-dev -y
+RUN apt install r-base -y
+ADD ImageDevelopment/lulu_install.R /
+RUN Rscript lulu_install.R
+
+
+
+
+
+
+#FROM rocker/r-apt:disco
+#RUN apt-get update
+#RUN apt-get install -y apt-utils
+#RUN apt-get install -y curl
+#RUN apt-get install -y libcurl4-gnutls-dev
+#RUN apt-get install -y libxml2-dev 
+#RUN apt-get install -y libssl-dev
+#ADD ImageDevelopment/lulu_install.R /
+#RUN Rscript lulu_install.R

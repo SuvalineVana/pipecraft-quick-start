@@ -25,6 +25,7 @@
     "@rauschma/stringio": "^1.4.0",
     "custom-electron-titlebar": "^3.2.3",
     "electron-pdf-window": "^1.0.12",
+    "electron-prompt": "^1.6.0",
     "insert-line": "^1.1.0",
     "jquery": "^3.5.1",
     "node-powershell": "^4.0.0",
@@ -32,6 +33,9 @@
     "path": "^0.12.7",
     "popper.js": "^1.16.1",
     "replace-in-file": "^6.1.0",
-    "slash": "^3.0.0"
+    "slash": "^3.0.0",
+    "smalltalk": "^4.0.6",
+    "sweetalert2": "^10.2.0",
+    "vex-js": "^4.1.0"
   }
 }

@@ -54,8 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var instances = M.Chips.init(elems, options);
 })
 
-var instance = M.Chips.getInstance(document.querySelector('.chips-initial'))
-
 
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".tooltipped");

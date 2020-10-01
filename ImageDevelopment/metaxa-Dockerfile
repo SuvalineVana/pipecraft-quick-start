@@ -1,0 +1,4 @@
+FROM conda/miniconda2:latest
+RUN conda config --add channels bioconda \  
+    && conda install -c bioconda metaxa --yes\
+    && conda clean --all --yes

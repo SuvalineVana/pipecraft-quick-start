@@ -7070,7 +7070,7 @@ textarea.materialize-textarea {
 }
 
 .switch label input[type=checkbox]:checked + .lever:after {
-  background-color: #26a69a;
+  background-color: #e8ecec;
 }
 
 .switch label .lever {

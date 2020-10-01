@@ -27,12 +27,9 @@ let conf2Save = [];
 const { Menu, MenuItem } = require("electron").remote;
 const slash = require("slash");
 
+
 // materialize-css
 
-document.addEventListener("DOMContentLoaded", function () {
-  var elems = document.querySelectorAll(".chips");
-  var instances = M.Chips.init(elems, options);
-});
 
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".tap-target");
@@ -43,14 +40,28 @@ $(document).ready(function () {
   $(".tap-target").tapTarget();
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelector('.chips-initial');
+  options = {
+    data: [{
+      tag: 'Apple',
+    }, {
+      tag: 'Microsoft',
+    }, {
+      tag: 'Google',
+    }],
+  }
+  var instances = M.Chips.init(elems, options);
+})
+
+var instance = M.Chips.getInstance(document.querySelector('.chips-initial'))
+
+
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".tooltipped");
   var instances = M.Tooltip.init(elems, options);
 });
 
-// $(document).ready(function () {
-//   $(".tooltipped").tooltip();
-// });
 
 $(document).ready(function () {
   $("input#input_text, textarea#textarea2").characterCounter();
@@ -313,6 +324,7 @@ function switchView() {
   });
 }
 
+
 // Add workflow steps
 var i = 1;
 $(".dropdown-selection").each(function () {
@@ -442,6 +454,10 @@ fileSelectButton.addEventListener("click", async function () {
     .then((result) => {
       if (result.value) {
         console.log(result);
+        if (result.value[1] == "multiplexed") {
+          console.log(result.value[1])
+          $(".dropdown-selection.demultiplex").click()
+        }
         //Clear previos inputfolder from .env file
         clearEnvLine("userDir");
         // Open windows file dialog

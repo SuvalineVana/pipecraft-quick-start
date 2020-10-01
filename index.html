@@ -89,8 +89,10 @@
       </li>
       <li class="dropdown-selection tax"><a href="#!">Assing Taxonomy<i
             class="material-icons">add_circle_outline</i></a></li>
-      <li class="dropdown-selection ccs"><a href="#!">Create PacBio CCS<i
+      <li class="dropdown-selection extraction"><a href="#!">Gene Extraction<i
             class="material-icons">add_circle_outline</i></a></li>
+      <!-- <li class="dropdown-selection ccs"><a href="#!">Create PacBio CCS<i
+            class="material-icons">add_circle_outline</i></a></li> -->
       <li class="dropdown-selection assemble-paired"><a href="#!">Assemble paired-end sequences<i
             class="material-icons">add_circle_outline</i></a></li>
       <li class="dropdown-selection demultiplex"><a href="#!">Demultiplex<i
@@ -98,6 +100,329 @@
     </ul>
     <ul id="SelectedSteps"></ul>
   </ul>
+
+  <!-- Gene extraction -->
+  <div class="wrapper extraction hideView blank">
+    <ul class="collapsible vertical-center">
+      <li>
+        <div class="collapsible-header">ITSx
+          <form action="#"></form>
+          <p class="adapter-checkbox not-collapse">
+            <label value="itsx-gene-extraction">
+              <input class="serviceCB" type="checkbox"/>
+              <span></span>
+            </label>
+          </p>
+        </div>
+        <div class="collapsible-body" id="itsx-gene-extraction"><span>
+          <div class="row" style="margin: 0;">
+            <div class="col s12">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title">fastq_filter</span>
+                  <p>Performs quality filtering.</p>
+                </div>
+                <div class="card-action">
+                  <a href="#" class="manualLink" id="mothur_trim_seqs.pdf">Read the ITSx manual for more info</a>
+                </div>
+              </div>
+            </div>
+              <div class="col s3 offset-s3 tooltipped" data-position="top" data-tooltip="Domain E-value cutoff a sequence must obtain in the HMMERbased step to be included in the output. Default = 1e-5." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
+                    <span class="card-title"
+                      style="font-size: 18px; margin: 0; line-height: 18px;">E-value</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-E" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard if there are > k Ns in the read." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxns k</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_minlen L</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_minlen" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_stripleft N</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_stripleft" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_truncqual N</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_truncqual" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee_rate E</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee_rate" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="extraOptionsTrigger col s12">Show more options</a>
+            </div>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Metaxa
+          <form action="#"></form>
+          <p class="adapter-checkbox not-collapse">
+            <label value="metaxa-gene-extraction">
+              <input class="serviceCB" type="checkbox"/>
+              <span></span>
+            </label>
+          </p>
+        </div>
+        <div class="collapsible-body" id="metaxa-gene-extraction"><span>
+          <div class="row" style="margin: 0;">
+            <div class="col s12">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title">fastq_filter</span>
+                  <p>Performs quality filtering.</p>
+                </div>
+                <div class="card-action">
+                  <a href="#" class="manualLink" id="mothur_trim_seqs.pdf">Read the USEARCH manual for more info</a>
+                </div>
+              </div>
+            </div>
+              <div class="col s3 offset-s3 tooltipped" data-position="top" data-tooltip="Discard reads with > E total expected errors for all bases in the read after any truncation options have been applied." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
+                    <span class="card-title"
+                      style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee E</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard if there are > k Ns in the read." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxns k</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_minlen L</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_minlen" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_stripleft N</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_stripleft" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_truncqual N</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_truncqual" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee_rate E</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee_rate" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="extraOptionsTrigger col s12">Show more options</a>
+            </div>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">V-Xtractor
+          <form action="#"></form>
+          <p class="adapter-checkbox not-collapse">
+            <label value="vxtractor-gene-extraction">
+              <input class="serviceCB" type="checkbox"/>
+              <span></span>
+            </label>
+          </p>
+        </div>
+        <div class="collapsible-body" id="vxtractor-gene-extraction"><span>
+          <div class="row" style="margin: 0;">
+            <div class="col s12">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title">fastq_filter</span>
+                  <p>Performs quality filtering.</p>
+                </div>
+                <div class="card-action">
+                  <a href="#" class="manualLink" id="mothur_trim_seqs.pdf">Read the USEARCH manual for more info</a>
+                </div>
+              </div>
+            </div>
+              <div class="col s3 offset-s3 tooltipped" data-position="top" data-tooltip="Discard reads with > E total expected errors for all bases in the read after any truncation options have been applied." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
+                    <span class="card-title"
+                      style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee E</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard if there are > k Ns in the read." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxns k</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_minlen L</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_minlen" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_stripleft N</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_stripleft" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_truncqual N</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_truncqual" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee_rate E</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee_rate" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="extraOptionsTrigger col s12">Show more options</a>
+            </div>
+        </div>
+      </li>
+  </div>
 
   <!-- Cut adapaters/primers -->
   <div class="wrapper cut hideView blank">
@@ -598,19 +923,110 @@
         </div>
       </li>
       <li>
-        <div class="collapsible-header">OBITOOLS
+        <div class="collapsible-header">USEARCH
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
-            <label value="obitools-quality-filter">
-              <input type="checkbox" disabled />
+            <label value="usearch-quality-filter">
+              <input class="serviceCB" type="checkbox"/>
               <span></span>
             </label>
           </p>
         </div>
-        <div class="collapsible-body" id="obitools-quality-filter"><span>
-            <i class="large material-icons">lock</i>
-            <p>UNDER CONSTRUCTION</p>
-          </span></div>
+        <div class="collapsible-body" id="usearch-quality-filter"><span>
+          <div class="row" style="margin: 0;">
+            <div class="col s12">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title">fastq_filter</span>
+                  <p>Performs quality filtering.</p>
+                </div>
+                <div class="card-action">
+                  <a href="#" class="manualLink" id="mothur_trim_seqs.pdf">Read the USEARCH manual for more info</a>
+                </div>
+              </div>
+            </div>
+              <div class="col s3 offset-s3 tooltipped" data-position="top" data-tooltip="Discard reads with > E total expected errors for all bases in the read after any truncation options have been applied." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
+                    <span class="card-title"
+                      style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee E</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard if there are > k Ns in the read." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxns k</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_minlen L</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_minlen" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_stripleft N</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_stripleft" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_truncqual N</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_truncqual" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee_rate E</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee_rate" type="number"
+                      value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="extraOptionsTrigger col s12">Show more options</a>
+            </div>
+        </div>
       </li>
       <li>
         <div class="collapsible-header">TRIMMOMATIC
@@ -799,9 +1215,18 @@
                 </div>
               </div>
             </div>
-            <div class="col s12 extraOptions">
+            <div class="col s12">
               <p>Specify forward and reverse primers manually</p>
-              <div id="demuxPrimers" class="chips"></div>
+              <div class="chips"></div>
+              <br />
+              <p>Set initial tags.</p>
+              <div class="chips chips-initial"></div>
+              <br />
+              <p>Placeholders and override hint texts.</p>
+              <div class="chips chips-placeholder"></div>
+              <br />
+              <p>Autocomplete with chips</p>
+              <div class="chips chips-autocomplete"></div>
             </div>
             <a href="#" class="extraOptionsTrigger col s12">Show more options</a>
           </div>
@@ -856,7 +1281,14 @@
               <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                 <div class="card-content white-text" style="padding: 10px 0;border-radius: 5px;">
                   <span class="card-title">denovno</span>
-                  <p>placeholder</p>
+                  <div class="switch">
+                    <label style="color: rgb(56, 54, 54);">
+                      Off
+                      <input type="checkbox" class="onOff" id="mergestagger">
+                      <span class="lever"></span>
+                      On
+                    </label><br>
+                  </div>
                 </div>
                 <div class="card-action" style="padding: 0; background: transparent;">
                   <div class="row" style="margin: 0;">
@@ -896,7 +1328,14 @@
               <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                 <div class="card-content white-text" style="padding: 10px 0;border-radius: 5px;">
                   <span class="card-title">refrence based</span>
-                  <p>placeholder</p>
+                  <div class="switch">
+                    <label style="color: rgb(56, 54, 54);">
+                      Off
+                      <input type="checkbox" class="onOff" id="mergestagger">
+                      <span class="lever"></span>
+                      On
+                    </label><br>
+                  </div>
                 </div>
                 <div class="card-action" style="padding: 0; background: transparent;">
                   <div class="row" style="margin: 0;">
@@ -923,6 +1362,117 @@
             <a href="#" class="extraOptionsTrigger col s12">Show more options</a>
           </div>
         </div>
+      </li>
+      <li>
+        <div class="collapsible-header">USEARCH
+          <form action="#"></form>
+          <p class="adapter-checkbox not-collapse">
+            <label value="usearch-chimera-filter">
+              <input class="serviceCB" type="checkbox" />
+              <span></span>
+            </label>
+          </p>
+        </div>
+        <div class="collapsible-body" id="usearch-chimera-filter">
+          <div class="row">
+            <div class="col s12">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title">uchime</span>
+                  <p>Filter out putative chimeric sequences.</p>
+                </div>
+                <div class="card-action">
+                  <a href="#" class="manualLink" id="vsearch_manual.pdf">Read the USEARCH manual for more info</a>
+                </div>
+              </div>
+            </div>
+            <div class="col s6">
+              <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                <div class="card-content white-text" style="padding: 10px 0;border-radius: 5px;">
+                  <span class="card-title">denovno</span>
+                  <div class="switch">
+                    <label style="color: rgb(56, 54, 54);">
+                      Off
+                      <input type="checkbox" class="onOff" id="mergestagger">
+                      <span class="lever"></span>
+                      On
+                    </label><br>
+                  </div>
+                </div>
+                <div class="card-action" style="padding: 0; background: transparent;">
+                  <div class="row" style="margin: 0;">
+                    <div class="col s6" style="padding: 5px;">
+                      <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                        <div class="card-content white-text"
+                          style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
+                          <span class="card-title"
+                            style="font-size: 18px; margin: 0; line-height: 18px;">abskew<br><br></span>
+                        </div>
+                        <div class="card-action"
+                          style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                          <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
+                            value="" min="1" step="1">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col s6" style="padding: 5px;">
+                      <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                        <div class="card-content white-text"
+                          style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                          <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">de novo
+                            abundance annotation</span>
+                        </div>
+                        <div class="card-action"
+                          style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                          <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
+                            value="" min="1" step="1">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col s6">
+              <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                <div class="card-content white-text" style="padding: 10px 0;border-radius: 5px;">
+                  <span class="card-title">refrence based</span>
+                  <div class="switch">
+                    <label style="color: rgb(56, 54, 54);">
+                      Off
+                      <input type="checkbox" class="onOff" id="mergestagger">
+                      <span class="lever"></span>
+                      On
+                    </label><br>
+                  </div>
+                </div>
+                <div class="card-action" style="padding: 0; background: transparent;">
+                  <div class="row" style="margin: 0;">
+                    <div class="col s12" style="padding: 5px;">
+                      <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                        <div class="card-content white-text"
+                          style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                          <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">select
+                            refrence database<br><br></span>
+                        </div>
+                        <div class="card-action"
+                          style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                          <a class='btn-floating btn-large waves-effect waves-dark grey lighten-5'
+                            id='DatabaseSelectButton' style="margin-right: 20px;"><i class="material-icons"
+                              style="color: black;">insert_drive_file</i></a>
+                          <!-- <a class='btn btn-large waves-effect waves-dark grey lighten-5' id='pipeDatabaseSelectButton' style="margin-left: 20px;"><i class="material-icons" style="color: black;">insert_drive_file</i></a> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="extraOptionsTrigger col s12">Show more options</a>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 
   <!-- Cluster -->
@@ -1420,6 +1970,7 @@
     };
     CustomizeTwitterWidget(options);
   </script>
+  
 </body>
 
 </html>

@@ -1,15 +1,13 @@
-FROM ubuntu:xenial
-RUN apt-get update
-RUN apt install build-essential -y
-RUN apt install autoconf -y
-RUN apt install automake -y
-RUN apt install libtool -y
-RUN apt install git -y
-RUN git clone https://github.com/tseemann/PEAR.git
-RUN cd PEAR && ./configure && make && make install
-#RUN ./configure
-#RUN make
-#RUN make install
-#RUN apk del automake
-#RUN apk del autoconf
-#RUN apk del git
+FROM alpine:3.10
+RUN apk add wget
+RUN apk add perl 
+RUN apk add build-base
+RUN wget http://eddylab.org/software/hmmer/hmmer.tar.gz 
+RUN tar zxf hmmer.tar.gz
+RUN apk add python3
+RUN cd hmmer-3.3.1 \
+    && ./configure \
+    && make \
+    && make check \
+    && make install
+RUN wget https://github.com/carden24/V-Xtractor/blob/master/vxtractor.pl

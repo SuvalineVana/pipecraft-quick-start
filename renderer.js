@@ -404,19 +404,24 @@ $("#SelectedSteps").on("click", "i", function (event) {
 });
 
 // Feature discovery setup
-$("#bugreport").on("click", function () {
-  console.log("test");
+$("#stepmode").on("click", function () {
   Swal.fire({
-    title: 'Do you want to save this configuration',
-    showDenyButton: true,
-    confirmButtonText: `Save`,
-    denyButtonText: `Don't save`,
+    text: "You will lose all active configurations",
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Continue'
   }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
-      configSaveButton.click()
+      Swal.fire(
+        'Single-step mode',
+        'activated.',
+        'success'
+      )
+      console.log("test");
+      $('#FileSelectButton').toggleClass("disabled")
+      $('.StepModeButtonContainer').toggleClass("hideView")
     }
-
   })
 });
 // Custom Notifications (might be good for errors and start/finished notifications)

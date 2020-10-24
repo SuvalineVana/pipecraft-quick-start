@@ -41,18 +41,11 @@ $(document).ready(function () {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelector('.chips-initial');
-  options = {
-    data: [{
-      tag: 'Apple',
-    }, {
-      tag: 'Microsoft',
-    }, {
-      tag: 'Google',
-    }],
-  }
+  var elems = document.querySelectorAll('.chips');
   var instances = M.Chips.init(elems, options);
-})
+});
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -405,29 +398,49 @@ $("#SelectedSteps").on("click", "i", function (event) {
 
 // Feature discovery setup
 $("#stepmode").on("click", function () {
-  Swal.fire({
-    text: "You will lose all active configurations",
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Continue'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire(
-        'Single-step mode',
-        'activated.',
-        'success'
-      )
-      console.log("test");
-      $('#FileSelectButton').toggleClass("disabled")
-      $('.StepModeButtonContainer').toggleClass("hideView")
-    }
-  })
+  if ($(".activated")[0]){
+    // Do something if class exists
+    Swal.fire({
+      text: "Switching to workflow-mode will clear all active configurations",
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Continue'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $('#FileSelectButton').toggleClass("disabled")
+        $('.StepModeButtonContainer').toggleClass("hideView")
+        $('#stepmode').find('i').toggleClass('activated')
+        console.log("single-step-mode deactivated");
+        StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i");
+        for (var y = 0; y < StepsToClear.length; y++) {
+          StepsToClear[y].click();
+        }
+      }
+    })
+  } else {
+    // Do something if class does not exist
+    Swal.fire({
+      text: "Switching to singe-step-mode will clear all active configurations",
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Continue'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $('#FileSelectButton').toggleClass("disabled")
+        $('.StepModeButtonContainer').toggleClass("hideView")
+        $('#stepmode').find('i').toggleClass('activated')
+        StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i");
+        for (var y = 0; y < StepsToClear.length; y++) {
+          StepsToClear[y].click();
+        }
+        console.log("single-step-mode activated");
+      }
+    })
+  }
 });
-// Custom Notifications (might be good for errors and start/finished notifications)
-// const myNotification = new Notification('Title', {
-//   body: 'Lorem Ipsum Dolor Sit Amet'
-// })
+
 
 // Select input folder and save as env variable
 const fileSelectButton = document.getElementById("FileSelectButton");
@@ -514,15 +527,6 @@ configSaveButton.addEventListener("click", async function () {
 
 const configLoadButton = document.getElementById("loadcfg");
 configLoadButton.addEventListener("click", async function () {
-  // saveConfiguration()
-  // if (steps.length < 1) {
-  //   alert("No steps selected");
-  //   return false;
-  // }
-  // if (steps.length != Object.keys(checkedServices).length ) {
-  //   alert("A software must be checked for each step, remove unused steps");
-  //   return false;
-  // }
   dialog
     .showOpenDialog({
       title: "Select a previous configuration",

@@ -105,7 +105,7 @@
   <div class="wrapper extraction hideView blank">
     <div class="row hideView StepModeButtonContainer">
       <div class="col s12" style="padding-top: 25px; padding-left: 44%;">
-        <a id="StepModeFileSelect" class="btn btn-nav-2 grey darken-1 waves-effect waves-light btn-large tooltipped" data-position="right" data-tooltip="Select input for selected service" style="border-radius: 7px;"><i class="material-icons center">data_usage</i></a>
+        <a id="StepModeFileSelect" class="btn btn-nav-2 grey darken-1 waves-effect waves-light btn-large tooltipped" data-position="right" data-tooltip="Select input file for gene extraction" style="border-radius: 7px;"><i class="material-icons center">data_usage</i></a>
       </div>
     </div>
     <ul class="collapsible vertical-center">
@@ -1222,16 +1222,7 @@
             </div>
             <div class="col s12">
               <p>Specify forward and reverse primers manually</p>
-              <div class="chips"></div>
-              <br />
-              <p>Set initial tags.</p>
-              <div class="chips chips-initial"></div>
-              <br />
-              <p>Placeholders and override hint texts.</p>
-              <div class="chips chips-placeholder"></div>
-              <br />
-              <p>Autocomplete with chips</p>
-              <div class="chips chips-autocomplete"></div>
+              <div id="primerChip" class="chips"></div>
             </div>
             <a href="#" class="extraOptionsTrigger col s12">Show more options</a>
           </div>

@@ -1,3 +1,7 @@
+.activated {
+  color: #64ffda;
+}
+
 .manualLink{
   color: wheat !important;
 }

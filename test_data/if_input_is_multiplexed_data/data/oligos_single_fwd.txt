@@ -1,0 +1,4 @@
+#forward	ACCTGCTAGGCTAGATGC
+#reverse	GGGATCCATCGATTTAAC
+barcode	AGTCGCCT	samp1
+barcode	AGCTGCTT	samp3

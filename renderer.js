@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+primerInput = $('#primerChip').find('input')
+primerInput.onkeypress = "return /[a-z]/i.test(event.key)"
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -320,6 +323,12 @@ function switchView() {
 var i = 1;
 $(".dropdown-selection").each(function () {
   $(this).click(function () {
+    if ($(".activated")[0]){
+      StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i");
+      for (var y = 0; y < StepsToClear.length; y++) {
+        StepsToClear[y].click();
+      }
+    }
     var step = $(this).clone().removeClass("dropdown-selection");
     step.find("i").text("remove_circle_outline").addClass("RemoveButtons");
     step.find("a").addClass("viewSwitch");
@@ -399,7 +408,7 @@ $("#SelectedSteps").on("click", "i", function (event) {
 // Feature discovery setup
 $("#stepmode").on("click", function () {
   if ($(".activated")[0]){
-    // Do something if class exists
+    // if class activated exists
     Swal.fire({
       text: "Switching to workflow-mode will clear all active configurations",
       showCancelButton: true,
@@ -419,7 +428,7 @@ $("#stepmode").on("click", function () {
       }
     })
   } else {
-    // Do something if class does not exist
+    // class activated does not exist
     Swal.fire({
       text: "Switching to singe-step-mode will clear all active configurations",
       showCancelButton: true,

@@ -1,0 +1,16 @@
+#!/bin/sh
+start=`date +%s`
+
+echo "This is Mothur Demulitplexer pre-script"
+echo $bdiffs
+echo $pdiffs
+echo $min_unique_size
+echo $fwdPrimers
+echo $revPrimers
+echo $inputFilesArray
+echo $oligosFile
+echo $seqTech
+
+end=`date +%s`
+runtime=$((end-start))
+echo $runtime

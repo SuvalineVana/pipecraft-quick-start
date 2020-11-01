@@ -1,0 +1,43 @@
+Linux version
+
+Using ReadLine,Boost,GSL
+mothur v.1.43.0
+Last updated: 10/21/2019
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+
+University of Michigan
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+For questions and analysis support, please visit our forum at https://forum.mothur.org
+
+Type 'quit()' to exit program
+
+[NOTE]: Setting random seed to 19760620.
+
+Script Mode
+
+
+mothur > fastq.info(fastq=NCMV166_S153_L001_R1_001.fastq, outputdir=/input/mothur-quality-filter-output/)
+Setting output directory to: /input/mothur-quality-filter-output/
+7303
+
+Output File Names: 
+/input/mothur-quality-filter-output/NCMV166_S153_L001_R1_001.fasta
+/input/mothur-quality-filter-output/NCMV166_S153_L001_R1_001.qual
+
+
+mothur > quit()
+
+
+It took 11 seconds to run 2 commands from your script.
+

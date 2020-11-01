@@ -1,2 +1,1 @@
-Error: Command failed: docker-compose run mothur-quality-filter
-Named volume "undefined:/input:rw" is used in service "cutadapt-cut" but no declaration was found in the volumes section.
+RangeError [ERR_CHILD_PROCESS_STDIO_MAXBUFFER]: stdout maxBuffer length exceeded

@@ -20,13 +20,18 @@ var url = require("url");
 const { clear } = require("console");
 const replace = require("replace-in-file");
 let inputFilesArray = [];
+let inputFilesArraryEnv = ""
+let forwardPrimerArray = [];
+let reversePrimerArray = [];
 let numericInputs = {};
 let checkedServices = {};
 let steps = [];
 let onOffInputs = {};
 let conf2Save = [];
+let seqTech = ""
 const { Menu, MenuItem } = require("electron").remote;
 const slash = require("slash");
+
 
 
 // materialize-css
@@ -474,6 +479,7 @@ $("#stepmode").on("click", function () {
 // Select input folder and save as env variable
 const fileSelectButton = document.getElementById("FileSelectButton");
 fileSelectButton.addEventListener("click", async function () {
+  seqTech = ""
   Swal.mixin({
     input: "select",
     confirmButtonText: "Next &rarr;",
@@ -499,6 +505,8 @@ fileSelectButton.addEventListener("click", async function () {
     .then((result) => {
       if (result.value) {
         console.log(result);
+        seqTech = result.value[0]
+        console.log(seqTech)
         if (result.value[1] == "multiplexed") {
           console.log(result.value[1])
           $(".dropdown-selection.demultiplex").click()
@@ -536,6 +544,7 @@ fileSelectButton2.addEventListener("click", async function () {
         //Clear previos inputfolder from .env file
         inputFilesArray = [];
         filepathString = "";
+        inputFilesArraryEnv = ""
         await clearEnvLine("userDir");
         await clearEnvLine("inputFilesArray");
         await console.log(inputFilesArray)
@@ -554,7 +563,6 @@ fileSelectButton2.addEventListener("click", async function () {
               console.log(xyz[i])
               inputFilesArray.push(path.basename(xyz[i]))
             }
-            test12 = inputFilesArray.toString()
             filepathString = JSON.stringify(inputFilesArray)
             filepathString = filepathString.replace(/","/g, '" "')
             filepathString = filepathString.replace(/\[/g, '(')
@@ -658,10 +666,18 @@ async function collectParams(WorkFlowTag) {
         fs.truncate(envFileToClear, 0, function () {
           console.log("env file ready");
         });
+        seqTechVariable = "seqTech=" + seqTech
+        oligosFileVariable = "oligosFile=" + userDatabaseFile
+        console.log(seqTechVariable)
+        AppendToEnvFile(inputFilesArraryEnv, serviceName)
+        AppendToEnvFile(seqTechVariable, serviceName);
+        AppendToEnvFile(forwardPrimerArrayEnv, serviceName)
+        AppendToEnvFile(reversePrimerArrayEnv, serviceName)
+        AppendToEnvFile(oligosFileVariable, serviceName)
         return serviceName;
       }
     });
-  //
+  // Save hard-coded inputs
 
   // Capture numeric input
   $(WorkFlowTag)
@@ -713,6 +729,34 @@ async function collectParams(WorkFlowTag) {
 
 // Run Button
 $("#runButton").click(async function () {
+  forwardPrimerArray = [];
+  reversePrimerArray = [];
+  
+  $('#forwardPrimerChip > .chip').each(function (index, item) {
+    forwardPrimerArray.push(item.innerText.replace('close','').replace(/(\r\n|\n|\r)/gm, ""))
+    console.log(forwardPrimerArray);
+    forwardPrimerArrayString = JSON.stringify(forwardPrimerArray)
+    forwardPrimerArrayString = forwardPrimerArrayString.replace(/","/g, '" "')
+    forwardPrimerArrayString = forwardPrimerArrayString.replace(/\[/g, '(')
+    forwardPrimerArrayString = forwardPrimerArrayString.replace(/\]/g, ')')
+    console.log(forwardPrimerArrayString)
+    forwardPrimerArrayEnv = "fwdPrimers=" + forwardPrimerArrayString + "\n";
+    console.log(forwardPrimerArrayEnv)
+
+    
+  });
+  $('#reversePrimerChip > .chip').each(function (index, item) {
+    reversePrimerArray.push(item.innerText.replace('close','').replace(/(\r\n|\n|\r)/gm, ""))
+    console.log(reversePrimerArray);
+    reversePrimerArrayString = JSON.stringify(reversePrimerArray)
+    reversePrimerArrayString = reversePrimerArrayString.replace(/","/g, '" "')
+    reversePrimerArrayString = reversePrimerArrayString.replace(/\[/g, '(')
+    reversePrimerArrayString = reversePrimerArrayString.replace(/\]/g, ')')
+    console.log(reversePrimerArrayString)
+    reversePrimerArrayEnv = "revPrimers=" + reversePrimerArrayString + "\n";
+    console.log(reversePrimerArrayEnv)
+  });
+
   Swal.fire({
     title: 'Do you want to save this configuration',
     showDenyButton: true,
@@ -763,13 +807,16 @@ $(document).on("click", "#DatabaseSelectButton", async function () {
       properties: ["openFile", "showHiddenFiles"],
     })
     .then((result) => {
-      inputPathEnv = "userDatabase=" + result.filePaths + "\n";
+      console.log(result)
+      userDatabaseFolder = path.dirname(result.filePaths[0])
+      userDatabaseFile = path.basename(result.filePaths[0])
+      inputPathEnv = "userDatabase=" + userDatabaseFolder + "\n";
       // Append folder path as a variable to .env file
       fs.appendFile(".env", inputPathEnv, function (err) {
         if (err) {
           console.log("append failed");
         } else {
-          console.log("database file set as: " + result.filePaths);
+          console.log("database file set as: " + userDatabaseFile);
         }
       });
     })
@@ -784,3 +831,8 @@ $(document).on( "click", '#mothur-demultiplex', function() {
     this.value = this.value.toLocaleUpperCase(); 
   }); 
 });
+
+$(document).on( "click", '#reorientReads.lever', function() {
+  console.log('tere')
+  $('.primerInput').toggleClass('hideView')
+})

@@ -157,7 +157,7 @@ services:
  mothur-demultiplex:
   image: pipecraft/mothur:1.43
   env_file:
-   - ./env_files/mothur-demultiplex-variables.env
+   - ./env_files/mothur-demultiplex.env
   volumes:
    - ./script_folder:/execute
    -  ${userDir}:/input

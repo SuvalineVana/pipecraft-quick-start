@@ -1,0 +1,10 @@
+This is Mothur Demulitplexer pre-script
+,bdiffs=22
+,pdiffs=33
+,min_unique_size=44
+("AAA" "TTT")
+("AAA" "TTT")
+
+oligos_paired.txt
+pairedend
+0

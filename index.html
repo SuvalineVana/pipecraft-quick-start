@@ -1146,7 +1146,7 @@
         <div class="collapsible-header">MOTHUR
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
-            <label value="mothur-quality-filter">
+            <label value="mothur-demultiplex">
               <input class="serviceCB" type="checkbox" />
               <span></span>
             </label>
@@ -1175,7 +1175,7 @@
                   </div>
                   <div class="card-action"
                     style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
-                    <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
+                    <input style="display: inline-block;" class="InlineNumericInput" id=",bdiffs=" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
@@ -1188,7 +1188,7 @@
                   </div>
                   <div class="card-action"
                     style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
-                    <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
+                    <input style="display: inline-block;" class="InlineNumericInput" id=",pdiffs=" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
@@ -1201,8 +1201,27 @@
                   </div>
                   <div class="card-action"
                     style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
-                    <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
+                    <input style="display: inline-block;" class="InlineNumericInput" id=",min_unique_size=" type="number"
                       value="" min="1" step="1">
+                  </div>
+                </div>
+              </div>
+              <div class="col s3 tooltipped" data-position="top" data-tooltip="Reorient Reads" style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">Reorient reads</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <div class="switch">
+                      <label>
+                        Off
+                        <input type="checkbox" class="onOff">
+                        <span class="lever" id="reorientReads"></span>
+                        On
+                      </label><br>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1210,7 +1229,7 @@
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">add oligos file</span>
+                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">add barcodes file</span>
                   </div>
                   <div class="card-action"
                   style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
@@ -1222,11 +1241,11 @@
                 </div>
               </div>
             </div>
-            <div class="col s12">
+            <div class="col s12 hideView primerInput">
               <p>Specify forward primers manually</p>
               <div id="forwardPrimerChip" class="chips"></div>
             </div>
-            <div class="col s12">
+            <div class="col s12 hideView primerInput">
               <p>Specify reverse primers manually</p>
               <div id="reversePrimerChip" class="chips"></div>
             </div>

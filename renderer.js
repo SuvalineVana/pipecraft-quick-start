@@ -19,6 +19,7 @@ const PDFWindow = require("electron-pdf-window");
 var url = require("url");
 const { clear } = require("console");
 const replace = require("replace-in-file");
+let inputFilesArray = [];
 let numericInputs = {};
 let checkedServices = {};
 let steps = [];
@@ -111,6 +112,21 @@ new customTitlebar.Titlebar({
 });
 
 //// FUNCTIONS
+
+// restrict certain chars AND keyCodes jQuery plugin by David Hellsing
+$.fn.restrict = function( chars ) {
+  return this.keydown(function(e) {
+      var found = false, i = -1;
+      while(chars[++i] && !found) {
+          found = chars[i] == String.fromCharCode(e.which).toLowerCase() || 
+                  chars[i] == e.which;
+      }
+      if (!found) { e.preventDefault(); }
+  });
+};
+    
+// $('input').restrict(['a',8,'b']);
+
 
 //Load a previous or an external configuration via JSON
 function loadConfiguration(configLoadPath) {
@@ -417,7 +433,9 @@ $("#stepmode").on("click", function () {
       confirmButtonText: 'Continue'
     }).then((result) => {
       if (result.isConfirmed) {
-        $('#FileSelectButton').toggleClass("disabled")
+        document.getElementById("FileSelectButton").style.display = "block";
+        document.getElementById("FileSelectButton2").style.display = "none";
+        // $('#FileSelectButton').toggleClass("disabled")
         $('.StepModeButtonContainer').toggleClass("hideView")
         $('#stepmode').find('i').toggleClass('activated')
         console.log("single-step-mode deactivated");
@@ -437,7 +455,9 @@ $("#stepmode").on("click", function () {
       confirmButtonText: 'Continue'
     }).then((result) => {
       if (result.isConfirmed) {
-        $('#FileSelectButton').toggleClass("disabled")
+        document.getElementById("FileSelectButton").style.display = "none";
+        document.getElementById("FileSelectButton2").style.display = "block";
+        // $('#FileSelectButton').toggleClass("disabled")
         $('.StepModeButtonContainer').toggleClass("hideView")
         $('#stepmode').find('i').toggleClass('activated')
         StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i");
@@ -514,7 +534,12 @@ fileSelectButton.addEventListener("click", async function () {
 const fileSelectButton2 = document.getElementById("FileSelectButton2");
 fileSelectButton2.addEventListener("click", async function () {
         //Clear previos inputfolder from .env file
-        clearEnvLine("userDir");
+        inputFilesArray = [];
+        filepathString = "";
+        await clearEnvLine("userDir");
+        await clearEnvLine("inputFilesArray");
+        await console.log(inputFilesArray)
+
         // Open windows file dialog
         dialog
           .showOpenDialog({
@@ -522,18 +547,31 @@ fileSelectButton2.addEventListener("click", async function () {
             properties: ["multiSelections", "showHiddenFiles"],
           })
           .then((result) => {
-            inputPathEnv = "userDir=" + result.filePaths[0] + "\n";
-            console.log(result)
+            inputPathEnv = "userDir=" + path.dirname(result.filePaths[0]) + "\n";
+            xyz = result.filePaths
+            console.log(xyz)
+            for (var i=0; i < xyz.length; i++){
+              console.log(xyz[i])
+              inputFilesArray.push(path.basename(xyz[i]))
+            }
+            test12 = inputFilesArray.toString()
+            filepathString = JSON.stringify(inputFilesArray)
+            filepathString = filepathString.replace(/","/g, '" "')
+            filepathString = filepathString.replace(/\[/g, '(')
+            filepathString = filepathString.replace(/\]/g, ')')
+            console.log(filepathString)
+            inputFilesArraryEnv = "inputFilesArray=" + filepathString + "\n";
+            console.log(inputFilesArraryEnv)
             // Append folder path as a variable to .env file
-            // fs.appendFile(".env", inputPathEnv, function (err) {
-            //   if (err) {
-            //     console.log("append failed");
-            //   } else {
-            //     console.log(
-            //       "Local working directory set as: " + result.filePaths[0]
-            //     );
-            //   }
-            // });
+            fs.appendFile(".env", inputPathEnv, function (err) {
+              if (err) {
+                console.log("append failed");
+              } else {
+                console.log(
+                  "Local working directory set as: " +  path.dirname(result.filePaths[0])
+                );
+              }
+            });
           })
           .catch((err) => {
             console.log(err);
@@ -738,4 +776,11 @@ $(document).on("click", "#DatabaseSelectButton", async function () {
     .catch((err) => {
       console.log(err);
     });
+});
+
+$(document).on( "click", '#mothur-demultiplex', function() {
+  $('.chips').find('input').restrict([8,'a','c', 'g', 't', 'r', 'y','s','w','k','m','b','d','h','v','n']);
+  $('.chips').find('input').keyup(function() { 
+    this.value = this.value.toLocaleUpperCase(); 
+  }); 
 });

@@ -1,3 +1,4 @@
+Error: Command failed: docker-compose run vsearch-quality-filter
 The userDatabase variable is not set. Defaulting to a blank string.
 [13212] Failed to execute script docker-compose
 Traceback (most recent call last):

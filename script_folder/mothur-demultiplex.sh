@@ -10,7 +10,7 @@ echo $revPrimers
 echo $inputFilesArray
 echo $oligosFile
 echo $seqTech
-
+echo $reOrient
 end=`date +%s`
 runtime=$((end-start))
 echo $runtime

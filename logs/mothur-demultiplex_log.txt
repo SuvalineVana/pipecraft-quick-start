@@ -1,9 +1,9 @@
 This is Mothur Demulitplexer pre-script
-,bdiffs=22
+,bdiffs=44
 ,pdiffs=33
-,min_unique_size=44
-("AAA" "TTT")
-("AAA" "TTT")
+,min_unique_size=12
+("AAAA" "YYYYY")
+("TTTT" "YYYYY")
 
 oligos_paired.txt
 pairedend

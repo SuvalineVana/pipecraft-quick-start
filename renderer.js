@@ -510,6 +510,36 @@ fileSelectButton.addEventListener("click", async function () {
       }
     });
 });
+// Select input folder and save as env variable
+const fileSelectButton2 = document.getElementById("FileSelectButton2");
+fileSelectButton2.addEventListener("click", async function () {
+        //Clear previos inputfolder from .env file
+        clearEnvLine("userDir");
+        // Open windows file dialog
+        dialog
+          .showOpenDialog({
+            title: "Select input files",
+            properties: ["multiSelections", "showHiddenFiles"],
+          })
+          .then((result) => {
+            inputPathEnv = "userDir=" + result.filePaths[0] + "\n";
+            console.log(result)
+            // Append folder path as a variable to .env file
+            // fs.appendFile(".env", inputPathEnv, function (err) {
+            //   if (err) {
+            //     console.log("append failed");
+            //   } else {
+            //     console.log(
+            //       "Local working directory set as: " + result.filePaths[0]
+            //     );
+            //   }
+            // });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+
 
 // Save current configuration Button
 const configSaveButton = document.getElementById("savecfg");

@@ -6018,7 +6018,7 @@ body.keyboard-focused .dropdown-content li:focus {
   outline: 0;
   margin: 0;
   padding: 0 !important;
-  width: 120px !important;
+  width: 235px !important;
 }
 
 .chips .input:focus {
@@ -7189,6 +7189,7 @@ select {
       -ms-user-select: none;
           user-select: none;
   z-index: 1;
+  color: #FFFFFF;
 }
 
 .select-wrapper input.select-dropdown:focus {

@@ -42,6 +42,17 @@ document.addEventListener("DOMContentLoaded", function () {
   var instances = M.TapTarget.init(elems, options);
 });
 
+// document.addEventListener('DOMContentLoaded', function() {
+//   var elems = document.querySelectorAll('select');
+//   var instances = M.FormSelect.init(elems, options);
+// });
+
+// Or with jQuery
+
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
 $(document).ready(function () {
   $(".tap-target").tapTarget();
 });
@@ -52,20 +63,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-primerInput = $('#primerChip').find('input')
-primerInput.onkeypress = "return /[a-z]/i.test(event.key)"
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".tooltipped");
   var instances = M.Tooltip.init(elems, options);
 });
 
-
-$(document).ready(function () {
-  $("input#input_text, textarea#textarea2").characterCounter();
-});
 
 $(document).ready(function () {
   $(".sidenav").sidenav();
@@ -129,9 +132,7 @@ $.fn.restrict = function( chars ) {
       if (!found) { e.preventDefault(); }
   });
 };
-    
-// $('input').restrict(['a',8,'b']);
-
+  
 
 //Load a previous or an external configuration via JSON
 function loadConfiguration(configLoadPath) {
@@ -440,7 +441,6 @@ $("#stepmode").on("click", function () {
       if (result.isConfirmed) {
         document.getElementById("FileSelectButton").style.display = "block";
         document.getElementById("FileSelectButton2").style.display = "none";
-        // $('#FileSelectButton').toggleClass("disabled")
         $('.StepModeButtonContainer').toggleClass("hideView")
         $('#stepmode').find('i').toggleClass('activated')
         console.log("single-step-mode deactivated");
@@ -462,7 +462,6 @@ $("#stepmode").on("click", function () {
       if (result.isConfirmed) {
         document.getElementById("FileSelectButton").style.display = "none";
         document.getElementById("FileSelectButton2").style.display = "block";
-        // $('#FileSelectButton').toggleClass("disabled")
         $('.StepModeButtonContainer').toggleClass("hideView")
         $('#stepmode').find('i').toggleClass('activated')
         StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i");
@@ -484,14 +483,22 @@ fileSelectButton.addEventListener("click", async function () {
     input: "select",
     confirmButtonText: "Next &rarr;",
     showCancelButton: true,
-    progressSteps: ["1", "2"],
+    progressSteps: ["1", "2", "3", "4"],
   })
     .queue([
       {
         title: "Sequencing technology",
         inputOptions: {
+          illumina: "Illumina",
+          pacbio: "PacBio",
+        },
+      },
+      {
+        title: "Sequencing read types",
+        inputOptions: {
           singleend: "single-end",
           pairedend: "paired-end",
+          smrt: "SMRT"
         },
       },
       {
@@ -499,6 +506,16 @@ fileSelectButton.addEventListener("click", async function () {
         inputOptions: {
           demulitplexed: "demulitplexed",
           multiplexed: "multiplexed",
+        },
+      },
+      {
+        title: "Sequencing files format",
+        inputOptions: {
+          fastq: "*.fastq",
+          fasta: "*.fasta",
+          fq: "*.fq",
+          fa: "*.fa",
+          txt: "*.txt",
         },
       },
     ])
@@ -834,5 +851,5 @@ $(document).on( "click", '#mothur-demultiplex', function() {
 
 $(document).on( "click", '#reorientReads.lever', function() {
   console.log('tere')
-  $('.primerInput').toggleClass('hideView')
+  $('.primerInput').fadeToggle()
 })

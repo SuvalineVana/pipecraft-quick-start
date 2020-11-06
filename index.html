@@ -1167,37 +1167,19 @@
               </div>
             </div>
             <div class="row" style="margin: 0;">
+
               <div class="col s4 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
                     <span class="card-title"
-                      style="font-size: 18px; margin: 0; line-height: 18px;">Sequencing platform</span>
+                      style="font-size: 18px; margin: 0; line-height: 18px;">Sequencing files extension</span>
                   </div>
                   <div class="card-action"
                     style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
                     <div class="input-field" style="color: #FFFFFF">
                       <select>
-                        <option value="" disabled selected>Choose platform</option>
-                        <option value="1">Illumina</option>
-                        <option value="2">PacBio</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col s4 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
-                    <span class="card-title"
-                      style="font-size: 18px; margin: 0; line-height: 18px;">Sequencing files format</span>
-                  </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
-                    <div class="input-field" style="color: #FFFFFF">
-                      <select>
-                        <option value="" disabled selected>Choose files format</option>
+                        <!-- <option value="" disabled selected>Choose files extension</option> -->
                         <option value="1">*.fastq</option>
                         <option value="2">*.fasta</option>
                         <option value="2">*.fq</option>
@@ -1213,15 +1195,34 @@
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
                     <span class="card-title"
-                      style="font-size: 18px; margin: 0; line-height: 18px;">Sequencing read types</span>
+                      style="font-size: 18px; margin: 0; line-height: 18px;">Sequencing type</span>
                   </div>
                   <div class="card-action"
                     style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
                     <div class="input-field" style="color: #FFFFFF">
                       <select>
-                        <option value="" disabled selected>Choose reads type</option>
+                        <option value="" disabled selected>Choose sequencing type</option>
                         <option value="1">Paired-End</option>
                         <option value="2">Single-End</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col s4 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
+                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
+                  <div class="card-content white-text"
+                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
+                    <span class="card-title"
+                      style="font-size: 18px; margin: 0; line-height: 18px;">Barcodes</span>
+                  </div>
+                  <div class="card-action"
+                    style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                    <div class="input-field" style="color: #FFFFFF">
+                      <select>
+                        <option value="" disabled selected>Barcodes</option>
+                        <option value="1">paired-end</option>
+                        <option value="2">single-end</option>
                       </select>
                     </div>
                   </div>

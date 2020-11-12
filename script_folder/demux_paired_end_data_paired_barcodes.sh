@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Input = paired-end fastq or fasta files; and barcodes file (oligos file).
-#Supported formats = fastq, fq, fasta, fa, txt.
+#Supported formats = fastq, fq, fasta, fa, txt.npm
 
 #Demultiplex paired-end fastq/fasta based on the specified barcodes file (states the barcodes per sample; optionally also primers).
 #Barcodes file has to be formatted as paired-end barcodes.
@@ -26,13 +26,26 @@
 ##########################################################
 
 ############################### variables FOR local TESTING
-extension=$"fasta"
-inputR1=$"R1.fasta" 
-inputR2=$"R2.fasta"
-barcodes_file=$",oligos=oligos_paired.txt"
-bdiffs=$",bdiffs=1"
-pdiffs=$",pdiffs=2"
-tdiffs=$",tdiffs=5"
+
+echo $extension
+echo $bdiffs
+echo $pdiffs
+echo $tdiffs
+echo $barcodes_file
+echo $dataFormat
+echo $readType
+inputR1=$(echo *R1*$extension)
+inputR2=$(echo *R2*$extension)
+echo $inputR1
+echo $inputR2
+#extension=$"fastq.gz"
+#inputR1=$"/input/R1.fastq.gz" 
+#inputR2=$"/input/R2.fastq.gz"
+#barcodes_file=$",oligos=/input/oligos_paired.txt"
+echo $barcodes_file
+#bdiffs=$",bdiffs=1"
+#pdiffs=$",pdiffs=2"
+#tdiffs=$",tdiffs=5"
 processors=$",processors=1"
 ###############################
 #set -e
@@ -59,6 +72,8 @@ if [[ $check_compress == "gz" ]] || [[ $check_compress == "zip" ]]; then
 	fi
 	extension=$(echo $extension | (awk 'BEGIN{FS=OFS="."} {print $(NF-1)}';))
 fi
+
+
 
 #If fastq file extension is fq, then rename to fastq (for consistency)
 if [[ $extension == "fq" ]]; then
@@ -95,6 +110,7 @@ if [[ $extension == "fa" ]] || [[ $extension == "fas" ]] || [[ $extension == "fn
 	printf "\e[35m   $inputR2.$extension\n\e[0m"
 fi
 
+echo $extension
 ###### PAIRED BARCODES DEMUX; PAIRED-END DATA (R1 and R2)
 ###Pre-processing input based on extension (fastq or fasta)
 #if input = fastq
@@ -108,7 +124,7 @@ if [[ $extension == "fastq" ]]; then
 	seqkit replace --quiet -p '.+' -r 'Seq{nr}' $inputR1.$extension > .R1.renamed.temp
 	#Check errors
 	if [ "$?" != "0" ]; then
-		printf "\e[31m[ERROR]: check $inputR1.$extension\nQuitting\n\e[0m" && exit
+		printf "\e[31m[ERROR 111]: check $inputR1.$extension\nQuitting\n\e[0m" && exit
 	fi
 	#Rename sequences R2
 	seqkit replace --quiet -p '.+' -r 'Seq{nr}' $inputR2.$extension > .R2.renamed.temp
@@ -131,7 +147,7 @@ if [[ $extension == "fastq" ]]; then
 	vsearch --fastx_filter .R1.renamed.temp --quiet --fasta_width 0 --fastq_qmax 93 --fastaout .R1.renamed.fasta
 	#Check errors
 	if [ "$?" != "0" ]; then
-		printf "\e[31m[ERROR]: check $inputR1.$extension\nQuitting\n\e[0m" && exit
+		printf "\e[31m[ERROR 134]: check $inputR1.$extension\nQuitting\n\e[0m" && exit
 	fi
 	vsearch --fastx_filter .R2.renamed.temp --quiet --fasta_width 0 --fastq_qmax 93 --fastaout .R2.renamed.fasta
 	#Check errors
@@ -148,7 +164,7 @@ elif [[ $extension == "fasta" ]]; then
 	seqkit replace --quiet -p '.+' -r 'Seq{nr}' $inputR1.$extension > .R1.renamed.temp
 	#Check errors
 	if [ "$?" != "0" ]; then
-		printf "\e[31m[ERROR]: check $inputR1.$extension\nQuitting\n\e[0m" && exit
+		printf "\e[31m[ERROR 151]: check $inputR1.$extension\nQuitting\n\e[0m" && exit
 	fi
 	#Rename sequences R2
 	seqkit replace --quiet -p '.+' -r 'Seq{nr}' $inputR2.$extension > .R2.renamed.temp
@@ -220,10 +236,10 @@ mv .R1R2.groups demux.groups
 ###Generate FASTQ/FASTA files per sample based on demux.groups file
 #demux R1
 printf "\nDemultiplexing R1\n"
-python demux_FASTX_based_on_groupsFile.py .R1.renamed.temp $extension
+python3 /execute/demux_FASTX_based_on_groupsFile.py .R1.renamed.temp $extension
 #Check errors
 if [ "$?" != "0" ]; then
-	printf "\e[31m[ERROR]: check $inputR1.$extension\nQuitting\n\e[0m" && exit
+	printf "\e[31m[ERROR 226]: check $inputR1.$extension\nQuitting\n\e[0m" && exit
 fi
 #remove redundant files
 rm Relabelled_input.fastx
@@ -245,7 +261,7 @@ cd ..
 
 #demux R2
 printf "Demultiplexing R2\n"
-python demux_FASTX_based_on_groupsFile.py .R2.renamed.temp $extension
+python3 /execute/demux_FASTX_based_on_groupsFile.py .R2.renamed.temp $extension
 #Check errors
 if [ "$?" != "0" ]; then
 	printf "\e[31m[ERROR]: check $inputR2.$extension\nQuitting\n\e[0m" && exit

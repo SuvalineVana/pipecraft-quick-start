@@ -5849,6 +5849,7 @@ body.keyboard-focused .dropdown-content li:focus {
 }
 
 .collapsible-header {
+  justify-content: center;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -7145,10 +7146,13 @@ select {
 
 select.browser-default {
   display: block;
+  color: #FFFFFF;
+  background: #536976;
+  border: 1px solid #bbd2c5;
 }
 
 select {
-  background-color: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(to left, #bbd2c5, #536976);
   width: 100%;
   padding: 5px;
   border: 1px solid #f2f2f2;

@@ -1,3 +1,0 @@
-Error: Command failed: docker-compose run mothur-demultiplex
-time="2020-11-06T10:56:28+02:00" level=error msg="error waiting for container: context canceled"
-Error response from daemon: OCI runtime create failed: container_linux.go:349: starting container process caused "exec: \"/execute/mothur-demultiplex.sh\": permission denied": unknown

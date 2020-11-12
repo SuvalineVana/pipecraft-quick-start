@@ -1168,7 +1168,7 @@
             </div>
             <div class="row" style="margin: 0;">
 
-              <div class="col s4 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
+              <div class="col s4 tooltipped demuxStepSelect hideView" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
@@ -1178,19 +1178,20 @@
                   <div class="card-action"
                     style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
                     <div class="input-field" style="color: #FFFFFF">
-                      <select>
-                        <!-- <option value="" disabled selected>Choose files extension</option> -->
-                        <option value="1">*.fastq</option>
-                        <option value="2">*.fasta</option>
-                        <option value="2">*.fq</option>
-                        <option value="2">*.fa</option>
-                        <option value="2">*.txt</option>
+                      <select class="browser-default">
+                        <option value="notSelected" disabled selected></option>
+                        <option value="fastq">*.fastq</option>
+                        <option value="fasta">*.fasta</option>
+                        <option value="fq">*.fq</option>
+                        <option value="fa">*.fa</option>
+                        <option value="txt">*.txt</option>
+                        <option value="fastq.gz">*.fastq.gz</option>
                       </select>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col s4 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
+              <div class="col s4 tooltipped demuxStepSelect hideView" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
@@ -1200,8 +1201,8 @@
                   <div class="card-action"
                     style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
                     <div class="input-field" style="color: #FFFFFF">
-                      <select>
-                        <option value="" disabled selected>Choose sequencing type</option>
+                      <select class="browser-default">
+                        <option value="notSelected" disabled selected></option>
                         <option value="1">Paired-End</option>
                         <option value="2">Single-End</option>
                       </select>
@@ -1209,7 +1210,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col s4 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
+              <div class="col s4 tooltipped demuxStepSelect hideView" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
@@ -1219,8 +1220,8 @@
                   <div class="card-action"
                     style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
                     <div class="input-field" style="color: #FFFFFF">
-                      <select>
-                        <option value="" disabled selected>Barcodes</option>
+                      <select class="browser-default">
+                        <option value="notSelected" disabled selected></option>
                         <option value="1">paired-end</option>
                         <option value="2">single-end</option>
                       </select>

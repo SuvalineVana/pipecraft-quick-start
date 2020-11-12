@@ -163,7 +163,8 @@ services:
    -  ${userDir}:/input
    -  ${userDatabase}:/userdatabase
    - ./pipe_base:/pipebase
-  command: [/execute/mothur-demultiplex.sh]
+  working_dir: ${workdir}
+  command: [/execute/demux_paired_end_data_paired_barcodes.sh]
   #OBITOOLS
  obitools-demultiplex:
   image: pipecraft/obitools:3

@@ -28,7 +28,9 @@ let checkedServices = {};
 let steps = [];
 let onOffInputs = {};
 let conf2Save = [];
-let seqTech = ""
+let readType = ""
+let dataFormat = ""
+let fileExtension = ""
 const { Menu, MenuItem } = require("electron").remote;
 const slash = require("slash");
 
@@ -42,15 +44,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var instances = M.TapTarget.init(elems, options);
 });
 
-// document.addEventListener('DOMContentLoaded', function() {
-//   var elems = document.querySelectorAll('select');
-//   var instances = M.FormSelect.init(elems, options);
-// });
-
-// Or with jQuery
-
-$(document).ready(function(){
-  $('select').formSelect();
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems, options);
 });
 
 $(document).ready(function () {
@@ -61,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.chips');
   var instances = M.Chips.init(elems, options);
 });
-
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -442,6 +437,7 @@ $("#stepmode").on("click", function () {
         document.getElementById("FileSelectButton").style.display = "block";
         document.getElementById("FileSelectButton2").style.display = "none";
         $('.StepModeButtonContainer').toggleClass("hideView")
+        $(".demuxStepSelect").toggleClass("hideView")
         $('#stepmode').find('i').toggleClass('activated')
         console.log("single-step-mode deactivated");
         StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i");
@@ -463,6 +459,7 @@ $("#stepmode").on("click", function () {
         document.getElementById("FileSelectButton").style.display = "none";
         document.getElementById("FileSelectButton2").style.display = "block";
         $('.StepModeButtonContainer').toggleClass("hideView")
+        $(".demuxStepSelect").toggleClass("hideView")
         $('#stepmode').find('i').toggleClass('activated')
         StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i");
         for (var y = 0; y < StepsToClear.length; y++) {
@@ -478,27 +475,21 @@ $("#stepmode").on("click", function () {
 // Select input folder and save as env variable
 const fileSelectButton = document.getElementById("FileSelectButton");
 fileSelectButton.addEventListener("click", async function () {
-  seqTech = ""
+  readType = ""
+  dataFormat = ""
+  fileExtension = ""
   Swal.mixin({
     input: "select",
     confirmButtonText: "Next &rarr;",
     showCancelButton: true,
-    progressSteps: ["1", "2", "3", "4"],
+    progressSteps: ["1", "2", "3"],
   })
     .queue([
-      {
-        title: "Sequencing technology",
-        inputOptions: {
-          illumina: "Illumina",
-          pacbio: "PacBio",
-        },
-      },
       {
         title: "Sequencing read types",
         inputOptions: {
           singleend: "single-end",
           pairedend: "paired-end",
-          smrt: "SMRT"
         },
       },
       {
@@ -509,23 +500,33 @@ fileSelectButton.addEventListener("click", async function () {
         },
       },
       {
-        title: "Sequencing files format",
+        title: "Sequence files extension",
         inputOptions: {
-          fastq: "*.fastq",
-          fasta: "*.fasta",
-          fq: "*.fq",
-          fa: "*.fa",
-          txt: "*.txt",
+          'Uncompressed':{
+            fastq: "*.fastq",
+            fasta: "*.fasta",
+            fq: "*.fq",
+            fa: "*.fa",
+            txt: "*.txt",
+          },
+          'Compressed':{
+            fastqDOTgz: "*.fastq.gz",
+            fastaDOTgz: "*.fasta.gz",
+            fqDOTgz: "*.fq.gz",
+            faDOTgz: "*.fa.gz",
+            txtDOTgz: "*.txt.gz",
+          },
         },
       },
     ])
     .then((result) => {
       if (result.value) {
         console.log(result);
-        seqTech = result.value[0]
-        console.log(seqTech)
+        readType = result.value[0]
+        dataFormat = result.value[1]
+        fileExtension = result.value[2].replace("DOT", ".")
         if (result.value[1] == "multiplexed") {
-          console.log(result.value[1])
+          $('#SelectedSteps > .demultiplex').find('i').click()
           $(".dropdown-selection.demultiplex").click()
         }
         //Clear previos inputfolder from .env file
@@ -683,13 +684,17 @@ async function collectParams(WorkFlowTag) {
         fs.truncate(envFileToClear, 0, function () {
           console.log("env file ready");
         });
-        seqTechVariable = "seqTech=" + seqTech
-        oligosFileVariable = "oligosFile=" + userDatabaseFile
-        console.log(seqTechVariable)
-        AppendToEnvFile(inputFilesArraryEnv, serviceName)
-        AppendToEnvFile(seqTechVariable, serviceName);
-        AppendToEnvFile(forwardPrimerArrayEnv, serviceName)
-        AppendToEnvFile(reversePrimerArrayEnv, serviceName)
+        readTypeVariable = "readType=" + readType
+        dataFormatVariable = "dataFormat=" + dataFormat
+        fileExtensionVariable = "extension=" + fileExtension
+        // barcodes_file=$",oligos=/input/oligos_paired.txt"
+        oligosFileVariable = "barcodes_file=,oligos=/userdatabase/" + userDatabaseFile
+        // AppendToEnvFile(inputFilesArraryEnv, serviceName)
+        // AppendToEnvFile(forwardPrimerArrayEnv, serviceName)
+        // AppendToEnvFile(reversePrimerArrayEnv, serviceName)
+        AppendToEnvFile(readTypeVariable, serviceName);
+        AppendToEnvFile(dataFormatVariable, serviceName);
+        AppendToEnvFile(fileExtensionVariable, serviceName);
         AppendToEnvFile(oligosFileVariable, serviceName)
         return serviceName;
       }
@@ -746,33 +751,33 @@ async function collectParams(WorkFlowTag) {
 
 // Run Button
 $("#runButton").click(async function () {
-  forwardPrimerArray = [];
-  reversePrimerArray = [];
+  // forwardPrimerArray = [];
+  // reversePrimerArray = [];
   
-  $('#forwardPrimerChip > .chip').each(function (index, item) {
-    forwardPrimerArray.push(item.innerText.replace('close','').replace(/(\r\n|\n|\r)/gm, ""))
-    console.log(forwardPrimerArray);
-    forwardPrimerArrayString = JSON.stringify(forwardPrimerArray)
-    forwardPrimerArrayString = forwardPrimerArrayString.replace(/","/g, '" "')
-    forwardPrimerArrayString = forwardPrimerArrayString.replace(/\[/g, '(')
-    forwardPrimerArrayString = forwardPrimerArrayString.replace(/\]/g, ')')
-    console.log(forwardPrimerArrayString)
-    forwardPrimerArrayEnv = "fwdPrimers=" + forwardPrimerArrayString + "\n";
-    console.log(forwardPrimerArrayEnv)
+  // $('#forwardPrimerChip > .chip').each(function (index, item) {
+  //   forwardPrimerArray.push(item.innerText.replace('close','').replace(/(\r\n|\n|\r)/gm, ""))
+  //   console.log(forwardPrimerArray);
+  //   forwardPrimerArrayString = JSON.stringify(forwardPrimerArray)
+  //   forwardPrimerArrayString = forwardPrimerArrayString.replace(/","/g, '" "')
+  //   forwardPrimerArrayString = forwardPrimerArrayString.replace(/\[/g, '(')
+  //   forwardPrimerArrayString = forwardPrimerArrayString.replace(/\]/g, ')')
+  //   console.log(forwardPrimerArrayString)
+  //   forwardPrimerArrayEnv = "fwdPrimers=" + forwardPrimerArrayString + "\n";
+  //   console.log(forwardPrimerArrayEnv)
 
     
-  });
-  $('#reversePrimerChip > .chip').each(function (index, item) {
-    reversePrimerArray.push(item.innerText.replace('close','').replace(/(\r\n|\n|\r)/gm, ""))
-    console.log(reversePrimerArray);
-    reversePrimerArrayString = JSON.stringify(reversePrimerArray)
-    reversePrimerArrayString = reversePrimerArrayString.replace(/","/g, '" "')
-    reversePrimerArrayString = reversePrimerArrayString.replace(/\[/g, '(')
-    reversePrimerArrayString = reversePrimerArrayString.replace(/\]/g, ')')
-    console.log(reversePrimerArrayString)
-    reversePrimerArrayEnv = "revPrimers=" + reversePrimerArrayString + "\n";
-    console.log(reversePrimerArrayEnv)
-  });
+  // });
+  // $('#reversePrimerChip > .chip').each(function (index, item) {
+  //   reversePrimerArray.push(item.innerText.replace('close','').replace(/(\r\n|\n|\r)/gm, ""))
+  //   console.log(reversePrimerArray);
+  //   reversePrimerArrayString = JSON.stringify(reversePrimerArray)
+  //   reversePrimerArrayString = reversePrimerArrayString.replace(/","/g, '" "')
+  //   reversePrimerArrayString = reversePrimerArrayString.replace(/\[/g, '(')
+  //   reversePrimerArrayString = reversePrimerArrayString.replace(/\]/g, ')')
+  //   console.log(reversePrimerArrayString)
+  //   reversePrimerArrayEnv = "revPrimers=" + reversePrimerArrayString + "\n";
+  //   console.log(reversePrimerArrayEnv)
+  // });
 
   Swal.fire({
     title: 'Do you want to save this configuration',

@@ -20,6 +20,7 @@ seq_dict = {}
 groups_dict = {} 
 for line in groups:
     line = line.strip("\n").split("\t")
+    print(line)
     m += [line[0]]
     if line[0] in seq_dict:
         print("WARNING: Sequence <", line[0], "> appears multiple times in .groups file.")
@@ -33,13 +34,14 @@ groups.close()
 
 ### Add sample names to seq headers based on groups file ###
 OUTPUT = open("Relabelled_input.fastx", "w+")
+print(OUTPUT)
 records = SeqIO.parse(infile, informat)
 for record in records:
     if record.id in seq_dict:
         record.id = "%s;sample=%s%s" % (record.id, seq_dict[record.id], "\t")
         OUTPUT.write(record.format(informat))
 OUTPUT.close()
-records.close()
+#records.close()
 
 cmd = "sed -e 's/\t.*//' Relabelled_input.fastx > Relabelled_input.fastx.temp"
 os.system(cmd)

@@ -24,8 +24,8 @@
       }
     }      
   </script>
-
-
+  <link rel="stylesheet" href="node_modules/xterm/css/xterm.css" />
+  <script src="node_modules/xterm/lib/xterm.js"></script>
   <title>Pipecraft 2.0 alfa</title>
 </head>
 
@@ -1753,6 +1753,10 @@
           </span></div>
       </li>
   </div>
+  <!-- Expert Mode -->
+  <div class="wrapper">
+    <div id="terminal"></div>
+  </div>
 
   <!-- PlutoF twitter timeline -->
   <div class="wrapper hideView" id="PlutoTwitter">
@@ -1760,6 +1764,8 @@
       href="https://twitter.com/plutof_platform?ref_src=twsrc%5Etfw">Tweets by plutof_platform</a>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
+
+
 
   <!-- Assemble paired-end sequences -->
   <div class="wrapper assemble-paired hideView blank">

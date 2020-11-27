@@ -33,8 +33,25 @@ let dataFormat = ""
 let fileExtension = ""
 const { Menu, MenuItem } = require("electron").remote;
 const slash = require("slash");
+const ipc = require("electron").ipcRenderer
 
 
+// Terminal Window
+// const { Terminal } = require("xterm");
+var term = new Terminal({
+  theme: { background: '#b83dff', foreground: '#dec5ed' },
+  rows: 20,
+  cols: 104
+});
+term.open(document.getElementById("terminal"))
+// term.write("hello")
+term.onData(e => {
+  ipc.send("terminal.toTerm", e);
+});
+
+ipc.on("terminal.incData", function(event, data){
+  term.write(data);
+})
 
 // materialize-css
 
@@ -421,6 +438,11 @@ $("#SelectedSteps").on("click", "i", function (event) {
     $(newView).fadeIn(500, function () {});
   }
 });
+
+$("#expertmode").on("click", function () {
+  $(newView).fadeOut(250, function () {});
+  $('#expertMode').fadeIn(250, function () {});
+})
 
 // Feature discovery setup
 $("#stepmode").on("click", function () {

@@ -16,7 +16,7 @@ function createWindow() {
     width: 1280,
     height: 720,
     frame: false,
-    resizable: false,
+    resizable: true,
     // maxWidth: 1280,
     maximizable: false,
     // fullscreenable: false,

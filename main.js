@@ -51,8 +51,9 @@ function createWindow() {
   ptyProcess.on("data", function(data) {
     mainWindow.webContents.send("terminal.incData", data);
   });
-  ptyProcess.write('echo "Setting up the terminal"\r');
-  ptyProcess.write('clear\r');
+  ptyProcess.write('clear\r')
+  // ptyProcess.write('echo "Setting up the terminal"\r');
+  // ptyProcess.write('clear\r');
 
   ipcMain.on("terminal.toTerm", function(event, data){
     ptyProcess.write(data);

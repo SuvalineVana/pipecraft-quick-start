@@ -39,9 +39,9 @@ const ipc = require("electron").ipcRenderer
 // Terminal Window
 // const { Terminal } = require("xterm");
 var term = new Terminal({
-  theme: { background: '#b83dff', foreground: '#dec5ed' },
+  theme: { background: 'linear-gradient(to right, #0f2027, #203a43, #2c5364)', foreground: '#fffff' },
   rows: 20,
-  cols: 104
+  cols: 100,
 });
 term.open(document.getElementById("terminal"))
 // term.write("hello")
@@ -124,6 +124,7 @@ menu1.append(
 );
 
 const customTitlebar = require("custom-electron-titlebar");
+const { RGBA } = require("custom-electron-titlebar");
 new customTitlebar.Titlebar({
   backgroundColor: customTitlebar.Color.fromHex("#757575"),
   menu: menu1,

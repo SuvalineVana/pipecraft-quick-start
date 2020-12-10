@@ -51,12 +51,24 @@ function createWindow() {
   ptyProcess.on("data", function(data) {
     mainWindow.webContents.send("terminal.incData", data);
   });
-  ptyProcess.write('clear\r')
+  // ptyProcess.write('clear\r')
   // ptyProcess.write('echo "Setting up the terminal"\r');
   // ptyProcess.write('clear\r');
 
   ipcMain.on("terminal.toTerm", function(event, data){
     ptyProcess.write(data);
+  });
+
+  ipcMain.on("clearTerminal", function(){
+    ptyProcess.write('ls\r');
+  });
+
+  ipcMain.on("startContainer", function(event, data){
+    ptyProcess.write(data);
+  });
+
+  ipcMain.on("exitContainer", function(){
+    ptyProcess.write('exit\r');
   });
 }
 

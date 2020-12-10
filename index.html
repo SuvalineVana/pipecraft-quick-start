@@ -37,6 +37,7 @@
       <p>A bunch of text</p>
     </div>
   </div>
+ 
   <!-- Loading spinner Overlay https://codepen.io/umng/pen/wZzbbQ -->
   <div class="spannerWrapper">
   </div>
@@ -45,6 +46,7 @@
     <div class="loader"></div>
     <p>Running workflow.</p>
   </div>
+
   <!-- Sidenav2 -->
   <ul id="slide-out2" class="sidenav sidenav-fixed">
     <a id="savecfg" class="btn btn-nav-2 grey darken-1 waves-effect waves-light btn-small tooltipped"
@@ -103,111 +105,94 @@
     <ul id="SelectedSteps"></ul>
   </ul>
 
-  <!-- Gene extraction -->
+  <!-- Gene extraction Cleaned-->
   <div class="wrapper extraction hideView blank">
-    <div class="row hideView StepModeButtonContainer">
-      <div class="col s12" style="padding-top: 25px; padding-left: 44%;">
-        <a id="StepModeFileSelect" class="btn btn-nav-2 grey darken-1 waves-effect waves-light btn-large tooltipped" data-position="right" data-tooltip="Select input file for gene extraction" style="border-radius: 7px;"><i class="material-icons center">data_usage</i></a>
-      </div>
-    </div>
     <ul class="collapsible vertical-center">
       <li>
-        <div class="collapsible-header">ITSx
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="itsx-gene-extraction">
               <input class="serviceCB" type="checkbox"/>
-              <span></span>
+              <span style="color: black;">ITSX</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="itsx-gene-extraction"><span>
-          <div class="row" style="margin: 0;">
+          <div class="row">
             <div class="col s12">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_filter</span>
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastq_filter</span>
                   <p>Performs quality filtering.</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <a href="#" class="manualLink" id="mothur_trim_seqs.pdf">Read the ITSx manual for more info</a>
                 </div>
               </div>
             </div>
-              <div class="col s3 offset-s3 tooltipped" data-position="top" data-tooltip="Domain E-value cutoff a sequence must obtain in the HMMERbased step to be included in the output. Default = 1e-5." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
-                    <span class="card-title"
-                      style="font-size: 18px; margin: 0; line-height: 18px;">E-value</span>
+              <div class="col s3 tooltipped" style="margin-left: 25%;" data-position="top" data-tooltip="Domain E-value cutoff a sequence must obtain in the HMMERbased step to be included in the output. Default = 1e-5." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">E-value</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-E" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard if there are > k Ns in the read." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxns k</span>
+              <div class="col s3 tooltipped" style="margin-right: 25%;" data-position="top" data-tooltip="Discard if there are > k Ns in the read." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_maxns k</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_minlen L</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_minlen L</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_minlen" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_stripleft N</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_stripleft N</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_stripleft" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_truncqual N</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_truncqual N</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_truncqual" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee_rate E</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_maxee_rate E</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee_rate" type="number"
                       value="" min="1" step="1">
                   </div>
@@ -218,102 +203,90 @@
         </div>
       </li>
       <li>
-        <div class="collapsible-header">Metaxa
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="metaxa-gene-extraction">
               <input class="serviceCB" type="checkbox"/>
-              <span></span>
+              <span style="color: black;">METAXA</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="metaxa-gene-extraction"><span>
-          <div class="row" style="margin: 0;">
+          <div class="row">
             <div class="col s12">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_filter</span>
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastq_filter</span>
                   <p>Performs quality filtering.</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <a href="#" class="manualLink" id="mothur_trim_seqs.pdf">Read the USEARCH manual for more info</a>
                 </div>
               </div>
             </div>
-              <div class="col s3 offset-s3 tooltipped" data-position="top" data-tooltip="Discard reads with > E total expected errors for all bases in the read after any truncation options have been applied." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
-                    <span class="card-title"
-                      style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee E</span>
+              <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard reads with > E total expected errors for all bases in the read after any truncation options have been applied." style="margin-left: 25%;">
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_maxee E</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard if there are > k Ns in the read." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxns k</span>
+              <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard if there are > k Ns in the read." style="margin-right: 25%;">
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_maxns k</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
-                    <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
-                      value="" min="1" step="1">
+                  <div class="card-action nrParameterCardAction">
+                    <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxns" type="number"
+                    value="1" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_minlen L</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_minlen L</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_minlen" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_stripleft N</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_stripleft N</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_stripleft" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_truncqual N</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_truncqual N</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_truncqual" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee_rate E</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_maxee_rate E</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee_rate" type="number"
                       value="" min="1" step="1">
                   </div>
@@ -324,102 +297,90 @@
         </div>
       </li>
       <li>
-        <div class="collapsible-header">V-Xtractor
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="vxtractor-gene-extraction">
               <input class="serviceCB" type="checkbox"/>
-              <span></span>
+              <span style="color: black; white-space: nowrap;">V-XTRACTOR</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="vxtractor-gene-extraction"><span>
-          <div class="row" style="margin: 0;">
+          <div class="row">
             <div class="col s12">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_filter</span>
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastq_filter</span>
                   <p>Performs quality filtering.</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <a href="#" class="manualLink" id="mothur_trim_seqs.pdf">Read the USEARCH manual for more info</a>
                 </div>
               </div>
             </div>
-              <div class="col s3 offset-s3 tooltipped" data-position="top" data-tooltip="Discard reads with > E total expected errors for all bases in the read after any truncation options have been applied." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
-                    <span class="card-title"
-                      style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee E</span>
+              <div class="col s3 offset-s3 tooltipped" style="margin-left: 25%;" data-position="top" data-tooltip="Discard reads with > E total expected errors for all bases in the read after any truncation options have been applied." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_maxee E</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard if there are > k Ns in the read." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxns k</span>
+              <div class="col s3 tooltipped" style="margin-right: 25%;" data-position="top" data-tooltip="Discard if there are > k Ns in the read." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_maxns k</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_minlen L</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_minlen L</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_minlen" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_stripleft N</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_stripleft N</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_stripleft" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_truncqual N</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_truncqual N</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_truncqual" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee_rate E</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_maxee_rate E</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee_rate" type="number"
                       value="" min="1" step="1">
                   </div>
@@ -435,14 +396,15 @@
   <div class="wrapper cut hideView blank">
     <ul class="collapsible vertical-center">
       <li>
-        <div class="collapsible-header">cutadapt
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="cutadapt-cut">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">CUTADAPT</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="vsearch-quality-filter">
           <div class="row">
@@ -547,27 +509,29 @@
         </div>
       </li>
       <li>
-        <div class="collapsible-header">Trimmomatic
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="trimmomatic-cut">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">TRIMMOMATIC</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body">
         </div>
       </li>
       <li>
-        <div class="collapsible-header"></i>Mothur
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="mothur-cut">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">MOTHUR</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body">
           <div class="flexcontainer" style="width:260x; height:260px;">
@@ -594,108 +558,102 @@
   <div class="wrapper quality hideView blank">
     <ul class="collapsible vertical-center">
       <li>
-        <div class="collapsible-header">VSEARCH
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="vsearch-quality-filter">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">VSEARCH</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="vsearch-quality-filter">
           <div class="row">
             <div class="col s12">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_filter</span>
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastq_filter</span>
                   <p>Shorten and/or filter sequences in your FASTQ files.</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <a href="#" class="manualLink" id="vsearch_manual.pdf">Read the VSEARCH manual for more info</a>
                 </div>
               </div>
             </div>
-            <div class="col s6">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_maxee</span>
-                  <p>discard sequences with more than the specified number of expected errors.</p>
+            <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard sequences with more than the specified number of expected errors" style="margin-left: 12.5%;">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastq_maxee</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="--fastq_maxee " type="number"
                     value="1" min="1" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s6">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_maxns</span>
-                  <p>discard sequences with more than the specified number of N’s.</p>
+            <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard sequences with more than the specified number of N’s" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastq_maxns</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="--fastq_maxns " type="number"
                     value="0" min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_maxlen</span>
-                  <p>discard sequences with more than the specified number of bases.</p>
+            <div class="col s3 tooltipped" style="margin-right: 12.5%;" data-position="top" data-tooltip="Discard sequences with less than the specified number of bases" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastq_minlen</span>
                 </div>
-                <div class="card-action">
-                  <input style="display: inline-block;" class="InlineNumericInput" id="--fastq_maxlen " type="number"
-                    value="" min="1" step="1">
-                </div>
-              </div>
-            </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_minlen</span>
-                  <p>discard sequences with less than the specified number of bases.</p><br>
-                </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="--fastq_minlen " type="number"
                     value="1" min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_truncqual</span>
-                  <p>truncate sequences starting from the first basewith the specified base quality score value or
-                    lower.</p>
+            <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with more than the specified number of bases" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastq_maxlen</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
+                  <input style="display: inline-block;" class="InlineNumericInput" id="--fastq_maxlen " type="number"
+                    value="" min="1" step="1">
+                </div>
+              </div>
+            </div>
+            <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate sequences starting from the first basewith the specified base quality score value or
+            lower" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content nrParameterCardContent white-text">
+                  <span class="card-title nrParameterCardTitle">fastq_truncqual</span>
+                </div>
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="--fastq_truncqual " type="number"
                     value="0" min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_maxee_rate</span>
-                  <p>discard sequences with more than the specified number of expected errors per base.</p>
+            <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with more than the specified number of expected errors per base" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastq_maxee_rate</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="--fastq_maxee_rate "
                     type="number" value="" min="1" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_qmin</span>
-                  <p>Specify the minimum quality score accepted for FASTQ files.</p><br>
+            <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Specify the minimum quality score accepted for FASTQ files" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastq_qmin</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="--fastq_qmin " type="number"
                     value="0" min="0" step="1">
                 </div>
@@ -706,107 +664,101 @@
         </div>
       </li>
       <li>
-        <div class="collapsible-header">MOTHUR
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="mothur-quality-filter">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">MOTHUR</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="mothur-quality-filter">
           <div class="row">
             <div class="col s12">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">trim.seqs</span>
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">trim.seqs</span>
                   <p>Provides the preprocessing features needed to screen and sort pyrosequences.</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <a href="#" class="manualLink" id="mothur_trim_seqs.pdf">Read the MOTHUR manual for more info</a>
                 </div>
               </div>
             </div>
-            <div class="col s4">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">qwindowaverage</span>
-                  <p>Set a minimum average quality score allowed over a window.</p>
+            <div class="col s3 tooltipped" data-position="top" data-tooltip="Set a minimum average quality score allowed over a window" style="margin-left: 12.5%;">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">qwindowaverage</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id=",qwindowaverage=" type="number"
                     value="30" min="1" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">qwindowsize</span>
-                  <p>Set a number of bases in a window</p>
+            <div class="col s3 tooltipped" data-position="top" data-tooltip="Set a number of bases in a window" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">qwindowsize</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id=",qwindowsize=" type="number"
                     value="32" min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">maxambig</span>
-                  <p>Set the number of allowed ambiguous base calls</p>
+            <div class="col s3 tooltipped" style="margin-right: 12.5%;" data-position="top" data-tooltip="Set the number of allowed ambiguous base calls" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">maxambig</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id=",maxambig=" type="number"
                     value="0" min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">qthreshold</span>
-                  <p>Discard sequences with a basecall below set quality value</p><br>
+            <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with a basecall below set quality value" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">qthreshold</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id=",qthreshold=" type="number"
                     value="" min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">minlength</span>
-                  <p>Discard sequences with less than the specified number of bases.</p><br>
+            <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with less than the specified number of bases" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">minlength</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id=",minlength=" type="number"
                     value="" min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">maxlength</span>
-                  <p>Discard sequences with more than the specified number of bases.</p>
+            <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with more than the specified number of bases" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">maxlength</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id=",maxlength=" type="number"
                     value="" min="1" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">processors</span>
-                  <p>Number of processors to use</p><br>
+            <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Number of processors to use" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">processors</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id=",processors=" type="number"
                     value="" min="0" step="1">
                 </div>
@@ -817,109 +769,101 @@
         </div>
       </li>
       <li>
-        <div class="collapsible-header">DADA2
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="dada2-quality-filter">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">DADA2</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="dada2-quality-filter">
           <div class="row">
             <div class="col s12">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastqFilter</span>
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastqFilter</span>
                   <p>Takes an input fastq file and filters it based on several user-definable criteria.</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <a href="#" class="manualLink" id="dada2_manual.pdf">Read the DADA2 manual for more info</a>
                 </div>
               </div>
             </div>
-            <div class="col s6">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">maxEE</span>
-                  <p>discard sequences with more than the specified number of expected errors.</p>
+            <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard sequences with more than the specified number of expected errors" style="margin-left: 12.5%;">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">maxEE</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="maxEE=" type="number" value="1"
                     min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s6">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">maxN</span>
-                  <p>discard sequences with more than the specified number of N’s.</p>
+            <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard sequences with more than the specified number of N’s" >
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">maxN</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="maxN=" type="number" value="0"
                     min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">truncQ</span>
-                  <p>Truncate reads at the first instance of a quality score less than or equal to truncQ.</p><br>
+            <div class="col s3 tooltipped" data-position="top" data-tooltip="Remove reads with length less than minLen. minLen is enforced after all other trimming and truncation" style="margin-right: 12.5%;">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content nrParameterCardContent white-text">
+                  <span class="card-title nrParameterCardTitle">minLen</span>
                 </div>
-                <div class="card-action">
-                  <input style="display: inline-block;" class="InlineNumericInput" id="truncQ=" type="number" value=""
-                    min="1" step="1">
-                </div>
-              </div>
-            </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">truncLen</span>
-                  <p>Truncate reads after truncLen bases. Reads shorter than this are discarded.</p><br>
-                </div>
-                <div class="card-action">
-                  <input style="display: inline-block;" class="InlineNumericInput" id="truncLen=" type="number"
-                    value="0" min="0" step="1">
-                </div>
-              </div>
-            </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">minLen</span>
-                  <p> Remove reads with length less than minLen. minLen is enforced after all other trimming and
-                    truncation.</p>
-                </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="minLen=" type="number" value="20"
                     min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">maxLen</span>
-                  <p>Remove reads with length greater than maxLen. maxLen is enforced on the raw reads.</p><br>
+            <div class="col s3 extraOptions tooltipped" data-position="top" data-tooltip="Truncate reads at the first instance of a quality score less than or equal to truncQ">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">truncQ</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
+                  <input style="display: inline-block;" class="InlineNumericInput" id="truncQ=" type="number" value=""
+                    min="1" step="1">
+                </div>
+              </div>
+            </div>
+            <div class="col s3 extraOptions tooltipped" data-position="top" data-tooltip="Truncate reads after truncLen bases. Reads shorter than this are discarded">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">truncLen</span>
+                </div>
+                <div class="card-action nrParameterCardAction">
+                  <input style="display: inline-block;" class="InlineNumericInput" id="truncLen=" type="number"
+                    value="0" min="0" step="1">
+                </div>
+              </div>
+            </div>
+            <div class="col s3 extraOptions tooltipped" data-position="top" data-tooltip="Remove reads with length greater than maxLen. maxLen is enforced on the raw reads">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">maxLen</span>
+                </div>
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="maxLen=" type="number" value=""
                     min="1" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">minQ</span>
-                  <p>After truncation, reads contain a quality score below minQ will be discarded.
-                  </p><br>
+            <div class="col s3 extraOptions tooltipped" data-position="top" data-tooltip="After truncation, reads contain a quality score below minQ will be discarded">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">minQ</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="minQ=" type="number" value="0"
                     min="0" step="1">
                 </div>
@@ -930,102 +874,90 @@
         </div>
       </li>
       <li>
-        <div class="collapsible-header">USEARCH
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="usearch-quality-filter">
               <input class="serviceCB" type="checkbox"/>
-              <span></span>
+              <span style="color: black;">USEARCH</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="usearch-quality-filter"><span>
-          <div class="row" style="margin: 0;">
+          <div class="row">
             <div class="col s12">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">fastq_filter</span>
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">fastq_filter</span>
                   <p>Performs quality filtering.</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <a href="#" class="manualLink" id="mothur_trim_seqs.pdf">Read the USEARCH manual for more info</a>
                 </div>
               </div>
             </div>
-              <div class="col s3 offset-s3 tooltipped" data-position="top" data-tooltip="Discard reads with > E total expected errors for all bases in the read after any truncation options have been applied." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
-                    <span class="card-title"
-                      style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee E</span>
+              <div class="col s3 offset-s3 tooltipped" style="margin-left: 25%;" data-position="top" data-tooltip="Discard reads with > E total expected errors for all bases in the read after any truncation options have been applied.">
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent">
+                    <span class="card-title nrParameterCardTitle">fastq_maxee E</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped" data-position="top" data-tooltip="Discard if there are > k Ns in the read." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxns k</span>
+              <div class="col s3 tooltipped" style="margin-right: 25%;" data-position="top" data-tooltip="Discard if there are > k Ns in the read." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent ">
+                    <span class="card-title nrParameterCardTitle">fastq_maxns k</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_minlen L</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard sequences with < L letters." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent ">
+                    <span class="card-title nrParameterCardTitle">fastq_minlen L</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_minlen" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_stripleft N</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="	Delete the first N bases in the read." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent ">
+                    <span class="card-title nrParameterCardTitle">fastq_stripleft N</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_stripleft" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_truncqual N</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Truncate the read at the first position having quality score <= N, so that all remaining Q scores are >N." >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent ">
+                    <span class="card-title nrParameterCardTitle">fastq_truncqual N</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_truncqual" type="number"
                       value="" min="1" step="1">
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  style="padding: 5px;">
-                <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
-                  <div class="card-content white-text"
-                    style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
-                    <span class="card-title" style="font-size: 18px; margin: 0; line-height: 18px;">fastq_maxee_rate E</span>
+              <div class="col s3 tooltipped extraOptions" data-position="top" data-tooltip="Discard reads with > E expected errors per base.Calculated after any truncation options have been applied."  >
+                <div class="card transparent nrParameterCard">
+                  <div class="card-content white-text nrParameterCardContent ">
+                    <span class="card-title nrParameterCardTitle">fastq_maxee_rate E</span>
                   </div>
-                  <div class="card-action"
-                    style="border-radius: 0 0 10px 10px;background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+                  <div class="card-action nrParameterCardAction">
                     <input style="display: inline-block;" class="InlineNumericInput" id="-fastq_maxee_rate" type="number"
                       value="" min="1" step="1">
                   </div>
@@ -1036,21 +968,22 @@
         </div>
       </li>
       <li>
-        <div class="collapsible-header">TRIMMOMATIC
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="trimmomatic-quality-filter">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">TRIMMOMATIC</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="trimmomatic-quality-filter">
           <div class="row">
             <div class="col s12">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">trimmomatic</span>
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">trimmomatic</span>
                   <p>can be used to trim and crop Illumina (FASTQ) data</p>
                 </div>
                 <div class="card-action">
@@ -1059,75 +992,69 @@
                 </div>
               </div>
             </div>
-            <div class="col s6">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">Slidingwindow : windowSize</span>
-                  <p>Perform a sliding window trimming, cutting once the average quality within the window falls below a
-                    threshold</p>
+            <div class="col s3 tooltipped" style="margin-left: 25%;" data-position="top" data-tooltip="Perform a sliding window trimming, cutting once the average quality within the window falls below a
+            threshold">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">Slidingwindow : windowSize</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="windowSize" type="number"
                     value="" min="1" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s6">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">Slidingwindow : requiredQuality</span>
-                  <p>Perform a sliding window trimming, cutting once the average quality within the window falls below a
-                    threshold.</p>
+            <div class="col s3 tooltipped" style="margin-right: 25%;" data-position="top" data-tooltip="Perform a sliding window trimming, cutting once the average quality within the window falls below a
+            threshold">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">Slidingwindow : requiredQuality</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="requiredQuality" type="number"
                     value="" min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">LEADING</span>
-                  <p>Cut bases off the start of a read, if below a threshold quality.</p><br>
+            <div class="col s3 extraOptions tooltipped" data-position="top" data-tooltip="Cut bases off the start of a read, if below a threshold quality">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">LEADING</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="LEADING:" type="number" value=""
                     min="1" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">TRAILING</span>
-                  <p> Cut bases off the end of a read, if below a threshold quality.</p><br>
+            <div class="col s3 extraOptions tooltipped" data-position="top" data-tooltip="Cut bases off the end of a read, if below a threshold quality">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">TRAILING</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="TRAILING:" type="number" value=""
                     min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">MINLEN</span><br>
-                  <p>Drop the read if it is below a specified length.</p>
+            <div class="col s3 extraOptions tooltipped" data-position="top" data-tooltip="Drop the read if it is below a specified length">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">MINLEN</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="MINLEN:" type="number" value=""
                     min="0" step="1">
                 </div>
               </div>
             </div>
-            <div class="col s4 extraOptions">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">AVGQUAL</span>
-                  <p>Drop the read if the average quality is below the specified level.</p>
+            <div class="col s3 extraOptions tooltipped" data-position="top" data-tooltip="Drop the read if the average quality is below the specified level">
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">AVGQUAL</span>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <input style="display: inline-block;" class="InlineNumericInput" id="AVGQUAL:" type="number" value=""
                     min="1" step="1">
                 </div>
@@ -1143,14 +1070,15 @@
   <div class="wrapper demultiplex hideView blank">
     <ul class="collapsible vertical-center">
       <li>
-        <div class="collapsible-header">DEMULTIPLEX
+        <div class="collapsible-header">
           <!-- <i class="material-icons">arrow_drop_down</i> -->
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="mothur-demultiplex">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">DEMULTIPLEX</span>
             </label>
+            <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
           </p>
         </div>
         <div class="collapsible-body" id="mothur-demultiplex">
@@ -1168,7 +1096,7 @@
             </div>
             <div class="row" style="margin: 0;">
 
-              <div class="col s4 tooltipped demuxStepSelect hideView" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
+              <div class="col s4 tooltipped demuxStepSelect hideView" data-position="top" data-tooltip="Number of allowed dierences in the barcode" >
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
@@ -1191,7 +1119,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col s4 tooltipped demuxStepSelect hideView" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
+              <div class="col s4 tooltipped demuxStepSelect hideView" data-position="top" data-tooltip="Number of allowed dierences in the barcode" >
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
@@ -1210,7 +1138,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col s4 tooltipped demuxStepSelect hideView" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
+              <div class="col s4 tooltipped demuxStepSelect hideView" data-position="top" data-tooltip="Number of allowed dierences in the barcode" >
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
@@ -1229,7 +1157,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the barcode" style="padding: 5px;">
+              <div class="col s3 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the barcode" >
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
@@ -1243,7 +1171,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the primers" style="padding: 5px;">
+              <div class="col s3 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the primers" >
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
@@ -1256,7 +1184,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col s3 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the primers" style="padding: 5px;">
+              <div class="col s3 tooltipped" data-position="top" data-tooltip="Number of allowed dierences in the primers" >
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
@@ -1269,7 +1197,7 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="col s3 tooltipped" data-position="top" data-tooltip="Reorient Reads" style="padding: 5px;">
+              <!-- <div class="col s3 tooltipped" data-position="top" data-tooltip="Reorient Reads" >
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
@@ -1288,7 +1216,7 @@
                   </div>
                 </div>
               </div> -->
-              <div class="col s3 tooltipped" data-position="top" data-tooltip="Add a file that can contain the sequences of the forward and reverse primersand barcodes and their sample identier. " style="padding: 5px;">
+              <div class="col s3 tooltipped" data-position="top" data-tooltip="Add a file that can contain the sequences of the forward and reverse primersand barcodes and their sample identier. " >
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
@@ -1303,7 +1231,7 @@
                 </div>
                 </div>
               </div>
-              <!-- <div class="col s9 tooltipped " data-position="top" data-tooltip="Specify forward primers manually" style="padding: 5px;">
+              <!-- <div class="col s9 tooltipped " data-position="top" data-tooltip="Specify forward primers manually" >
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
@@ -1317,7 +1245,7 @@
                   </div>
                 </div>
               </div> -->
-              <div class="extraOptions col s3 tooltipped " data-position="top" data-tooltip="Discard sequences with an abundance value smaller than set value" style="padding: 5px;">
+              <div class="extraOptions col s3 tooltipped " data-position="top" data-tooltip="Discard sequences with an abundance value smaller than set value" >
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
@@ -1330,7 +1258,7 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="col s9 offset-s3 tooltipped " data-position="top" data-tooltip="Specify forward primers manually" style="padding: 5px;">
+              <!-- <div class="col s9 offset-s3 tooltipped " data-position="top" data-tooltip="Specify forward primers manually" >
                 <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                   <div class="card-content white-text"
                     style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
@@ -1363,24 +1291,25 @@
   <div class="wrapper chimera hideView blank">
     <ul class="collapsible vertical-center">
       <li>
-        <div class="collapsible-header">VSEARCH
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="vsearch-chimera-filter">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">VSEARCH</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="vsearch-chimera-filter">
           <div class="row">
             <div class="col s12">
-              <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                  <span class="card-title">uchime</span>
+              <div class="card transparent nrParameterCard">
+                <div class="card-content white-text nrParameterCardContent">
+                  <span class="card-title nrParameterCardTitle">uchime</span>
                   <p>Filter out putative chimeric sequences.</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action nrParameterCardAction">
                   <a href="#" class="manualLink" id="vsearch_manual.pdf">Read the VSEARCH manual for more info</a>
                 </div>
               </div>
@@ -1400,7 +1329,7 @@
                 </div>
                 <div class="card-action" style="padding: 0; background: transparent;">
                   <div class="row" style="margin: 0;">
-                    <div class="col s6" style="padding: 5px;">
+                    <div class="col s6" >
                       <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                         <div class="card-content white-text"
                           style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
@@ -1414,7 +1343,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col s6" style="padding: 5px;">
+                    <div class="col s6" >
                       <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                         <div class="card-content white-text"
                           style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
@@ -1431,7 +1360,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> 
             <div class="col s6">
               <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                 <div class="card-content white-text" style="padding: 10px 0;border-radius: 5px;">
@@ -1447,7 +1376,7 @@
                 </div>
                 <div class="card-action" style="padding: 0; background: transparent;">
                   <div class="row" style="margin: 0;">
-                    <div class="col s12" style="padding: 5px;">
+                    <div class="col s12" >
                       <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                         <div class="card-content white-text"
                           style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
@@ -1472,14 +1401,15 @@
         </div>
       </li>
       <li>
-        <div class="collapsible-header">USEARCH
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="usearch-chimera-filter">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">USEARCH</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="usearch-chimera-filter">
           <div class="row">
@@ -1509,7 +1439,7 @@
                 </div>
                 <div class="card-action" style="padding: 0; background: transparent;">
                   <div class="row" style="margin: 0;">
-                    <div class="col s6" style="padding: 5px;">
+                    <div class="col s6" >
                       <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                         <div class="card-content white-text"
                           style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to left, #bbd2c5, #536976);">
@@ -1523,7 +1453,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col s6" style="padding: 5px;">
+                    <div class="col s6" >
                       <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                         <div class="card-content white-text"
                           style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
@@ -1556,7 +1486,7 @@
                 </div>
                 <div class="card-action" style="padding: 0; background: transparent;">
                   <div class="row" style="margin: 0;">
-                    <div class="col s12" style="padding: 5px;">
+                    <div class="col s12" >
                       <div class="card transparent" style="-webkit-box-shadow: none; box-shadow: none;">
                         <div class="card-content white-text"
                           style="padding: 10px 0; border-radius: 10px 10px 0 0;background: linear-gradient(to right, #bbd2c5, #536976);">
@@ -1587,14 +1517,15 @@
   <div class="wrapper cluster hideView blank">
     <ul class="collapsible vertical-center">
       <li>
-        <div class="collapsible-header">MOTHUR
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="mothur-cluster">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">MOTHUR</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body"><span>
             <div class="input-field">
@@ -1604,14 +1535,15 @@
           </span></div>
       </li>
       <li>
-        <div class="collapsible-header">VSEARCH
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="vsearch-cluster">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">VSEARCH</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body"><span>
             <div class="input-field">
@@ -1621,14 +1553,15 @@
           </span></div>
       </li>
       <li>
-        <div class="collapsible-header">CD-HIT
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="cd-hit-cluster">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black; white-space: nowrap;">CD-HIT</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body"><span>
             <div class="input-field">
@@ -1638,14 +1571,15 @@
           </span></div>
       </li>
       <li>
-        <div class="collapsible-header">SWARM
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="swarm-cluster">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">SWARM</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body"><span>
             <div class="input-field">
@@ -1660,14 +1594,15 @@
   <div class="wrapper tax hideView blank">
     <ul class="collapsible vertical-center">
       <li>
-        <div class="collapsible-header">MOTHUR
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="mothur-taxonomy">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">MOTHUR</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body"><span>
             <div class="input-field">
@@ -1677,14 +1612,15 @@
           </span></div>
       </li>
       <li>
-        <div class="collapsible-header">BLAST
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="blast-taxonomy">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">BLAST</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body"><span>
             <div class="input-field">
@@ -1753,26 +1689,7 @@
           </span></div>
       </li>
   </div>
-  <!-- Expert Mode -->
-  <div class="wrapper hideView">
-    <div id="terminal" style="margin-top: 30px;">
-      <a class="waves-effect waves-light btn left" style="border-radius: 0; width: 25%; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;"><i class="material-icons left">cloud</i>button</a>
-      <a class="waves-effect waves-light btn left" style="border-radius: 0; width: 25%; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;"><i class="material-icons left">cloud</i>button</a>
-      <a class="waves-effect waves-light btn left" style="border-radius: 0; width: 25%; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;"><i class="material-icons left">cloud</i>button</a>
-      <!-- Dropdown Trigger -->
-      <a class='dropdown-trigger btn' href='#' data-target='dropdown2' style="border-radius: 0; width: 25%; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;" >Drop Me!</a>
-      <!-- Dropdown Structure -->
-      <ul id='dropdown2' class='dropdown-content'>
-        <li><a href="#!">one</a></li>
-        <li><a href="#!">two</a></li>
-        <li class="divider" tabindex="-1"></li>
-        <li><a href="#!">three</a></li>
-        <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-        <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-      </ul>
-    </div>
 
-  </div>
 
   <!-- PlutoF twitter timeline -->
   <div class="wrapper hideView" id="PlutoTwitter">
@@ -1781,20 +1698,42 @@
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
 
+  <!-- Expert Mode -->
+  <div class="wrapper" id="expertmodeView">
+    <div id="terminal" style="margin-top: 30px;">
+      <a id="expertStart" class="waves-effect waves-light btn left grey darken-1" style="border-radius: 0; width: 25%; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; border: 1px rgb(80, 79, 79) solid;">START</a>
+      <a id="expertStop" class="waves-effect waves-light btn left grey darken-1" style="border-radius: 0; width: 25%; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; border: 1px rgb(80, 79, 79) solid;">STOP</a>
+      <a id="expertFileSelect" class="waves-effect waves-light btn left grey darken-1" style="border-radius: 0; width: 25%; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; border: 1px rgb(80, 79, 79) solid;">SELECT A FOLDER</a>
+      <div class="input-field" style="display: inline-flex; width: 25%; height: 36px; margin: 0;">
+        <select id="expertService" class="browser-default" style="border: none; border-radius: 0; background: #757575; padding: 0; height: 100%; outline: none; border: 1px rgb(80, 79, 79) solid; text-align-last: center;">
+          <option value="notSelected" disabled selected>CHOOSE A BIOCONTAINER</option>
+          <option value="pipecraft/mothur:1.43">Mothur</option>
+          <option value="pipecraft/vsearch:1.25.0">Vsearch</option>
+          <option value="pipecraft/dada2:3.10">DADA2</option>
+          <option value="pipecraft/usearch:latest" disabled>Usearch</option>
+          <option value="pipecraft/trimmomatic:0.39">Trimmomatic</option>
+          <option value="pipecraft/flash:2">Flash</option>
+          <option value="pipecraft/pandaseq:2.11">Panda-seq</option>
+          <option value="pipecraft/cutadapt:2.10">cutadapt</option>
+        </select>
+      </div>
+    </div>
+  </div>
 
 
   <!-- Assemble paired-end sequences -->
   <div class="wrapper assemble-paired hideView blank">
     <ul class="collapsible vertical-center">
       <li>
-        <div class="collapsible-header">PANDAseq
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="pandaseq-assemble-paired-end-sequences">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">PANDASEQ</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="pandaseq-assemble-paired-end-sequences">
           <div class="row">
@@ -1881,14 +1820,15 @@
         </div>
       </li>
       <li>
-        <div class="collapsible-header">FLASH
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="flash-assemble-paired-end-sequences">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">FLASH</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="flash-assemble-paired-end-sequences">
           <div class="row">
@@ -1995,14 +1935,15 @@
         </div>
       </li>
       <li>
-        <div class="collapsible-header">VSEARCH
+        <div class="collapsible-header">
           <form action="#"></form>
           <p class="adapter-checkbox not-collapse">
             <label value="vsearch-assemble-paired-end-sequences">
               <input class="serviceCB" type="checkbox" />
-              <span></span>
+              <span style="color: black;">VSEARCH</span>
             </label>
           </p>
+          <div style="text-align: end; width: 100%;"><i style="margin-right: 450px;" class="material-icons">arrow_drop_down</i></div>
         </div>
         <div class="collapsible-body" id="vsearch-assemble-paired-end-sequences">
           <div class="row">

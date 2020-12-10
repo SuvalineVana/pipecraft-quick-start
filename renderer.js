@@ -39,7 +39,7 @@ const ipc = require("electron").ipcRenderer
 // Terminal Window
 // const { Terminal } = require("xterm");
 var term = new Terminal({
-  theme: { background: 'linear-gradient(to right, #0f2027, #203a43, #2c5364)', foreground: '#fffff' },
+  theme: { background: '#454442', foreground: '#ffffff' },
   rows: 20,
   cols: 100,
 });
@@ -52,6 +52,49 @@ term.onData(e => {
 ipc.on("terminal.incData", function(event, data){
   term.write(data);
 })
+
+// Expertmode
+
+$( document ).ready(function() {
+  document.getElementById("expertmodeView").style.display = "none";
+});
+
+$("#expertmode").on("click", function () {
+  ipc.send("clearTerminal")
+  $(newView).fadeToggle(0, function () {});
+  $('#expertmodeView').fadeToggle(250, function () {});
+})
+
+$('#expertFileSelect').on("click", function(){
+  console.log('select files')
+  dialog
+  .showOpenDialog({
+    title: "Select folder",
+    properties: ["openDirectory", "showHiddenFiles"],
+  })
+  .then((result) => {
+    expertPath = result.filePaths[0];
+    expertFolder = path.basename(expertPath)
+  })
+})
+
+$('#expertStop').on("click", function(){
+  ipc.send('exitContainer')  
+})
+
+$('#expertStart').on("click", function(){
+  console.log(expertFolder)
+  expertServiceName = ($('#expertService').val())
+  expertServiceCommand = "docker run --interactive --tty " + ' -v ' + expertPath + ':/' + expertFolder + ' ' + expertServiceName +'\r'
+  if (expertServiceName == null) {
+    alert("Choose a valid biocontainer")
+  }
+  else{
+    ipc.send("startContainer", expertServiceCommand)
+  }
+})
+
+
 
 // materialize-css
 
@@ -324,7 +367,7 @@ $("body").on("click", ".extraOptionsTrigger", function () {
   } else {
     $(this).text("Show more options");
   }
-  $(this).siblings(".extraOptions").toggle();
+  $(this).siblings(".extraOptions").fadeToggle();
   console.log($(this).text());
 });
 
@@ -440,10 +483,6 @@ $("#SelectedSteps").on("click", "i", function (event) {
   }
 });
 
-$("#expertmode").on("click", function () {
-  $(newView).fadeOut(250, function () {});
-  $('#expertMode').fadeIn(250, function () {});
-})
 
 // Feature discovery setup
 $("#stepmode").on("click", function () {

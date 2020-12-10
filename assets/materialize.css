@@ -5849,7 +5849,7 @@ body.keyboard-focused .dropdown-content li:focus {
 }
 
 .collapsible-header {
-  justify-content: center;
+  justify-content: flex-start;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

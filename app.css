@@ -300,3 +300,27 @@ p.adapter-checkbox {
 .DeepSpace {
   background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+.nrParameterCard {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.nrParameterCardContent {
+  padding: 10px 0 !important;
+  border-radius: 10px 10px 0 0 !important;
+  background: linear-gradient(to left, #bbd2c5, #536976) !important;
+}
+
+.nrParameterCardTitle {
+  font-size: 18px !important;
+  margin: 0 !important;
+  line-height: 18px !important;
+}
+
+.nrParameterCardAction {
+  border-radius: 0 0 10px 10px !important;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364) !important;
+}
+
+

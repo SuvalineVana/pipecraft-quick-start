@@ -1,10 +1,7 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
-
+// Imports
 window.$ = window.jQuery = require("jquery");
 const Swal = require("sweetalert2");
-var vex = require("vex-js");
+const vex = require("vex-js");
 vex.registerPlugin(require("vex-dialog"));
 vex.defaultOptions.className = "vex-theme-os";
 const prompt = require("electron-prompt");
@@ -12,15 +9,20 @@ const { dialog } = require("electron").remote;
 const fs = require("fs");
 const { spawnSync } = require("child_process");
 const { spawn } = require("child_process");
-let Shell2 = require("node-powershell-await");
+const Shell2 = require("node-powershell-await");
 const path = require("path");
 const { BrowserWindow } = require("electron").remote;
 const PDFWindow = require("electron-pdf-window");
-var url = require("url");
+const url = require("url");
 const { clear } = require("console");
 const replace = require("replace-in-file");
+const { Menu, MenuItem } = require("electron").remote;
+const slash = require("slash");
+const ipc = require("electron").ipcRenderer;
+
+// Variables
 let inputFilesArray = [];
-let inputFilesArraryEnv = ""
+let inputFilesArraryEnv = "";
 let forwardPrimerArray = [];
 let reversePrimerArray = [];
 let numericInputs = {};
@@ -28,84 +30,92 @@ let checkedServices = {};
 let steps = [];
 let onOffInputs = {};
 let conf2Save = [];
-let readType = ""
-let dataFormat = ""
-let fileExtension = ""
-const { Menu, MenuItem } = require("electron").remote;
-const slash = require("slash");
-const ipc = require("electron").ipcRenderer
-
+let readType = "";
+let dataFormat = "";
+let fileExtension = "";
 
 // Terminal Window
-// const { Terminal } = require("xterm");
 var term = new Terminal({
-  theme: { background: '#454442', foreground: '#ffffff' },
+  theme: { background: "#454442", foreground: "#ffffff" },
   rows: 20,
   cols: 100,
 });
-term.open(document.getElementById("terminal"))
-// term.write("hello")
-term.onData(e => {
+
+// Terminal write
+term.open(document.getElementById("terminal"));
+term.onData((e) => {
   ipc.send("terminal.toTerm", e);
 });
 
-ipc.on("terminal.incData", function(event, data){
+// Terminal listen and execute
+ipc.on("terminal.incData", function (event, data) {
   term.write(data);
-})
+});
 
 // Expertmode
-
-$( document ).ready(function() {
+$(document).ready(function () {
   document.getElementById("expertmodeView").style.display = "none";
 });
 
 $("#expertmode").on("click", function () {
-  ipc.send("clearTerminal")
+  ipc.send("clearTerminal");
   $(newView).fadeToggle(0, function () {});
-  $('#expertmodeView').fadeToggle(250, function () {});
-})
+  $("#expertmodeView").fadeToggle(250, function () {});
+});
 
-$('#expertFileSelect').on("click", function(){
-  console.log('select files')
+$("#expertFileSelect").on("click", function () {
+  console.log("select files");
   dialog
-  .showOpenDialog({
-    title: "Select folder",
-    properties: ["openDirectory", "showHiddenFiles"],
-  })
-  .then((result) => {
-    expertPath = result.filePaths[0];
-    expertFolder = path.basename(expertPath)
-  })
-})
+    .showOpenDialog({
+      title: "Select folder",
+      properties: ["openDirectory", "showHiddenFiles"],
+    })
+    .then((result) => {
+      expertPath = result.filePaths[0];
+      expertFolder = path.basename(expertPath);
+    });
+});
 
-$('#expertStop').on("click", function(){
-  ipc.send('exitContainer')  
-})
+$("#expertStop").on("click", function () {
+  ipc.send("exitContainer");
+});
 
-$('#expertStart').on("click", function(){
-  console.log(expertFolder)
-  expertServiceName = ($('#expertService').val())
-  expertServiceCommand = "docker run --interactive --tty " + ' -v ' + expertPath + ':/' + expertFolder + ' ' + expertServiceName +'\r'
+$("#expertStart").on("click", function () {
+  console.log(expertFolder);
+  expertServiceName = $("#expertService").val();
+  expertServiceCommand =
+    "docker run --interactive --tty " +
+    " -v " +
+    expertPath +
+    ":/" +
+    expertFolder +
+    " " +
+    expertServiceName +
+    "\r";
   if (expertServiceName == null) {
-    alert("Choose a valid biocontainer")
+    alert("Choose a valid biocontainer");
+  } else {
+    ipc.send("startContainer", expertServiceCommand);
   }
-  else{
-    ipc.send("startContainer", expertServiceCommand)
-  }
-})
+});
 
-
+$("#pavian").on("click", async () => {
+  const result = await ipcRenderer.invoke("launchPavian");
+  // console.log(result);
+});
 
 // materialize-css
-
+$(document).ready(function () {
+  $(".materialboxed").materialbox();
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".tap-target");
   var instances = M.TapTarget.init(elems, options);
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('select');
+document.addEventListener("DOMContentLoaded", function () {
+  var elems = document.querySelectorAll("select");
   var instances = M.FormSelect.init(elems, options);
 });
 
@@ -113,17 +123,15 @@ $(document).ready(function () {
   $(".tap-target").tapTarget();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('.chips');
+document.addEventListener("DOMContentLoaded", function () {
+  var elems = document.querySelectorAll(".chips");
   var instances = M.Chips.init(elems, options);
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".tooltipped");
   var instances = M.Tooltip.init(elems, options);
 });
-
 
 $(document).ready(function () {
   $(".sidenav").sidenav();
@@ -146,28 +154,11 @@ $(function () {
 
 // Custom titlebar and menu
 const menu1 = new Menu();
-
-menu1.append(
-  new MenuItem({
-    // label: 'Documentation',
-    // submenu: [
-    // 	{
-    // 		label: 'pdf',
-    // 		click: () => console.log('Click on subitem 1')
-    // 	},
-    // 	{
-    // 		type: 'separator'
-    //   },
-    //   {
-    // 		label: 'online',
-    // 		click: () => console.log('Click on subitem 1')
-    // 	}
-    // ]
-  })
-);
+menu1.append(new MenuItem({}));
 
 const customTitlebar = require("custom-electron-titlebar");
 const { RGBA } = require("custom-electron-titlebar");
+const { ipcRenderer } = require("electron");
 new customTitlebar.Titlebar({
   backgroundColor: customTitlebar.Color.fromHex("#757575"),
   menu: menu1,
@@ -175,20 +166,21 @@ new customTitlebar.Titlebar({
   titleHorizontalAlignment: "center",
 });
 
-//// FUNCTIONS
-
-// restrict certain chars AND keyCodes jQuery plugin by David Hellsing
-$.fn.restrict = function( chars ) {
-  return this.keydown(function(e) {
-      var found = false, i = -1;
-      while(chars[++i] && !found) {
-          found = chars[i] == String.fromCharCode(e.which).toLowerCase() || 
-                  chars[i] == e.which;
-      }
-      if (!found) { e.preventDefault(); }
+// Restrict certain chars AND keyCodes jQuery plugin by David Hellsing
+$.fn.restrict = function (chars) {
+  return this.keydown(function (e) {
+    var found = false,
+      i = -1;
+    while (chars[++i] && !found) {
+      found =
+        chars[i] == String.fromCharCode(e.which).toLowerCase() ||
+        chars[i] == e.which;
+    }
+    if (!found) {
+      e.preventDefault();
+    }
   });
 };
-  
 
 //Load a previous or an external configuration via JSON
 function loadConfiguration(configLoadPath) {
@@ -239,6 +231,7 @@ function loadConfiguration(configLoadPath) {
   }
 }
 
+// Save a configuration
 function saveConfiguration() {
   // Clear configuration objects
   for (var member in numericInputs) delete numericInputs[member];
@@ -268,7 +261,7 @@ function saveConfiguration() {
             .find(".InlineNumericInput")
             .each(function () {
               numericInputs[serviceSave + "|" + $(this).attr("id")] = $(
-                this
+                this,
               )[0].value;
             });
           $(WorkFlowTag)
@@ -276,7 +269,7 @@ function saveConfiguration() {
             .find(".onOff")
             .each(function () {
               onOffInputs[serviceSave + "|" + $(this).attr("id")] = $(
-                this
+                this,
               ).prop("checked");
             });
         }
@@ -335,6 +328,7 @@ async function clearEnvLine(line) {
   }
 }
 
+// Write a log file for each service ran
 function writeLog(serviceName, runLog) {
   logName = "logs/" + serviceName + "_log.txt";
   fs.writeFile(logName, runLog, function (err) {
@@ -382,10 +376,56 @@ $("body").on("click", ".manualLink", function () {
 var newView = $("#PlutoTwitter");
 $(newView).fadeIn(500, function () {});
 
+// Usearch
+
+$("#usearch").on("click", function () {
+  showItem($("#getUsearch"));
+});
+
+const usearchInstallerPath = document.getElementById("usearchInstallerPath");
+usearchInstallerPath.addEventListener("click", async function () {
+  savePathToEnv("usearchBinaryFolder", "Select your usearch installer");
+});
+
+function createUsearchImage() {
+  execShellCommand(
+    "docker build --tag pipecraft/usearch:11 --file .ImageDevelopment/usearch-Dockerfile .",
+  );
+}
+
+function savePathToEnv(variableName, title) {
+  dialog
+    .showOpenDialog({
+      title: title,
+      properties: ["multiSelections", "showHiddenFiles"],
+    })
+    .then((result) => {
+      inputPathEnv = variableName + "=" + result.filePaths[0] + "\n";
+      fs.appendFile(".env", inputPathEnv, function (err) {
+        if (err) {
+          console.log("append failed");
+        } else {
+          console.log("New variable set: " + inputPathEnv);
+        }
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function showItem(divID) {
+  oldview = newView;
+  newView = divID;
+  $(oldview).fadeOut(250, function () {
+    $(newView).fadeIn(250, function () {});
+  });
+}
+
 // Switch view
 function switchView() {
   viewSelector = ".wrapper.".concat(
-    $(this).parent().attr("class").replace(" ", ".")
+    $(this).parent().attr("class").replace(" ", "."),
   );
   oldview = newView;
   newView = $(viewSelector);
@@ -396,12 +436,11 @@ function switchView() {
   });
 }
 
-
 // Add workflow steps
 var i = 1;
 $(".dropdown-selection").each(function () {
   $(this).click(function () {
-    if ($(".activated")[0]){
+    if ($(".activated")[0]) {
       StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i");
       for (var y = 0; y < StepsToClear.length; y++) {
         StepsToClear[y].click();
@@ -470,7 +509,7 @@ $("#SelectedSteps").on("click", "i", function (event) {
 
   viewTag = (".wrapper." + $(this).closest("li").attr("class")).replace(
     " ",
-    "."
+    ".",
   );
   $(viewTag).remove();
   $(this).closest("li").remove();
@@ -483,63 +522,61 @@ $("#SelectedSteps").on("click", "i", function (event) {
   }
 });
 
-
-// Feature discovery setup
+// Stepmode
 $("#stepmode").on("click", function () {
-  if ($(".activated")[0]){
+  if ($(".activated")[0]) {
     // if class activated exists
     Swal.fire({
       text: "Switching to workflow-mode will clear all active configurations",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Continue'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Continue",
     }).then((result) => {
       if (result.isConfirmed) {
         document.getElementById("FileSelectButton").style.display = "block";
         document.getElementById("FileSelectButton2").style.display = "none";
-        $('.StepModeButtonContainer').toggleClass("hideView")
-        $(".demuxStepSelect").toggleClass("hideView")
-        $('#stepmode').find('i').toggleClass('activated')
+        $(".StepModeButtonContainer").toggleClass("hideView");
+        $(".demuxStepSelect").toggleClass("hideView");
+        $("#stepmode").find("i").toggleClass("activated");
         console.log("single-step-mode deactivated");
         StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i");
         for (var y = 0; y < StepsToClear.length; y++) {
           StepsToClear[y].click();
         }
       }
-    })
+    });
   } else {
     // class activated does not exist
     Swal.fire({
       text: "Switching to singe-step-mode will clear all active configurations",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Continue'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Continue",
     }).then((result) => {
       if (result.isConfirmed) {
         document.getElementById("FileSelectButton").style.display = "none";
         document.getElementById("FileSelectButton2").style.display = "block";
-        $('.StepModeButtonContainer').toggleClass("hideView")
-        $(".demuxStepSelect").toggleClass("hideView")
-        $('#stepmode').find('i').toggleClass('activated')
+        $(".StepModeButtonContainer").toggleClass("hideView");
+        $(".demuxStepSelect").toggleClass("hideView");
+        $("#stepmode").find("i").toggleClass("activated");
         StepsToClear = document.querySelectorAll("#SelectedSteps > li > a > i");
         for (var y = 0; y < StepsToClear.length; y++) {
           StepsToClear[y].click();
         }
         console.log("single-step-mode activated");
       }
-    })
+    });
   }
 });
-
 
 // Select input folder and save as env variable
 const fileSelectButton = document.getElementById("FileSelectButton");
 fileSelectButton.addEventListener("click", async function () {
-  readType = ""
-  dataFormat = ""
-  fileExtension = ""
+  readType = "";
+  dataFormat = "";
+  fileExtension = "";
   Swal.mixin({
     input: "select",
     confirmButtonText: "Next &rarr;",
@@ -564,14 +601,14 @@ fileSelectButton.addEventListener("click", async function () {
       {
         title: "Sequence files extension",
         inputOptions: {
-          'Uncompressed':{
+          Uncompressed: {
             fastq: "*.fastq",
             fasta: "*.fasta",
             fq: "*.fq",
             fa: "*.fa",
             txt: "*.txt",
           },
-          'Compressed':{
+          Compressed: {
             fastqDOTgz: "*.fastq.gz",
             fastaDOTgz: "*.fasta.gz",
             fqDOTgz: "*.fq.gz",
@@ -584,12 +621,12 @@ fileSelectButton.addEventListener("click", async function () {
     .then((result) => {
       if (result.value) {
         console.log(result);
-        readType = result.value[0]
-        dataFormat = result.value[1]
-        fileExtension = result.value[2].replace("DOT", ".")
+        readType = result.value[0];
+        dataFormat = result.value[1];
+        fileExtension = result.value[2].replace("DOT", ".");
         if (result.value[1] == "multiplexed") {
-          $('#SelectedSteps > .demultiplex').find('i').click()
-          $(".dropdown-selection.demultiplex").click()
+          $("#SelectedSteps > .demultiplex").find("i").click();
+          $(".dropdown-selection.demultiplex").click();
         }
         //Clear previos inputfolder from .env file
         clearEnvLine("userDir");
@@ -607,7 +644,7 @@ fileSelectButton.addEventListener("click", async function () {
                 console.log("append failed");
               } else {
                 console.log(
-                  "Local working directory set as: " + result.filePaths[0]
+                  "Local working directory set as: " + result.filePaths[0],
                 );
               }
             });
@@ -618,54 +655,55 @@ fileSelectButton.addEventListener("click", async function () {
       }
     });
 });
-// Select input folder and save as env variable
+
+// Select input file and save dir path as env variable
 const fileSelectButton2 = document.getElementById("FileSelectButton2");
 fileSelectButton2.addEventListener("click", async function () {
-        //Clear previos inputfolder from .env file
-        inputFilesArray = [];
-        filepathString = "";
-        inputFilesArraryEnv = ""
-        await clearEnvLine("userDir");
-        await clearEnvLine("inputFilesArray");
-        await console.log(inputFilesArray)
+  //Clear previos inputfolder from .env file
+  inputFilesArray = [];
+  filepathString = "";
+  inputFilesArraryEnv = "";
+  await clearEnvLine("userDir");
+  await clearEnvLine("inputFilesArray");
+  await console.log(inputFilesArray);
 
-        // Open windows file dialog
-        dialog
-          .showOpenDialog({
-            title: "Select input files",
-            properties: ["multiSelections", "showHiddenFiles"],
-          })
-          .then((result) => {
-            inputPathEnv = "userDir=" + path.dirname(result.filePaths[0]) + "\n";
-            xyz = result.filePaths
-            console.log(xyz)
-            for (var i=0; i < xyz.length; i++){
-              console.log(xyz[i])
-              inputFilesArray.push(path.basename(xyz[i]))
-            }
-            filepathString = JSON.stringify(inputFilesArray)
-            filepathString = filepathString.replace(/","/g, '" "')
-            filepathString = filepathString.replace(/\[/g, '(')
-            filepathString = filepathString.replace(/\]/g, ')')
-            console.log(filepathString)
-            inputFilesArraryEnv = "inputFilesArray=" + filepathString + "\n";
-            console.log(inputFilesArraryEnv)
-            // Append folder path as a variable to .env file
-            fs.appendFile(".env", inputPathEnv, function (err) {
-              if (err) {
-                console.log("append failed");
-              } else {
-                console.log(
-                  "Local working directory set as: " +  path.dirname(result.filePaths[0])
-                );
-              }
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-
+  // Open windows file dialog
+  dialog
+    .showOpenDialog({
+      title: "Select input files",
+      properties: ["multiSelections", "showHiddenFiles"],
+    })
+    .then((result) => {
+      inputPathEnv = "userDir=" + path.dirname(result.filePaths[0]) + "\n";
+      xyz = result.filePaths;
+      console.log(xyz);
+      for (var i = 0; i < xyz.length; i++) {
+        console.log(xyz[i]);
+        inputFilesArray.push(path.basename(xyz[i]));
+      }
+      filepathString = JSON.stringify(inputFilesArray);
+      filepathString = filepathString.replace(/","/g, '" "');
+      filepathString = filepathString.replace(/\[/g, "(");
+      filepathString = filepathString.replace(/\]/g, ")");
+      console.log(filepathString);
+      inputFilesArraryEnv = "inputFilesArray=" + filepathString + "\n";
+      console.log(inputFilesArraryEnv);
+      // Append folder path as a variable to .env file
+      fs.appendFile(".env", inputPathEnv, function (err) {
+        if (err) {
+          console.log("append failed");
+        } else {
+          console.log(
+            "Local working directory set as: " +
+              path.dirname(result.filePaths[0]),
+          );
+        }
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 // Save current configuration Button
 const configSaveButton = document.getElementById("savecfg");
@@ -746,18 +784,19 @@ async function collectParams(WorkFlowTag) {
         fs.truncate(envFileToClear, 0, function () {
           console.log("env file ready");
         });
-        readTypeVariable = "readType=" + readType
-        dataFormatVariable = "dataFormat=" + dataFormat
-        fileExtensionVariable = "extension=" + fileExtension
+        readTypeVariable = "readType=" + readType;
+        dataFormatVariable = "dataFormat=" + dataFormat;
+        fileExtensionVariable = "extension=" + fileExtension;
         // barcodes_file=$",oligos=/input/oligos_paired.txt"
-        oligosFileVariable = "barcodes_file=,oligos=/userdatabase/" + userDatabaseFile
+        oligosFileVariable =
+          "barcodes_file=,oligos=/userdatabase/" + userDatabaseFile;
         // AppendToEnvFile(inputFilesArraryEnv, serviceName)
         // AppendToEnvFile(forwardPrimerArrayEnv, serviceName)
         // AppendToEnvFile(reversePrimerArrayEnv, serviceName)
         AppendToEnvFile(readTypeVariable, serviceName);
         AppendToEnvFile(dataFormatVariable, serviceName);
         AppendToEnvFile(fileExtensionVariable, serviceName);
-        AppendToEnvFile(oligosFileVariable, serviceName)
+        AppendToEnvFile(oligosFileVariable, serviceName);
         return serviceName;
       }
     });
@@ -813,72 +852,44 @@ async function collectParams(WorkFlowTag) {
 
 // Run Button
 $("#runButton").click(async function () {
-  // forwardPrimerArray = [];
-  // reversePrimerArray = [];
-  
-  // $('#forwardPrimerChip > .chip').each(function (index, item) {
-  //   forwardPrimerArray.push(item.innerText.replace('close','').replace(/(\r\n|\n|\r)/gm, ""))
-  //   console.log(forwardPrimerArray);
-  //   forwardPrimerArrayString = JSON.stringify(forwardPrimerArray)
-  //   forwardPrimerArrayString = forwardPrimerArrayString.replace(/","/g, '" "')
-  //   forwardPrimerArrayString = forwardPrimerArrayString.replace(/\[/g, '(')
-  //   forwardPrimerArrayString = forwardPrimerArrayString.replace(/\]/g, ')')
-  //   console.log(forwardPrimerArrayString)
-  //   forwardPrimerArrayEnv = "fwdPrimers=" + forwardPrimerArrayString + "\n";
-  //   console.log(forwardPrimerArrayEnv)
-
-    
-  // });
-  // $('#reversePrimerChip > .chip').each(function (index, item) {
-  //   reversePrimerArray.push(item.innerText.replace('close','').replace(/(\r\n|\n|\r)/gm, ""))
-  //   console.log(reversePrimerArray);
-  //   reversePrimerArrayString = JSON.stringify(reversePrimerArray)
-  //   reversePrimerArrayString = reversePrimerArrayString.replace(/","/g, '" "')
-  //   reversePrimerArrayString = reversePrimerArrayString.replace(/\[/g, '(')
-  //   reversePrimerArrayString = reversePrimerArrayString.replace(/\]/g, ')')
-  //   console.log(reversePrimerArrayString)
-  //   reversePrimerArrayEnv = "revPrimers=" + reversePrimerArrayString + "\n";
-  //   console.log(reversePrimerArrayEnv)
-  // });
-
   Swal.fire({
-    title: 'Do you want to save this configuration',
+    title: "Do you want to save this configuration",
     showDenyButton: true,
     confirmButtonText: `Save`,
     denyButtonText: `Don't save`,
   }).then(async (result) => {
-    console.log(result)
+    console.log(result);
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
-      configSaveButton.click()
+      configSaveButton.click();
     }
-  $("div.spanner").addClass("show");
-  $("div.overlay").addClass("show");
+    $("div.spanner").addClass("show");
+    $("div.overlay").addClass("show");
 
-  await clearEnvLine("workdir");
-  defaultWorkDir = "workdir=/input \n";
-  fs.appendFile(".env", defaultWorkDir, function (err) {
-    if (err) {
-    } else {
+    await clearEnvLine("workdir");
+    defaultWorkDir = "workdir=/input \n";
+    fs.appendFile(".env", defaultWorkDir, function (err) {
+      if (err) {
+      } else {
+      }
+    });
+
+    workFlowSteps = $(".viewSwitch");
+    if ($(".serviceCB:checked").length != workFlowSteps.length) {
+      $("div.spanner").removeClass("show");
+      $("div.overlay").removeClass("show");
+      alert("A software must be checked for each step, remove unused steps");
+      return false;
     }
-  });
 
-  workFlowSteps = $(".viewSwitch");
-  if ($(".serviceCB:checked").length != workFlowSteps.length) {
+    await processStepsInfo(workFlowSteps);
+    console.log(
+      "The whole workflow has completed: Show user stats and save configuration file",
+    );
+
     $("div.spanner").removeClass("show");
     $("div.overlay").removeClass("show");
-    alert("A software must be checked for each step, remove unused steps");
-    return false;
-  }
-
-  await processStepsInfo(workFlowSteps);
-  console.log(
-    "The whole workflow has completed: Show user stats and save configuration file"
-  );
-
-  $("div.spanner").removeClass("show");
-  $("div.overlay").removeClass("show");
-  })
+  });
 });
 
 $(document).on("click", "#DatabaseSelectButton", async function () {
@@ -891,9 +902,9 @@ $(document).on("click", "#DatabaseSelectButton", async function () {
       properties: ["openFile", "showHiddenFiles"],
     })
     .then((result) => {
-      console.log(result)
-      userDatabaseFolder = path.dirname(result.filePaths[0])
-      userDatabaseFile = path.basename(result.filePaths[0])
+      console.log(result);
+      userDatabaseFolder = path.dirname(result.filePaths[0]);
+      userDatabaseFile = path.basename(result.filePaths[0]);
       inputPathEnv = "userDatabase=" + userDatabaseFolder + "\n";
       // Append folder path as a variable to .env file
       fs.appendFile(".env", inputPathEnv, function (err) {
@@ -909,14 +920,35 @@ $(document).on("click", "#DatabaseSelectButton", async function () {
     });
 });
 
-$(document).on( "click", '#mothur-demultiplex', function() {
-  $('.chips').find('input').restrict([8,'a','c', 'g', 't', 'r', 'y','s','w','k','m','b','d','h','v','n']);
-  $('.chips').find('input').keyup(function() { 
-    this.value = this.value.toLocaleUpperCase(); 
-  }); 
+$(document).on("click", "#mothur-demultiplex", function () {
+  $(".chips")
+    .find("input")
+    .restrict([
+      8,
+      "a",
+      "c",
+      "g",
+      "t",
+      "r",
+      "y",
+      "s",
+      "w",
+      "k",
+      "m",
+      "b",
+      "d",
+      "h",
+      "v",
+      "n",
+    ]);
+  $(".chips")
+    .find("input")
+    .keyup(function () {
+      this.value = this.value.toLocaleUpperCase();
+    });
 });
 
-$(document).on( "click", '#reorientReads.lever', function() {
-  console.log('tere')
-  $('.primerInput').fadeToggle()
-})
+$(document).on("click", "#reorientReads.lever", function () {
+  console.log("tere");
+  $(".primerInput").fadeToggle();
+});

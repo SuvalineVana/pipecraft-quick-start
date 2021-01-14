@@ -1,0 +1,35 @@
+#Filtering sequneces with vsearch
+
+NCMV166_S153_L001_R1_001.fastq Filter info:
+
+vsearch v2.15.0_linux_x86_64, 6.1GB RAM, 6 cores
+https://github.com/torognes/vsearch
+
+Reading input file 100%
+2911 sequences kept (of which 0 truncated), 4392 sequences discarded.
+
+NCMV166_S153_L001_R2_001.fastq Filter info:
+
+vsearch v2.15.0_linux_x86_64, 6.1GB RAM, 6 cores
+https://github.com/torognes/vsearch
+
+Reading input file 100%
+2548 sequences kept (of which 0 truncated), 4755 sequences discarded.
+
+NCMV84_S73_L001_R1_001.fastq Filter info:
+
+vsearch v2.15.0_linux_x86_64, 6.1GB RAM, 6 cores
+https://github.com/torognes/vsearch
+
+Reading input file 100%
+7802 sequences kept (of which 0 truncated), 9693 sequences discarded.
+
+NCMV84_S73_L001_R2_001.fastq Filter info:
+
+vsearch v2.15.0_linux_x86_64, 6.1GB RAM, 6 cores
+https://github.com/torognes/vsearch
+
+Reading input file 100%
+3737 sequences kept (of which 0 truncated), 13758 sequences discarded.
+Sequences filtered with vsearch
+6
